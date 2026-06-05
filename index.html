@@ -338,6 +338,80 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .poll .row{position:relative;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;font-size:1.1rem}.poll .pct{font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 .pollwrap{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;margin-top:1.5rem;z-index:2}@media(max-width:1100px){.pollwrap{grid-template-columns:1fr}}.pollwrap h3{color:var(--sky);font-size:1.2rem;margin-bottom:.5rem;font-weight:600}
 @media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}.duo,.gauges{grid-template-columns:1fr}.m-panel{padding:2rem 1.5rem}.two{gap:1.6rem}}
+
+/* ============ SCENE 24: 30-DAY JOURNEY (animated step timeline) ============ */
+.journey{position:relative;width:100%;margin-top:3.6rem;z-index:2}
+.journey .jline{position:absolute;left:12.5%;right:12.5%;top:35px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+.journey .jfill{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--royal),var(--sky),var(--orange2),var(--orange))}
+.journey.play .jfill{animation:jfill 1.9s cubic-bezier(.4,0,.2,1) .35s forwards}
+@keyframes jfill{to{width:100%}}
+.jsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.jstep{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.38rem;padding:0 .3rem;cursor:pointer;color:#fff;font-family:inherit;background:none;border:0;opacity:0;transform:translateY(24px)}
+.journey.play .jstep{animation:jrise .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.45s + var(--d)*.42s)}
+@keyframes jrise{to{opacity:1;transform:none}}
+.jnode{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:2;border:2px solid var(--sky);background:radial-gradient(circle at 36% 30%,rgba(42,164,244,.4),rgba(9,18,38,.95));box-shadow:0 0 0 7px rgba(42,164,244,.09),var(--glow);transition:transform .3s,box-shadow .3s}
+.jstep.o .jnode{border-color:var(--orange);background:radial-gradient(circle at 36% 30%,rgba(247,121,31,.4),rgba(9,18,38,.95));box-shadow:0 0 0 7px rgba(247,121,31,.09),var(--glowO)}
+.jnum{font-family:var(--mono);font-weight:700;font-size:1.5rem;color:#fff}
+.jicon{font-size:1.55rem;margin-top:.55rem}
+.jwk{font-size:.72rem;letter-spacing:.2em;color:var(--orange2);font-weight:700}
+.jstep h3{font-size:1.28rem;font-weight:600;margin:.05rem 0}
+.jstep p{color:var(--muted);font-size:.95rem;line-height:1.34;max-width:25ch}
+.jtap{margin-top:.3rem;font-size:.8rem;font-weight:600;color:var(--sky);letter-spacing:.02em;opacity:.8;transition:.25s}
+.jstep.o .jtap{color:var(--orange2)}
+.jstep:hover .jnode{transform:translateY(-7px) scale(1.07)}
+.jstep:hover .jtap{opacity:1;letter-spacing:.08em}
+.jgoal{margin-top:2.6rem;text-align:center;color:var(--muted);font-size:1.08rem;padding:1rem 1.4rem;border:1px dashed var(--pb);border-radius:14px;background:rgba(12,22,44,.4)}
+.jgoal b{color:#fff;font-weight:600}
+@media(max-width:900px){.jsteps{grid-template-columns:1fr 1fr;gap:2rem}.journey .jline{display:none}}
+
+/* ============ SCENE 25: MATURITY CLIMB (ascending staircase) ============ */
+.climb{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;align-items:end;height:46vh;margin:2.6rem 0 0;padding-left:2.8rem;z-index:2}
+.climb::after{content:"";position:absolute;left:2.8rem;right:0;bottom:-3px;height:2px;background:linear-gradient(90deg,transparent,var(--pb) 18%,var(--pb) 82%,transparent)}
+.climb-axis{position:absolute;left:-.1rem;top:0;bottom:6px;display:flex;align-items:center}
+.climb-axis span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.72rem;letter-spacing:.26em;color:var(--sky);font-weight:700;text-transform:uppercase}
+.cstep{position:relative;border:1px solid var(--pb);border-radius:18px 18px 0 0;padding:1.5rem;cursor:pointer;text-align:left;color:#fff;font-family:inherit;display:flex;flex-direction:column;gap:.4rem;justify-content:flex-end;overflow:hidden;background:linear-gradient(180deg,rgba(14,26,52,.28),rgba(14,26,52,.82));transform-origin:bottom;opacity:0;transform:translateY(34px) scaleY(.88)}
+.climb.play .cstep{animation:crise .75s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.4s + var(--d)*.5s)}
+@keyframes crise{to{opacity:1;transform:none}}
+.cstep::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:var(--grad)}
+.cstep:nth-child(1){height:62%}.cstep:nth-child(2){height:80%}.cstep:nth-child(3){height:100%}
+.cstep.o::before{background:linear-gradient(135deg,var(--orange),var(--ember))}
+.cphase{position:absolute;right:1.1rem;top:.7rem;font-family:var(--mono);font-size:2.6rem;font-weight:700;color:rgba(255,255,255,.06);line-height:1}
+.cday{font-size:.8rem;letter-spacing:.16em;color:var(--orange2);font-weight:700}
+.cpips{display:flex;gap:.34rem;margin:.15rem 0 .2rem}
+.cpips i{width:28px;height:5px;border-radius:3px;background:rgba(255,255,255,.13)}
+.cpips i.on{background:linear-gradient(90deg,var(--sky),var(--orange))}
+.cic{font-size:1.85rem}
+.cstep h3{font-size:1.42rem;font-weight:600;margin:.05rem 0}
+.cstep p{color:var(--muted);font-size:1rem;line-height:1.35}
+.ctap{margin-top:.3rem;font-size:.82rem;color:var(--sky);font-weight:600;opacity:.8;transition:.25s}
+.cstep.o .ctap{color:var(--orange2)}
+.cstep:hover{border-color:var(--sky);box-shadow:var(--glow);transform:translateY(-7px)}
+.cstep.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+.cstep:hover .ctap{opacity:1}
+@media(max-width:1100px){.climb{grid-template-columns:1fr;height:auto;padding-left:1.6rem}.cstep{height:auto!important;border-radius:16px}.climb::after{display:none}.climb-axis span{font-size:.66rem}}
+
+/* ============ SCENE 29: RESILIENCE PILLARS (temple on a foundation) ============ */
+.temple{width:100%;margin-top:2rem;z-index:2;display:flex;flex-direction:column}
+.temple .cols{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;align-items:end;height:36vh}
+.tcol{position:relative;height:100%;border:1px solid var(--pb);border-top:0;border-radius:0 0 8px 8px;padding:1.4rem 1rem 1.3rem;cursor:pointer;color:#fff;font-family:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem;background:linear-gradient(180deg,rgba(14,26,52,.82),rgba(8,16,34,.32));transform-origin:bottom;opacity:0;transform:translateY(28px) scaleY(.9)}
+.temple.play .tcol{animation:trise .65s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.5s + var(--d)*.11s)}
+@keyframes trise{to{opacity:1;transform:none}}
+.tcol::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:var(--grad)}
+.tcol.o::before{background:linear-gradient(135deg,var(--orange),var(--ember))}
+.tnum{position:absolute;top:.55rem;right:.7rem;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.tic{font-size:2.05rem;margin-top:.35rem;transition:transform .3s}
+.tcol h4{font-size:1.05rem;font-weight:600;line-height:1.16}
+.tline{font-size:.82rem;color:var(--muted);line-height:1.3}
+.tcol:hover{border-color:var(--sky);box-shadow:var(--glow);transform:translateY(-7px)}
+.tcol.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+.tcol:hover .tic{transform:scale(1.18) translateY(-2px)}
+.foundation{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;padding:1.1rem 1rem;border-radius:8px;border:1px solid var(--pb);background:linear-gradient(180deg,rgba(42,164,244,.18),rgba(247,121,31,.13));box-shadow:var(--glow);opacity:0;transform:translateY(16px)}
+.temple.play .foundation{animation:jrise .6s ease forwards;animation-delay:.3s}
+.f-ic{font-size:1.45rem}
+.f-txt{font-weight:700;letter-spacing:.24em;font-size:1.16rem;background:linear-gradient(100deg,var(--sky),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.f-sub{font-size:.82rem;color:var(--muted);letter-spacing:.08em}
+@media(max-width:900px){.temple .cols{grid-template-columns:1fr 1fr 1fr;height:auto;gap:.7rem}.tcol{height:auto}}
+@media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}.duo,.gauges{grid-template-columns:1fr}.m-panel{padding:2rem 1.5rem}.two{gap:1.6rem}}
 </style>
 </head>
 <body>
@@ -816,26 +890,31 @@ const slides=[
 
 // 24 30-DAY — MILESTONES
 {nav:'30-Day Plan',html:`<section class="slide"><div class="idx">23</div>
-  <div class="reveal kicker">Execution</div>
-  <h2 class="reveal">30-Day Cybersecurity <span class="hl">Action Plan</span></h2>
-  <p class="reveal sub">A focused month. Click each week →</p>
-  <div class="miles reveal"><div class="mline"></div>
-    <button class="mile" data-k="${reg({icon:'🔍',title:'Week 1 · Discover',intro:'Build a clear picture before acting.',list:['Identify critical systems & users','Map vendors & data','Find exposed assets']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 1</div><h3>Discover</h3><p>Identify critical systems, users, vendors, data &amp; exposed assets.</p></div></button>
-    <button class="mile o" data-k="${reg({icon:'🔐',title:'Week 2 · Identity',intro:'Close the most exploited gaps.',list:['Enable MFA','Review admin access','Remove shared passwords','Secure email']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 2</div><h3>Identity</h3><p>Enable MFA, review admin access, remove shared passwords, secure email.</p></div></button>
-    <button class="mile" data-k="${reg({icon:'🛠️',title:'Week 3 · Harden',intro:'Patch and test the obvious weak points.',list:['Patch critical systems','Scan vulnerabilities','Train finance & executives']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 3</div><h3>Harden</h3><p>Patch critical systems, scan vulnerabilities, train finance &amp; executives.</p></div></button>
-    <button class="mile o" data-k="${reg({icon:'🧯',title:'Week 4 · Prepare',intro:'Make sure you can recover and respond.',list:['Test a restore','Create an IR card','Run a tabletop exercise']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 4</div><h3>Prepare</h3><p>Test restore, create an IR card, run a tabletop exercise.</p></div></button>
+  <div class="reveal kicker">Execution · First 30 Days</div>
+  <h2 class="reveal">Your 30-Day Cybersecurity <span class="hl">Action Plan</span></h2>
+  <p class="reveal sub">Four focused weeks, each building on the last. Tap any week for its checklist →</p>
+  <div class="journey" data-anim="journey">
+    <div class="jline"><span class="jfill"></span></div>
+    <div class="jsteps">
+      <button class="jstep" style="--d:0" data-k="${reg({icon:'🔍',title:'Week 1 · Discover',intro:'Build a clear picture before acting — you can only protect what you can see.',list:['Identify critical systems & users','Map vendors & where data lives','Find internet-exposed assets']})}"><span class="jnode"><span class="jnum">01</span></span><span class="jicon">🔍</span><span class="jwk">WEEK 1</span><h3>Discover</h3><p>Map critical systems, users, vendors &amp; exposed assets.</p><span class="jtap">View checklist ▸</span></button>
+      <button class="jstep o" style="--d:1" data-k="${reg({icon:'🔐',title:'Week 2 · Identity',intro:'Close the most exploited gaps first — stolen logins start most breaches.',list:['Enable MFA everywhere','Review admin access','Remove shared passwords','Secure email']})}"><span class="jnode"><span class="jnum">02</span></span><span class="jicon">🔐</span><span class="jwk">WEEK 2</span><h3>Identity</h3><p>MFA, admin review, kill shared passwords, secure email.</p><span class="jtap">View checklist ▸</span></button>
+      <button class="jstep" style="--d:2" data-k="${reg({icon:'🛠️',title:'Week 3 · Harden',intro:'Patch and test the obvious weak points before attackers find them.',list:['Patch critical systems','Scan for vulnerabilities','Train finance & executives']})}"><span class="jnode"><span class="jnum">03</span></span><span class="jicon">🛠️</span><span class="jwk">WEEK 3</span><h3>Harden</h3><p>Patch, scan for vulnerabilities, train finance &amp; execs.</p><span class="jtap">View checklist ▸</span></button>
+      <button class="jstep o" style="--d:3" data-k="${reg({icon:'🧯',title:'Week 4 · Prepare',intro:'Make sure you can actually recover and respond under pressure.',list:['Test a real restore','Create an incident-response card','Run a tabletop exercise']})}"><span class="jnode"><span class="jnum">04</span></span><span class="jicon">🧯</span><span class="jwk">WEEK 4</span><h3>Prepare</h3><p>Test a restore, build an IR card, run a tabletop.</p><span class="jtap">View checklist ▸</span></button>
+    </div>
+    <div class="jgoal reveal">After 30 days: <b>your top risks are identified, identities are locked down, and you have a tested way to recover.</b></div>
   </div>
 </section>`},
 
 // 25 ROADMAP — LADDER
 {nav:'60–90 Day Roadmap',html:`<section class="slide"><div class="idx">24</div>
-  <div class="reveal kicker">Maturity Roadmap</div>
+  <div class="reveal kicker">Maturity Roadmap · Day 1–90</div>
   <h2 class="reveal">From Reactive Security to <span class="hl">Managed Resilience</span></h2>
-  <p class="reveal sub">Click each phase of the maturity ladder →</p>
-  <div class="ladder cascade">
-    <button class="rung" data-k="${reg({icon:'🧱',title:'Day 1–30 · Baseline',intro:'Get the fundamentals in place.',list:['MFA, endpoint, email & backup','Access control & awareness','Payment verification process']})}"><div class="rd">DAY 1–30</div><h3>Baseline</h3><p>Core controls implemented.</p></button>
-    <button class="rung" data-k="${reg({icon:'🔎',title:'Day 31–60 · Validation',intro:'Prove the controls work.',list:['Vulnerability & penetration testing','Cloud & supplier review','Remediation tracking']})}"><div class="rd">DAY 31–60</div><h3>Validation</h3><p>Test, review &amp; remediate.</p></button>
-    <button class="rung" data-k="${reg({icon:'🏛️',title:'Day 61–90 · Governance',intro:'Make resilience repeatable & visible.',list:['Dashboards & policy','Quarterly access review','DR runbook & executive reporting']})}"><div class="rd">DAY 61–90</div><h3>Governance</h3><p>Govern &amp; report.</p></button>
+  <p class="reveal sub">Three phases that climb in maturity — each one builds on the last. Tap to explore →</p>
+  <div class="climb" data-anim="climb">
+    <div class="climb-axis"><span>Maturity ▲</span></div>
+    <button class="cstep" style="--d:0" data-k="${reg({icon:'🧱',title:'Day 1–30 · Baseline',intro:'Get the fundamentals firmly in place across the business.',list:['MFA, endpoint, email & backup','Access control & staff awareness','Payment verification process']})}"><span class="cphase">01</span><span class="cic">🧱</span><h3>Baseline</h3><span class="cday">DAY 1–30</span><div class="cpips"><i class="on"></i><i></i><i></i></div><p>Core controls implemented across the business.</p><span class="ctap">explore ▸</span></button>
+    <button class="cstep" style="--d:1" data-k="${reg({icon:'🔎',title:'Day 31–60 · Validation',intro:'Prove the controls actually work, rather than assuming they do.',list:['Vulnerability & penetration testing','Cloud & supplier review','Remediation tracking']})}"><span class="cphase">02</span><span class="cic">🔎</span><h3>Validation</h3><span class="cday">DAY 31–60</span><div class="cpips"><i class="on"></i><i class="on"></i><i></i></div><p>Test, review &amp; remediate what you built.</p><span class="ctap">explore ▸</span></button>
+    <button class="cstep o" style="--d:2" data-k="${reg({icon:'🏛️',title:'Day 61–90 · Governance',intro:'Make resilience repeatable, measurable and visible to leadership.',list:['Dashboards & policy','Quarterly access review','DR runbook & executive reporting']})}"><span class="cphase">03</span><span class="cic">🏛️</span><h3>Governance</h3><span class="cday">DAY 61–90</span><div class="cpips"><i class="on"></i><i class="on"></i><i class="on"></i></div><p>Govern, measure &amp; report — resilience as a habit.</p><span class="ctap">explore ▸</span></button>
   </div>
 </section>`},
 
@@ -895,14 +974,17 @@ const slides=[
 {nav:'Final Message',html:`<section class="slide"><div class="idx">28</div>
   <div class="reveal kicker">Closing</div>
   <h2 class="reveal">Cybersecurity Is a <span class="hl">Business Discipline</span></h2>
-  <p class="reveal sub">Not bought with tools — built through leadership &amp; discipline. Click each pillar.</p>
-  <div class="pillars cascade">
-    <button class="pillar" data-k="${reg({icon:'🗂️',title:'Know your assets',intro:'You can only protect what you can see.',list:['Maintain an asset inventory','Prioritise the critical few']})}"><span class="pi">🗂️</span><h4>Know your assets</h4></button>
-    <button class="pillar o" data-k="${reg({icon:'🔐',title:'Protect identities',intro:'MFA and least privilege everywhere.',list:['MFA on every critical account','Separate admin accounts']})}"><span class="pi">🔐</span><h4>Protect identities</h4></button>
-    <button class="pillar" data-k="${reg({icon:'🎓',title:'Train people',intro:'Your people are the first line of defence.',list:['Practical, ongoing training','No-blame reporting']})}"><span class="pi">🎓</span><h4>Train people</h4></button>
-    <button class="pillar o" data-k="${reg({icon:'🧩',title:'Patch exposed systems',intro:'Close known doors before attackers walk through.',list:['Patch on a cadence','Remove what you do not need']})}"><span class="pi">🧩</span><h4>Patch systems</h4></button>
-    <button class="pillar" data-k="${reg({icon:'🔄',title:'Test recovery',intro:'A backup only counts if it restores.',list:['Restore-test regularly','Know your RTO & RPO']})}"><span class="pi">🔄</span><h4>Test recovery</h4></button>
-    <button class="pillar o" data-k="${reg({icon:'⚡',title:'Prepare response',intro:'Decide who acts before the incident hits.',list:['Written IR plan','Run tabletop exercises']})}"><span class="pi">⚡</span><h4>Prepare response</h4></button>
+  <p class="reveal sub">Not bought with tools — built on six pillars that hold up resilience. Tap each to explore →</p>
+  <div class="temple" data-anim="temple">
+    <div class="cols">
+      <button class="tcol" style="--d:0" data-k="${reg({icon:'🗂️',title:'Know your assets',intro:'You can only protect what you can see.',list:['Maintain an asset inventory','Prioritise the critical few']})}"><span class="tnum">01</span><span class="tic">🗂️</span><h4>Know your assets</h4><span class="tline">See what you have</span></button>
+      <button class="tcol o" style="--d:1" data-k="${reg({icon:'🔐',title:'Protect identities',intro:'MFA and least privilege everywhere.',list:['MFA on every critical account','Separate admin accounts']})}"><span class="tnum">02</span><span class="tic">🔐</span><h4>Protect identities</h4><span class="tline">Lock the front door</span></button>
+      <button class="tcol" style="--d:2" data-k="${reg({icon:'🎓',title:'Train people',intro:'Your people are the first line of defence.',list:['Practical, ongoing training','No-blame reporting']})}"><span class="tnum">03</span><span class="tic">🎓</span><h4>Train people</h4><span class="tline">Your first line</span></button>
+      <button class="tcol o" style="--d:3" data-k="${reg({icon:'🧩',title:'Patch exposed systems',intro:'Close known doors before attackers walk through.',list:['Patch on a cadence','Remove what you do not need']})}"><span class="tnum">04</span><span class="tic">🧩</span><h4>Patch systems</h4><span class="tline">Close known doors</span></button>
+      <button class="tcol" style="--d:4" data-k="${reg({icon:'🔄',title:'Test recovery',intro:'A backup only counts if it restores.',list:['Restore-test regularly','Know your RTO & RPO']})}"><span class="tnum">05</span><span class="tic">🔄</span><h4>Test recovery</h4><span class="tline">Prove you can restore</span></button>
+      <button class="tcol o" style="--d:5" data-k="${reg({icon:'⚡',title:'Prepare response',intro:'Decide who acts before the incident hits.',list:['Written IR plan','Run tabletop exercises']})}"><span class="tnum">06</span><span class="tic">⚡</span><h4>Prepare response</h4><span class="tline">Decide before the day</span></button>
+    </div>
+    <div class="foundation"><span class="f-ic">🛡️</span><span class="f-txt">CYBER RESILIENCE</span><span class="f-sub">Leadership · Discipline · Preparation</span></div>
   </div>
 </section>`},
 
@@ -1035,7 +1117,7 @@ const dotBtns=[...dotsEl.children];
 function animateSlide(el){
   el.querySelectorAll('[data-count]').forEach(n=>{const target=+n.dataset.count,suf=n.dataset.suffix||'';let t0=null;
     requestAnimationFrame(function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1400,1),e=1-Math.pow(1-p,3);n.textContent=Math.floor(e*target).toLocaleString()+suf;if(p<1)requestAnimationFrame(step)})});
-  el.querySelectorAll('[data-anim="rail"]').forEach(r=>{r.classList.remove('play');void r.offsetWidth;r.classList.add('play')});
+  el.querySelectorAll('[data-anim]').forEach(r=>{r.classList.remove('play');void r.offsetWidth;r.classList.add('play')});
 }
 function go(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===idx)return;
   const cur=slideEls[idx];cur.classList.add('leaving');cur.classList.remove('active');setTimeout(()=>cur.classList.remove('leaving'),560);
