@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cybersecurity &amp; Business Resilience for Dubai SMEs — ITSEC</title>
+<link rel="icon" type="image/png" href="asset/ITSEC%20Icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ITSEC KEYNOTE v4 — bespoke animated scenes, brand-true
+   ============================================================ */
+:root{
+  --orange:#f7791f; --orange2:#ff9d52; --ember:#e2511c;
+  --royal:#0d5fb5; --sky:#2aa4f4; --navy:#0a2c66; --ink:#061227;
+  --bg:#04060d; --panel:rgba(12,22,44,.62); --pb:rgba(42,164,244,.18);
+  --text:#e8eefc; --muted:#93a6c8; --line:rgba(42,164,244,.12);
+  --glow:0 0 26px rgba(42,164,244,.3); --glowO:0 0 26px rgba(247,121,31,.34);
+  --grad:linear-gradient(135deg,var(--orange),var(--royal));
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --font:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--font);color:var(--text)}
+
+/* dim cyber background */
+#bg{position:fixed;inset:0;z-index:0;background:
+   radial-gradient(1300px 760px at 82% -14%,rgba(42,164,244,.12),transparent 58%),
+   radial-gradient(1000px 660px at 4% 116%,rgba(247,121,31,.07),transparent 58%),
+   linear-gradient(165deg,#03050b 0%,#050a16 48%,#07112a 100%);}
+#net{position:fixed;inset:0;z-index:1;opacity:.36}
+#grid{position:fixed;inset:0;z-index:1;opacity:.2;background-image:
+   linear-gradient(rgba(42,164,244,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(42,164,244,.07) 1px,transparent 1px);
+   background-size:54px 54px;-webkit-mask-image:radial-gradient(circle at 50% 36%,#000 0%,transparent 74%);mask-image:radial-gradient(circle at 50% 36%,#000 0%,transparent 74%);}
+#vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 120% at 50% 42%,transparent 50%,rgba(0,0,0,.62) 100%)}
+.scan{position:fixed;left:0;right:0;height:1px;z-index:3;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(42,164,244,.45),transparent);animation:scan 11s linear infinite;opacity:.28}
+@keyframes scan{0%{top:-5%}100%{top:105%}}
+
+/* stage */
+#stage{position:relative;z-index:5;height:100vh;width:100vw}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:6vh 7vw 12vh;opacity:0;transform:translateY(26px);transition:opacity .55s ease,transform .55s ease}
+.slide.active{display:flex;opacity:1;transform:none}
+.slide.leaving{display:flex;opacity:0;transform:translateY(-26px)}
+.slide.active .reveal{animation:rise .75s cubic-bezier(.2,.7,.2,1) both}
+.slide.active .reveal:nth-child(1){animation-delay:.04s}.slide.active .reveal:nth-child(2){animation-delay:.13s}
+.slide.active .reveal:nth-child(3){animation-delay:.24s}.slide.active .reveal:nth-child(4){animation-delay:.35s}.slide.active .reveal:nth-child(5){animation-delay:.45s}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.idx{position:absolute;top:7vh;right:6vw;font-size:17vw;font-weight:700;line-height:1;color:rgba(42,164,244,.045);z-index:0;pointer-events:none;letter-spacing:-.04em;user-select:none}
+
+/* cascade */
+.cascade>*{opacity:0}
+.slide.active .cascade>*{animation:pop .55s cubic-bezier(.2,.8,.2,1) forwards}
+.cascade>*:nth-child(1){animation-delay:.18s}.cascade>*:nth-child(2){animation-delay:.25s}.cascade>*:nth-child(3){animation-delay:.32s}
+.cascade>*:nth-child(4){animation-delay:.39s}.cascade>*:nth-child(5){animation-delay:.46s}.cascade>*:nth-child(6){animation-delay:.53s}
+.cascade>*:nth-child(7){animation-delay:.60s}.cascade>*:nth-child(8){animation-delay:.67s}.cascade>*:nth-child(9){animation-delay:.74s}
+.cascade>*:nth-child(10){animation-delay:.81s}.cascade>*:nth-child(11){animation-delay:.88s}.cascade>*:nth-child(12){animation-delay:.95s}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+
+/* type */
+.kicker{display:inline-flex;align-items:center;gap:.7rem;font-size:.92rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);font-weight:600;margin-bottom:1.1rem;z-index:2}
+.kicker::before{content:"";width:46px;height:2px;background:var(--grad)}
+h1{font-size:clamp(2.8rem,6.2vw,5.8rem);line-height:.98;font-weight:700;letter-spacing:-.025em}
+h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-spacing:-.02em;margin-bottom:.8rem;z-index:2}
+.hl{background:linear-gradient(100deg,var(--sky),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1.2rem,1.9vw,1.7rem);color:var(--text);max-width:34ch;line-height:1.3;font-weight:500}
+.sub{color:var(--muted);font-size:clamp(1.1rem,1.6vw,1.5rem);max-width:48ch;line-height:1.45;margin-top:.4rem;font-weight:400}
+.note{color:var(--orange2);font-weight:600}
+.two{display:grid;grid-template-columns:.92fr 1.08fr;gap:3rem;align-items:center;width:100%;z-index:2}
+@media(max-width:1100px){.two{grid-template-columns:1fr}}
+
+/* ---- generic feature card (used sparingly) ---- */
+.grid{display:grid;gap:1.2rem;margin-top:1.7rem;width:100%;z-index:2}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.fcard{position:relative;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:.5rem;background:linear-gradient(165deg,rgba(14,26,52,.78),rgba(8,16,34,.5));
+   border:1px solid var(--pb);border-radius:18px;padding:1.4rem 1.4rem 1.25rem;color:#fff;font-family:inherit;backdrop-filter:blur(10px);overflow:hidden;will-change:transform;transition:transform .25s,border-color .25s,box-shadow .25s}
+.fcard::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--grad);opacity:.85}
+.fcard::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;background:radial-gradient(340px 190px at var(--mx,50%) var(--my,0%),rgba(42,164,244,.16),transparent 70%);opacity:0;transition:opacity .3s}
+.fcard:hover{border-color:var(--sky);box-shadow:var(--glow)}.fcard:hover::after{opacity:1}
+.fcard .ic{display:grid;place-items:center;width:52px;height:52px;border-radius:13px;font-size:1.6rem;background:rgba(42,164,244,.1);border:1px solid var(--pb);color:var(--sky);transition:transform .3s}
+.fcard:hover .ic{transform:scale(1.08) rotate(-5deg)}
+.fcard h3{font-size:clamp(1.08rem,1.4vw,1.38rem);font-weight:600;color:#fff;line-height:1.12}
+.fcard p{font-size:clamp(.92rem,1.05vw,1.08rem);color:var(--muted);line-height:1.38;flex:1}
+.fcard .explore{margin-top:.35rem;display:inline-flex;align-items:center;gap:.5rem;align-self:flex-start;font-size:.85rem;font-weight:600;color:var(--sky);padding:.4rem .85rem;border-radius:999px;background:rgba(42,164,244,.1);border:1px solid var(--pb);transition:.25s}
+.fcard:hover .explore{gap:.8rem;background:rgba(42,164,244,.2);color:#fff}.fcard .explore i{font-style:normal;transition:.25s}.fcard:hover .explore i{transform:translateX(4px)}
+.fcard.o::before{background:linear-gradient(135deg,var(--orange),var(--ember))}.fcard.o::after{background:radial-gradient(340px 190px at var(--mx,50%) var(--my,0%),rgba(247,121,31,.18),transparent 70%)}
+.fcard.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}.fcard.o .ic{background:rgba(247,121,31,.12);border-color:rgba(247,121,31,.3);color:var(--orange2)}
+.fcard.o .explore{color:var(--orange2);background:rgba(247,121,31,.1);border-color:rgba(247,121,31,.3)}.fcard.o:hover .explore{background:rgba(247,121,31,.22);color:#fff}
+
+/* ============ SCENE: COVER ============ */
+.cover{align-items:flex-start;justify-content:center}
+.cover .hero-mark{position:absolute;right:5vw;top:50%;transform:translateY(-50%);width:min(34vw,460px);filter:drop-shadow(0 0 60px rgba(42,164,244,.4));animation:spinfloat 18s linear infinite}
+@keyframes spinfloat{0%{transform:translateY(-50%) rotate(0)}50%{transform:translateY(-54%) rotate(4deg)}100%{transform:translateY(-50%) rotate(0)}}
+@media(max-width:1100px){.cover .hero-mark{display:none}}
+.cover h1{max-width:17ch}
+.footerline{margin-top:2.3rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;color:var(--muted);font-size:1.12rem;z-index:2}
+.footerline .who{color:#fff;font-weight:600}.dot-sep{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.cta{margin-top:2.2rem;display:inline-flex;align-items:center;gap:.7rem;cursor:pointer;padding:1rem 1.9rem;border-radius:999px;font-size:1.1rem;font-weight:600;color:#04060d;font-family:inherit;background:var(--grad);border:0;box-shadow:var(--glow);transition:.25s;z-index:2}
+.cta:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 46px rgba(42,164,244,.55)}
+
+/* ============ SCENE: RADAR (slide 3) ============ */
+.radarwrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;width:100%;margin-top:1.4rem;z-index:2}
+@media(max-width:1100px){.radarwrap{grid-template-columns:1fr}}
+.radar{position:relative;width:100%;max-width:440px;margin-inline:auto;aspect-ratio:1}
+.radar svg{width:100%;height:100%}
+.sweep{transform-origin:200px 200px;animation:spin 3.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:blip 2.4s ease-in-out infinite}@keyframes blip{0%,100%{opacity:.25}50%{opacity:1}}
+.ping{transform-origin:center;animation:ping 3s ease-out infinite}@keyframes ping{0%{opacity:.8;transform:scale(.2)}100%{opacity:0;transform:scale(1)}}
+.rstats{display:grid;gap:.8rem}
+.rstat{position:relative;display:flex;align-items:center;gap:1.1rem;padding:1rem 1.2rem;border:1px solid var(--pb);border-radius:14px;background:linear-gradient(165deg,rgba(14,26,52,.7),rgba(8,16,34,.4));cursor:pointer;text-align:left;color:#fff;font-family:inherit;transition:.25s;overflow:hidden}
+.rstat:hover{transform:translateX(8px);border-color:var(--sky);box-shadow:var(--glow)}
+.rstat .big{font-size:clamp(1.7rem,2.8vw,2.6rem);font-weight:700;line-height:1;min-width:3.4ch;background:linear-gradient(120deg,var(--sky),#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rstat.o .big{background:linear-gradient(120deg,var(--orange2),#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rstat .cap{color:var(--muted);font-size:1.02rem;line-height:1.3}
+.rstat::after{content:"›";position:absolute;right:1rem;color:var(--sky);font-size:1.5rem;opacity:.4}
+
+/* ============ SCENE: HEX HONEYCOMB (slide 4) ============ */
+.hexgrid{display:flex;justify-content:center;gap:1.4rem;margin-top:1.6rem;z-index:2}
+.hexcol{display:flex;flex-direction:column;gap:1.4rem}
+.hexcol:nth-child(2){margin-top:4.4rem}
+.hex{position:relative;width:clamp(180px,15vw,230px);aspect-ratio:1/1.1;cursor:pointer;border:0;background:none;font-family:inherit;padding:0;color:#fff}
+.hex .face{position:absolute;inset:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+   background:linear-gradient(165deg,rgba(14,26,52,.92),rgba(8,16,34,.7));border:1px solid transparent;
+   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:1.4rem;transition:.28s}
+.hex::before{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--grad);opacity:.45;transition:.28s}
+.hex .face{margin:2px}
+.hex:hover{transform:translateY(-8px) scale(1.03)}
+.hex:hover::before{opacity:1}
+.hex.o::before{background:linear-gradient(135deg,var(--orange),var(--ember))}
+.hex .ic{font-size:2rem}
+.hex h4{font-size:1.12rem;font-weight:600;line-height:1.1}
+.hex small{color:var(--muted);font-size:.86rem}
+@media(max-width:900px){.hexcol:nth-child(2){margin-top:0}.hexgrid{flex-wrap:wrap}}
+
+/* ============ SCENE: ORBIT (slides 6,18,28) ============ */
+.orbit{position:relative;width:min(680px,74vw);margin:1.4rem auto 0;aspect-ratio:1/.8;z-index:2}
+.orbit .olines{position:absolute;inset:0;width:100%;height:100%}
+.flowline{stroke:rgba(42,164,244,.4);stroke-width:1.6;stroke-dasharray:5 7;animation:flow 1.3s linear infinite}
+.flowline.o{stroke:rgba(247,121,31,.45)}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.ocore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(120px,14vw,168px);aspect-ratio:1;border-radius:50%;
+   display:grid;place-items:center;text-align:center;gap:.2rem;border:1px solid var(--pb);background:radial-gradient(circle at 50% 35%,rgba(42,164,244,.18),rgba(8,16,34,.92));z-index:3;box-shadow:var(--glow)}
+.ocore .ci{font-size:2.1rem}.ocore b{font-size:1rem;font-weight:600;letter-spacing:.02em}.ocore small{color:var(--muted);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase}
+.ocore.pulse{animation:corepulse 3s ease-in-out infinite}@keyframes corepulse{0%,100%{box-shadow:0 0 0 0 rgba(42,164,244,.32)}50%{box-shadow:0 0 0 16px rgba(42,164,244,0)}}
+.ocore img{width:70%}
+.onode{position:absolute;transform:translate(-50%,-50%);width:clamp(98px,10vw,130px);padding:.85rem .6rem;border-radius:14px;cursor:pointer;text-align:center;color:#fff;font-family:inherit;z-index:4;
+   border:1px solid var(--pb);background:linear-gradient(165deg,rgba(14,26,52,.95),rgba(8,16,34,.8));transition:.25s}
+.onode:hover{border-color:var(--sky);box-shadow:var(--glow);transform:translate(-50%,-50%) scale(1.08)}
+.onode.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+.onode .oi{font-size:1.5rem;display:block;margin-bottom:.2rem}.onode h5{font-size:.95rem;font-weight:600;line-height:1.1}
+@media(max-width:900px){.orbit{display:none}}
+/* fallback grid for small screens */
+.orbit-fallback{display:none}@media(max-width:900px){.orbit-fallback{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem}}
+
+/* ============ SCENE: CONVERGENCE MAP (slide 8) ============ */
+.cmap{position:relative;width:100%;margin-top:1.4rem;aspect-ratio:2.1/1;z-index:2;max-height:54vh}
+.cmap svg{position:absolute;inset:0;width:100%;height:100%}
+.csrc{position:absolute;transform:translate(0,-50%);left:1%;width:clamp(140px,15vw,200px);padding:.7rem .9rem;border-radius:12px;cursor:pointer;color:#fff;font-family:inherit;text-align:left;
+   border:1px solid rgba(247,121,31,.3);background:linear-gradient(165deg,rgba(34,18,10,.9),rgba(14,10,8,.7));transition:.25s;display:flex;gap:.6rem;align-items:center}
+.csrc:hover{transform:translate(6px,-50%);border-color:var(--orange);box-shadow:var(--glowO)}
+.csrc .si{font-size:1.3rem}.csrc h5{font-size:.95rem;font-weight:600;line-height:1.1}
+.ccore{position:absolute;right:1%;top:50%;transform:translate(0,-50%);width:clamp(130px,13vw,170px);aspect-ratio:1;border-radius:18px;display:grid;place-items:center;text-align:center;gap:.2rem;
+   border:1px solid var(--pb);background:radial-gradient(circle at 50% 35%,rgba(42,164,244,.2),rgba(8,16,34,.95));z-index:3;box-shadow:var(--glow);animation:corepulse 3s ease-in-out infinite}
+.ccore .ci{font-size:1.9rem}.ccore b{font-size:.95rem}.ccore small{color:var(--muted);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+@media(max-width:900px){.cmap{display:none}}
+
+/* ============ SCENE: TERMINAL (slide 11) ============ */
+.terminal{margin-top:1.6rem;width:100%;max-width:1000px;border-radius:16px;overflow:hidden;border:1px solid rgba(226,81,28,.35);background:rgba(6,8,14,.92);box-shadow:0 24px 70px rgba(0,0,0,.6),0 0 40px rgba(226,81,28,.12);z-index:2}
+.term-bar{display:flex;align-items:center;gap:.5rem;padding:.7rem 1rem;background:rgba(20,12,10,.9);border-bottom:1px solid rgba(226,81,28,.25)}
+.term-bar .td{width:12px;height:12px;border-radius:50%}.td.r{background:#ff5f56}.td.y{background:#ffbd2e}.td.g{background:#27c93f}
+.term-bar .tt{margin-left:.8rem;font-family:var(--mono);font-size:.86rem;color:#ff9d6b}
+.term-body{padding:1.4rem 1.6rem;font-family:var(--mono);font-size:clamp(.92rem,1.15vw,1.12rem);display:grid;gap:.5rem;line-height:1.5}
+.tline{display:flex;align-items:center;gap:.7rem;cursor:pointer;background:none;border:0;font-family:inherit;color:#d7e3f5;text-align:left;padding:.35rem .5rem;border-radius:8px;transition:.18s;width:100%}
+.tline:hover{background:rgba(247,121,31,.1)}
+.tline .pr{color:#27c93f}.tline .seq{color:#ff9d6b;font-weight:600}.tline .cmd{color:#e8eefc}
+.tline .hintx{margin-left:auto;color:#5f7a9c;font-size:.78rem;opacity:0;transition:.18s}.tline:hover .hintx{opacity:1;color:var(--orange2)}
+.term-cursor{font-family:var(--mono);color:#27c93f;animation:cursor 1s steps(1) infinite}@keyframes cursor{50%{opacity:0}}
+
+/* ============ SCENE: SHIELD note uses ORBIT ============ */
+
+/* ============ SCENE: STACK LAYERS (slide 19) ============ */
+.stack{display:grid;gap:1rem;margin-top:1.6rem;width:100%;max-width:1000px;z-index:2}
+.slayer{position:relative;display:flex;align-items:center;gap:1.4rem;padding:1.5rem 1.8rem;border-radius:16px;cursor:pointer;color:#fff;font-family:inherit;text-align:left;
+   border:1px solid var(--pb);background:linear-gradient(100deg,rgba(14,26,52,.8),rgba(8,16,34,.45));transition:.25s;overflow:hidden}
+.slayer::before{content:"";position:absolute;left:0;top:0;height:100%;width:5px;background:var(--grad)}
+.slayer:hover{transform:translateX(10px);border-color:var(--sky);box-shadow:var(--glow)}
+.slayer .ln{font-size:2.4rem;font-weight:700;color:rgba(42,164,244,.5);min-width:1.6ch}
+.slayer .si{font-size:2rem}.slayer h3{font-size:1.4rem;font-weight:600}.slayer p{color:var(--muted);font-size:1.05rem;margin-top:.2rem}
+.slayer .arrow{margin-left:auto;font-size:1.6rem;color:var(--sky);opacity:.5}
+.slayer.o::before{background:linear-gradient(135deg,var(--orange),var(--ember))}.slayer.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+
+/* ============ SCENE: INBOX (slide 9) ============ */
+.inbox{width:100%;max-width:980px;margin-top:1.5rem;border-radius:18px;overflow:hidden;border:1px solid var(--pb);background:rgba(10,18,38,.85);z-index:2}
+.inbox-top{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.3rem;background:rgba(14,26,52,.9);border-bottom:1px solid var(--line);font-weight:600}
+.inbox-top .badge2{margin-left:auto;background:var(--orange);color:#04060d;font-size:.78rem;padding:.2rem .7rem;border-radius:999px;font-weight:700}
+.msg{display:flex;align-items:center;gap:1rem;padding:1.05rem 1.3rem;border-bottom:1px solid var(--line);cursor:pointer;color:#fff;font-family:inherit;width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0;transition:.18s}
+.msg:hover{background:rgba(247,121,31,.08)}
+.msg .av{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:1.3rem;background:rgba(247,121,31,.14);border:1px solid rgba(247,121,31,.3);color:var(--orange2);flex:0 0 auto}
+.msg .mt{flex:1}.msg .mt b{font-size:1.05rem}.msg .mt span{display:block;color:var(--muted);font-size:.92rem;margin-top:.15rem}
+.msg .flag{font-size:.74rem;color:var(--orange2);border:1px solid rgba(247,121,31,.3);padding:.2rem .6rem;border-radius:999px;letter-spacing:.06em}
+.msg .when{color:var(--muted);font-size:.82rem;min-width:5ch;text-align:right}
+
+/* ============ SCENE: PROGRESS CHECKLIST (slide 23) ============ */
+.pcheckhead{display:flex;align-items:center;gap:1.2rem;margin-top:1.2rem;z-index:2}
+.pbar{flex:1;height:10px;border-radius:999px;background:rgba(42,164,244,.12);overflow:hidden;border:1px solid var(--pb)}
+.pbar span{display:block;height:100%;width:0;background:var(--grad);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.ptext{font-variant-numeric:tabular-nums;color:var(--sky);font-weight:600;min-width:11ch;text-align:right}
+.checkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.3rem;z-index:2}
+.check{display:flex;align-items:center;gap:.9rem;padding:.95rem 1.1rem;border-radius:13px;cursor:pointer;color:#fff;font-family:inherit;text-align:left;
+   border:1px solid var(--pb);background:linear-gradient(165deg,rgba(14,26,52,.7),rgba(8,16,34,.4));transition:.2s}
+.check:hover{border-color:var(--sky);transform:translateY(-3px)}
+.check .ck{width:24px;height:24px;border-radius:7px;border:2px solid var(--muted);flex:0 0 auto;display:grid;place-items:center;color:transparent;font-size:.85rem;transition:.2s}
+.check.done .ck{background:var(--grad);border-color:transparent;color:#04060d}
+.check.done{border-color:var(--sky)}
+.check h4{font-size:1rem;font-weight:500;line-height:1.15}
+@media(max-width:900px){.checkgrid{grid-template-columns:1fr 1fr}}
+
+/* ============ SCENE: MILESTONE ROADMAP (slide 24) ============ */
+.miles{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem;width:100%;z-index:2}
+.miles .mline{position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.miles .mline::after{content:"";position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--royal),var(--sky),var(--orange));transition:width 1.6s cubic-bezier(.4,0,.2,1)}
+.slide.active .miles .mline::after{width:100%}
+.mile{position:relative;padding-top:2.2rem;cursor:pointer;text-align:left;color:#fff;font-family:inherit}
+.mile .mdot{position:absolute;top:-9px;left:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--royal));border:4px solid var(--bg);box-shadow:0 0 0 4px rgba(42,164,244,.14)}
+.mile.o .mdot{background:linear-gradient(135deg,var(--orange),var(--ember));box-shadow:0 0 0 4px rgba(247,121,31,.16)}
+.mile .mcard{border:1px solid var(--pb);border-radius:14px;padding:1.2rem;background:linear-gradient(165deg,rgba(14,26,52,.75),rgba(8,16,34,.45));transition:.25s}
+.mile:hover .mcard{transform:translateY(-6px);border-color:var(--sky);box-shadow:var(--glow)}
+.mile.o:hover .mcard{border-color:var(--orange);box-shadow:var(--glowO)}
+.mile .wk{font-size:.74rem;letter-spacing:.18em;color:var(--orange2);font-weight:700}.mile h3{font-size:1.2rem;margin:.3rem 0;font-weight:600}.mile p{color:var(--muted);font-size:.92rem;line-height:1.35}
+@media(max-width:900px){.miles{grid-template-columns:1fr 1fr}}
+
+/* ============ SCENE: LADDER (slide 25) ============ */
+.ladder{display:flex;align-items:flex-end;gap:1.6rem;margin-top:2rem;height:44vh;width:100%;z-index:2}
+.rung{flex:1;border:1px solid var(--pb);border-radius:18px 18px 0 0;padding:1.4rem;cursor:pointer;text-align:left;color:#fff;font-family:inherit;background:linear-gradient(180deg,rgba(14,26,52,.35),rgba(14,26,52,.78));display:flex;flex-direction:column;justify-content:flex-end;transition:.3s;position:relative;overflow:hidden}
+.rung::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:var(--grad)}
+.rung:hover{border-color:var(--orange);box-shadow:var(--glowO);transform:translateY(-6px)}
+.rung .rd{font-size:.84rem;letter-spacing:.16em;color:var(--orange2);font-weight:700}.rung h3{font-size:1.35rem;margin:.5rem 0;font-weight:600}.rung p{color:var(--muted);font-size:1rem;line-height:1.35}
+.rung:nth-child(1){height:56%}.rung:nth-child(2){height:78%}.rung:nth-child(3){height:100%}
+
+/* ============ SCENE: GAUGES + TABLE (slide 20) ============ */
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.4rem;z-index:2}
+.gauge{border:1px solid var(--pb);border-radius:16px;padding:1.4rem;background:linear-gradient(165deg,rgba(14,26,52,.7),rgba(8,16,34,.4));cursor:pointer;text-align:center;color:#fff;font-family:inherit;transition:.25s}
+.gauge:hover{transform:translateY(-6px);border-color:var(--sky);box-shadow:var(--glow)}
+.gauge.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+.gauge svg{width:100%;max-width:230px;height:auto}
+.gauge .gt{font-size:1.25rem;font-weight:600;margin-top:.3rem}.gauge .gd{color:var(--muted);font-size:1rem;margin-top:.2rem}
+.gauge .arc{stroke-dasharray:283;stroke-dashoffset:283}
+.slide.active .gauge .arc{animation:gdraw 1.4s ease .3s forwards}@keyframes gdraw{to{stroke-dashoffset:70}}
+.rto{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:1.12rem;z-index:2}
+.rto th,.rto td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--line)}
+.rto th{color:var(--sky);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}.rto td:first-child{color:#fff;font-weight:600}
+.rto .pill{display:inline-block;padding:.28rem .85rem;border-radius:999px;font-size:.95rem;background:rgba(247,121,31,.14);color:var(--orange2);border:1px solid rgba(247,121,31,.3)}
+.rto .pill.b{background:rgba(42,164,244,.12);color:var(--sky);border-color:var(--pb)}
+
+/* ============ SCENE: CLOCK (slide 21) ============ */
+.warroom{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center;margin-top:1rem;width:100%;z-index:2}
+.svgbox{width:100%;height:auto;max-height:46vh}
+@media(max-width:1100px){.warroom{grid-template-columns:1fr}.ladder{flex-direction:column;height:auto}.rung{height:auto!important;width:100%;border-radius:16px}.gauges{grid-template-columns:1fr}}
+
+/* ============ SCENE: PILLARS (slide 29) ============ */
+.pillars{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:1.8rem;align-items:end;height:40vh;z-index:2}
+.pillar{border:1px solid var(--pb);border-radius:14px 14px 0 0;padding:1.2rem;cursor:pointer;color:#fff;font-family:inherit;text-align:left;display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;
+   background:linear-gradient(180deg,rgba(14,26,52,.3),rgba(14,26,52,.8));position:relative;transition:.3s;transform-origin:bottom}
+.pillar::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:var(--grad)}
+.pillar:hover{transform:translateY(-6px);border-color:var(--sky);box-shadow:var(--glow)}
+.pillar.o:hover{border-color:var(--orange);box-shadow:var(--glowO)}
+.pillar .pi{font-size:1.7rem}.pillar h4{font-size:1.02rem;font-weight:600;line-height:1.15}
+.pillar:nth-child(1){height:62%}.pillar:nth-child(2){height:74%}.pillar:nth-child(3){height:86%}.pillar:nth-child(4){height:74%}.pillar:nth-child(5){height:90%}.pillar:nth-child(6){height:100%}
+@media(max-width:900px){.pillars{grid-template-columns:1fr 1fr;height:auto}.pillar{height:auto!important}}
+
+/* ============ SCENE: SPLIT DIAGRAM (7,12,13,14,15,16,17,27) ============ */
+.diagbox{position:relative;width:100%;aspect-ratio:1.15/1;max-height:52vh}
+.diagbox svg{width:100%;height:100%}
+.pulse-c{animation:corepulse 3s ease-in-out infinite}
+.blink{animation:blink 1.4s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.points{list-style:none;display:grid;gap:.7rem;margin-top:1rem}
+.points li{position:relative;padding:.7rem 1rem .7rem 2.4rem;background:rgba(42,164,244,.05);border:1px solid var(--line);border-radius:12px;font-size:1.05rem;color:var(--text);line-height:1.35}
+.points li::before{content:"";position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.5rem;z-index:2}
+.duopanel{border:1px solid var(--pb);border-radius:16px;padding:1.6rem;background:linear-gradient(165deg,rgba(14,26,52,.7),rgba(8,16,34,.4));cursor:pointer;color:#fff;font-family:inherit;text-align:left;transition:.25s}
+.duopanel:hover{transform:translateY(-6px);box-shadow:var(--glow);border-color:var(--sky)}
+.duopanel.danger{border-color:rgba(255,80,80,.3);background:linear-gradient(165deg,rgba(40,14,14,.7),rgba(16,8,8,.4))}
+.duopanel.danger:hover{border-color:#ff5050;box-shadow:0 0 26px rgba(255,80,80,.3)}
+.duopanel.safe{border-color:rgba(39,201,63,.3)}.duopanel.safe:hover{border-color:#27c93f;box-shadow:0 0 26px rgba(39,201,63,.25)}
+.duopanel .dh{display:flex;align-items:center;gap:.7rem;font-size:1.3rem;font-weight:600;margin-bottom:.9rem}
+.duopanel .dh .di{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:1.3rem;background:rgba(42,164,244,.12);border:1px solid var(--pb)}
+.duopanel.danger .dh .di{background:rgba(255,80,80,.14);border-color:rgba(255,80,80,.3)}
+.duopanel.safe .dh .di{background:rgba(39,201,63,.14);border-color:rgba(39,201,63,.3)}
+.duopanel ul{list-style:none;display:grid;gap:.5rem}.duopanel li{position:relative;padding-left:1.4rem;color:var(--muted);font-size:1.02rem;line-height:1.35}
+.duopanel li::before{content:"▸";position:absolute;left:0;color:var(--sky)}.duopanel.danger li::before{content:"✕";color:#ff5050}.duopanel.safe li::before{content:"✓";color:#27c93f}
+
+/* chrome */
+.brand{position:fixed;top:24px;left:38px;z-index:30}.brand img{height:34px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+#prog{position:fixed;top:0;left:0;height:3px;z-index:40;width:0;background:var(--grad);box-shadow:0 0 12px var(--sky);transition:width .5s ease}
+.counter{position:fixed;bottom:26px;right:38px;z-index:30;font-size:.92rem;color:var(--muted);letter-spacing:.12em;font-variant-numeric:tabular-nums}.counter b{color:#fff}
+.nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:30;display:flex;gap:.8rem;align-items:center}
+.nav button{width:50px;height:50px;border-radius:13px;border:1px solid var(--pb);background:rgba(12,22,44,.6);color:var(--sky);font-size:1.35rem;cursor:pointer;backdrop-filter:blur(6px);display:grid;place-items:center;transition:.2s}
+.nav button:hover{border-color:var(--sky);box-shadow:var(--glow);color:#fff;background:rgba(42,164,244,.12)}
+.nav .title{font-size:.88rem;color:var(--muted);max-width:34ch;text-align:center;letter-spacing:.04em}
+.dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:9px;max-height:78vh;overflow:auto;padding:6px;scrollbar-width:none}.dots::-webkit-scrollbar{display:none}
+.dots button{width:11px;height:11px;border-radius:50%;border:1px solid var(--pb);background:transparent;cursor:pointer;padding:0;transition:.2s}.dots button:hover{background:var(--sky)}
+.dots button.on{background:var(--orange);border-color:var(--orange);box-shadow:0 0 10px var(--orange);height:24px;border-radius:6px}
+.hint{position:fixed;bottom:28px;left:38px;z-index:30;font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+.hint kbd{background:rgba(42,164,244,.1);border:1px solid var(--pb);border-radius:6px;padding:1px 8px;color:var(--sky);font-family:inherit}
+#overview{position:fixed;inset:0;z-index:60;background:rgba(3,5,12,.94);backdrop-filter:blur(10px);display:none;padding:7vh 6vw;overflow:auto}#overview.show{display:block}
+#overview h3{font-size:1.4rem;margin-bottom:1.5rem;color:var(--sky);letter-spacing:.1em;font-weight:600}
+.ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1rem}
+.ovgrid button{text-align:left;background:var(--panel);border:1px solid var(--pb);border-radius:14px;padding:1rem;color:var(--text);cursor:pointer;transition:.2s;min-height:84px;font-size:.92rem;line-height:1.25;font-family:inherit}
+.ovgrid button:hover{border-color:var(--orange);transform:translateY(-5px);box-shadow:var(--glowO)}.ovgrid button .qn{display:block;color:var(--orange2);font-weight:700;font-size:.78rem;margin-bottom:.35rem;letter-spacing:.1em}
+
+/* MODAL */
+#modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:5vh 5vw}#modal.show{display:flex}
+.m-back{position:absolute;inset:0;background:rgba(2,4,10,.82);backdrop-filter:blur(14px);opacity:0;transition:opacity .35s}#modal.show .m-back{opacity:1}
+.m-panel{position:relative;width:min(860px,94vw);max-height:88vh;overflow:auto;background:linear-gradient(165deg,rgba(14,28,58,.97),rgba(7,14,32,.97));border:1px solid var(--pb);border-radius:24px;padding:3rem 3rem 2.6rem;box-shadow:0 30px 90px rgba(0,0,0,.65),var(--glow);transform:translateY(40px) scale(.94);opacity:0;transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .42s}
+#modal.show .m-panel{transform:none;opacity:1}.m-panel.o{box-shadow:0 30px 90px rgba(0,0,0,.65),var(--glowO);border-color:rgba(247,121,31,.4)}
+.m-glowbar{position:absolute;top:0;left:0;right:0;height:4px;border-radius:24px 24px 0 0;background:var(--grad)}
+.m-close{position:absolute;top:1.3rem;right:1.5rem;width:44px;height:44px;border-radius:12px;border:1px solid var(--pb);background:rgba(42,164,244,.08);color:var(--sky);font-size:1.3rem;cursor:pointer;transition:.2s;display:grid;place-items:center}
+.m-close:hover{background:rgba(247,121,31,.18);color:#fff;border-color:var(--orange);transform:rotate(90deg)}
+.m-head{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.4rem;padding-right:3rem}
+.m-ic{display:grid;place-items:center;width:74px;height:74px;border-radius:18px;font-size:2.2rem;flex:0 0 auto;background:rgba(42,164,244,.13);border:1px solid var(--pb);color:var(--sky);box-shadow:inset 0 0 30px rgba(42,164,244,.14)}
+.m-panel.o .m-ic{background:rgba(247,121,31,.15);border-color:rgba(247,121,31,.35);color:var(--orange2);box-shadow:inset 0 0 30px rgba(247,121,31,.14)}
+.m-head h2{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.04;margin:0}
+.m-intro{font-size:1.3rem;line-height:1.55;color:var(--text);margin-bottom:1.4rem;font-weight:500}
+.m-sec{margin-top:1.3rem}.m-sec h4{font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sky);margin-bottom:.8rem;font-weight:600}.m-panel.o .m-sec h4{color:var(--orange2)}
+.m-list{list-style:none;display:grid;gap:.7rem}
+.m-list li{position:relative;padding:.85rem 1.1rem .85rem 2.8rem;background:rgba(42,164,244,.05);border:1px solid var(--line);border-radius:13px;font-size:1.14rem;color:var(--text);line-height:1.4;opacity:0;animation:mItem .5s ease forwards}
+.m-list li::before{content:"";position:absolute;left:1.1rem;top:1.35rem;width:10px;height:10px;border-radius:50%;background:var(--sky);box-shadow:0 0 12px var(--sky)}.m-panel.o .m-list li::before{background:var(--orange);box-shadow:0 0 12px var(--orange)}
+.m-list li:nth-child(1){animation-delay:.1s}.m-list li:nth-child(2){animation-delay:.17s}.m-list li:nth-child(3){animation-delay:.24s}.m-list li:nth-child(4){animation-delay:.31s}.m-list li:nth-child(5){animation-delay:.38s}.m-list li:nth-child(6){animation-delay:.45s}.m-list li:nth-child(7){animation-delay:.52s}.m-list li:nth-child(8){animation-delay:.59s}
+@keyframes mItem{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
+.m-ex{margin-top:1.4rem;padding:1.2rem 1.4rem;border-radius:16px;border-left:4px solid var(--orange);background:rgba(247,121,31,.08);font-size:1.14rem;line-height:1.5;color:var(--text)}
+.m-ex b{color:var(--orange2);display:block;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+
+/* poll */
+.poll{display:grid;gap:.7rem;margin-top:1rem}.poll .opt{position:relative;border:1px solid var(--pb);border-radius:13px;overflow:hidden;cursor:pointer;background:rgba(12,22,44,.5);transition:.2s}.poll .opt:hover{border-color:var(--sky)}
+.poll .fill{position:absolute;inset:0;width:0;background:linear-gradient(90deg,rgba(42,164,244,.34),rgba(247,121,31,.3));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.poll .row{position:relative;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;font-size:1.1rem}.poll .pct{font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.pollwrap{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;margin-top:1.5rem;z-index:2}@media(max-width:1100px){.pollwrap{grid-template-columns:1fr}}.pollwrap h3{color:var(--sky);font-size:1.2rem;margin-bottom:.5rem;font-weight:600}
+@media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}.duo,.gauges{grid-template-columns:1fr}.m-panel{padding:2rem 1.5rem}.two{gap:1.6rem}}
+</style>
+</head>
+<body>
+<div id="bg"></div><canvas id="net"></canvas><div id="grid"></div><div id="vignette"></div><div class="scan"></div>
+<div class="brand"><img src="asset/ITSEC%20Horizontal%20White.png" alt="ITSEC"></div>
+<div id="prog"></div><div id="stage"></div>
+<div class="dots" id="dots"></div>
+<div class="nav"><button id="prev">‹</button><div class="title" id="navTitle"></div><button id="next">›</button></div>
+<div class="counter"><b id="cur">01</b> / <span id="total">30</span></div>
+<div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen</div>
+<div id="overview"><h3>SLIDE OVERVIEW — CLICK TO JUMP</h3><div class="ovgrid" id="ovgrid"></div></div>
+<div id="modal"><div class="m-back"></div><div class="m-panel"><div class="m-glowbar"></div><button class="m-close">✕</button><div id="mbody"></div></div></div>
+
+<script>
+/* ===== registry + builders ===== */
+const DETAILS={};let _k=0;
+function reg(d){const k='k'+(_k++);DETAILS[k]=d;return k}
+function card(c){return `<button class="fcard ${c.o?'o':''}" data-k="${reg(c)}"><span class="ic">${c.icon}</span><h3>${c.title}</h3><p>${c.tag||''}</p><span class="explore">Explore <i>→</i></span></button>`}
+const HEROMARK='<img class="hero-mark" src="asset/ITSEC%20Icon.png" alt="">';
+
+/* ---- ORBIT scene ---- */
+function orbit(coreHTML,items,o){
+  const n=items.length, cx=50, cy=50, rx=40, ry=40;
+  const pts=items.map((it,i)=>{const a=-Math.PI/2+i*2*Math.PI/n;return {x:cx+Math.cos(a)*rx,y:cy+Math.sin(a)*ry,it}});
+  const lines=pts.map(p=>`<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" class="flowline ${o?'o':''}" vector-effect="non-scaling-stroke"/>`).join('');
+  const nodes=pts.map(p=>`<button class="onode ${o?'o':''}" style="left:${p.x}%;top:${p.y}%" data-k="${reg(p.it)}"><span class="oi">${p.it.icon}</span><h5>${p.it.title}</h5></button>`).join('');
+  const fb=items.map(it=>card(it)).join('');
+  return `<div class="orbit"><svg class="olines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><div class="ocore pulse ${o?'o':''}">${coreHTML}</div>${nodes}</div><div class="orbit-fallback grid g2">${fb}</div>`;
+}
+
+const slides=[
+// 1 COVER
+{nav:'Cover',html:`<section class="slide cover">${HEROMARK}
+  <div class="reveal kicker">ITSEC × DET · Cybersecurity Webinar · 18 June 2026</div>
+  <h1 class="reveal">Cybersecurity &amp;<br><span class="hl">Business Resilience</span><br>for Dubai SMEs</h1>
+  <p class="reveal sub">Protecting your business from cyberattacks, data loss, fraud &amp; operational disruption.</p>
+  <button class="reveal cta" onclick="next()">Begin the briefing →</button>
+  <div class="reveal footerline"><span class="who">Amir A. Kolahzadeh</span><span class="dot-sep"></span><span>Founder &amp; CEO, ITSEC</span></div>
+</section>`},
+
+// 2 WHY — editorial split
+{nav:'Why this matters',html:`<section class="slide"><div class="idx">01</div>
+  <div class="reveal kicker">Why This Session Matters</div>
+  <h2 class="reveal">Cybersecurity Is <span class="hl">No Longer an IT Problem</span></h2>
+  <div class="two reveal">
+    <div><p class="lead">It is now a board-level <span class="note">business survival</span> issue.</p>
+    <p class="sub" style="margin-top:1.2rem">One incident can disrupt revenue, damage client trust, expose data, and stop operations. Click each driver →</p></div>
+    <div class="grid g2" style="margin-top:0">
+      ${card({icon:'⚖️',title:'A Board Issue',tag:'Sits beside finance & legal',intro:'Cyber risk belongs on the executive agenda — not buried in IT.',list:['Boards are accountable for cyber oversight','Investors & partners ask about your posture','Regulators expect leadership involvement'],ex:'A single breach can trigger questions from your bank, insurer and biggest clients within hours.'})}
+      ${card({o:1,icon:'💸',title:'Revenue Impact',tag:'Operations & cash flow stop',intro:'One incident can halt operations and cash flow for days or weeks.',list:['Systems offline = no invoicing, no fulfilment','Recovery costs escalate by the hour','Lost deals rarely come back']})}
+      ${card({o:1,icon:'🤝',title:'Client Trust',tag:'Years to build, seconds to lose',intro:'Breaches damage relationships that took years to build.',list:['Customers fear their data is exposed','Competitors weaponise your incident']})}
+      ${card({icon:'🏛️',title:'Governance',tag:'Fund it, own it, govern it',intro:'Resilience must be understood, funded and owned at leadership level.',list:['Assign clear ownership of cyber risk','Budget for prevention, not just recovery']})}
+    </div>
+  </div>
+</section>`},
+
+// 3 THREAT — RADAR
+{nav:'The Threat Reality',html:`<section class="slide"><div class="idx">02</div>
+  <div class="reveal kicker">The Cyber Threat Reality</div>
+  <h2 class="reveal">Cyber Risk Is <span class="hl">No Longer Theoretical</span></h2>
+  <div class="radarwrap reveal">
+    <div class="radar"><svg viewBox="0 0 400 400">
+      <defs><linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(42,164,244,0)"/><stop offset="1" stop-color="rgba(42,164,244,.5)"/></linearGradient></defs>
+      <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(42,164,244,.15)"/><circle cx="200" cy="200" r="130" fill="none" stroke="rgba(42,164,244,.13)"/><circle cx="200" cy="200" r="70" fill="none" stroke="rgba(42,164,244,.13)"/>
+      <line x1="10" y1="200" x2="390" y2="200" stroke="rgba(42,164,244,.1)"/><line x1="200" y1="10" x2="200" y2="390" stroke="rgba(42,164,244,.1)"/>
+      <g class="sweep"><path d="M200 200 L200 10 A190 190 0 0 1 330 70 Z" fill="url(#sw)"/></g>
+      <circle class="blip" cx="120" cy="140" r="5" fill="#ff5050"/><circle class="blip" cx="290" cy="160" r="4" fill="#f7791f" style="animation-delay:.6s"/>
+      <circle class="blip" cx="250" cy="280" r="5" fill="#ff5050" style="animation-delay:1.1s"/><circle class="blip" cx="140" cy="270" r="4" fill="#f7791f" style="animation-delay:1.6s"/>
+      <circle class="blip" cx="300" cy="240" r="3" fill="#2aa4f4" style="animation-delay:.3s"/>
+      <circle class="ping" cx="120" cy="140" r="14" fill="none" stroke="#ff5050"/>
+      <circle cx="200" cy="200" r="6" fill="#2aa4f4"/></svg></div>
+    <div class="rstats cascade">
+      <button class="rstat" data-k="${reg({icon:'🌐',title:'200,000+ daily attacks',intro:'Over 200,000 attacks are reported daily against UAE strategic sectors.',list:['Automated scanning runs around the clock','SMEs are swept up in mass campaigns','Geography is no protection']})}"><span class="big" data-count="200000" data-suffix="+">0</span><span class="cap">daily attacks on UAE strategic sectors</span></button>
+      <button class="rstat o" data-k="${reg({icon:'🔒',title:'Ransomware — #1 impact',intro:'Ransomware remains one of the highest-impact threats to continuity.',list:['Encrypts and steals data','Targets your backups first','Public extortion adds damage']})}"><span class="big">#1</span><span class="cap">ransomware = highest-impact threat</span></button>
+      <button class="rstat" data-k="${reg({icon:'🧑',title:'Human element in most breaches',intro:'A human element is present in the majority of breaches.',list:['Clicking, approving, sharing, reusing passwords','Awareness is a control, not an afterthought']})}"><span class="big">Most</span><span class="cap">breaches involve a human element</span></button>
+      <button class="rstat o" data-k="${reg({icon:'🔗',title:'Vendor risk rising sharply',intro:'Third-party and supply-chain risk is rising sharply.',list:['Vendors hold access to your systems','Their breach becomes your incident']})}"><span class="big">↑</span><span class="cap">third-party / vendor risk rising</span></button>
+      <button class="rstat" data-k="${reg({icon:'🔑',title:'Credentials — easiest entry',intro:'Stolen credentials are one of the easiest entry points.',list:['Attackers prefer to log in, not break in','MFA closes most of this door']})}"><span class="big">Easy</span><span class="cap">credential theft = easiest entry</span></button>
+    </div>
+  </div>
+</section>`},
+
+// 4 HACKERS — HEX HONEYCOMB
+{nav:'Types of Hackers',html:`<section class="slide"><div class="idx">03</div>
+  <div class="reveal kicker">Threat Actors</div>
+  <h2 class="reveal">Types of Hackers &amp; <span class="hl">Their Motives</span></h2>
+  <div class="hexgrid reveal">
+    <div class="hexcol">
+      <button class="hex o" data-k="${reg({icon:'💰',title:'Financially Motivated',intro:'The largest group — driven purely by profit.',list:['Fraud & invoice manipulation','Ransomware & extortion','Theft of funds & data for resale'],ex:'Most SME incidents trace back to a financially motivated actor.'})}"><div class="face"><span class="ic">💰</span><h4>Financial</h4><small>Money</small></div></button>
+      <button class="hex" data-k="${reg({icon:'🕵️',title:'Insider Threats',intro:'Employees or contractors — malicious or careless.',list:['Revenge & sabotage','Negligence & accidental exposure','Data theft on the way out'],ex:'Offboarding gaps are a classic insider risk.'})}"><div class="face"><span class="ic">🕵️</span><h4>Insiders</h4><small>Revenge / error</small></div></button>
+    </div>
+    <div class="hexcol">
+      <button class="hex" data-k="${reg({icon:'🛰️',title:'State-Sponsored',intro:'Well-resourced actors pursuing national objectives.',list:['Espionage & IP theft','Disruption of critical services','Long-term strategic influence']})}"><div class="face"><span class="ic">🛰️</span><h4>State</h4><small>Espionage</small></div></button>
+      <button class="hex o" data-k="${reg({icon:'💥',title:'Cyber Terrorists',intro:'Aim to cause fear and disrupt critical infrastructure.',list:['Maximise disruption & visibility','Target essential services']})}"><div class="face"><span class="ic">💥</span><h4>Terrorists</h4><small>Disruption</small></div></button>
+    </div>
+    <div class="hexcol">
+      <button class="hex o" data-k="${reg({icon:'📢',title:'Hacktivists',intro:'Driven by political or social causes.',list:['Website defacement','Data leaks to embarrass targets','Campaign-style disruption']})}"><div class="face"><span class="ic">📢</span><h4>Hacktivists</h4><small>Ideology</small></div></button>
+      <button class="hex" data-k="${reg({icon:'🎭',title:'Opportunists',intro:'Script kiddies exploiting whatever is easy.',list:['Curiosity & bragging rights','Off-the-shelf tools','Hit whoever is exposed']})}"><div class="face"><span class="ic">🎭</span><h4>Opportunists</h4><small>Fame</small></div></button>
+    </div>
+  </div>
+</section>`},
+
+// 5 ANATOMY — TIMELINE RAIL (kept, strongest)
+{nav:'Anatomy of an Attack',html:`<section class="slide"><div class="idx">04</div>
+  <div class="reveal kicker">Attack Lifecycle · interactive timeline</div>
+  <h2 class="reveal">Anatomy of a <span class="hl">Hacker Attack</span></h2>
+  <p class="reveal sub" style="max-width:60ch">Attackers do not start with a full breach — they start with <span class="note">one weak point</span>, then move along this chain. Click any stage.</p>
+  ${rail([
+    {icon:'🔭',title:'Reconnaissance',intro:'The attacker quietly studies your business before touching it.',list:['Maps domains, staff & vendors','Finds exposed systems via internet scanning','Builds a target list — often automated']},
+    {icon:'🎣',title:'Phishing & Social Eng.',intro:'A crafted message tricks an employee into acting.',list:['Fake invoice, delivery or login page','Urgency & authority pressure the victim','One click is all it takes']},
+    {icon:'🔑',title:'Credential Theft',intro:'Valid usernames & passwords are captured.',list:['Harvested from a fake login page','Reused or leaked passwords','MFA stops most of this']},
+    {icon:'🧩',title:'Exploit Vulnerabilities',intro:'Unpatched systems give the attacker a way in.',list:['Old firewalls, plugins & servers','Known exploits used within days','Patch cadence matters']},
+    {icon:'⬆️',title:'Privilege Escalation',alt:1,intro:'The attacker gains higher-level access.',list:['From normal user to admin','Targets misconfigured permissions']},
+    {icon:'↔️',title:'Lateral Movement',alt:1,intro:'They spread quietly across your network.',list:['Hop between systems & accounts','Locate the most valuable data','Stay undetected as long as possible']},
+    {icon:'📤',title:'Data Exfiltration',alt:1,intro:'Sensitive data is copied out before any noise.',list:['Customer & financial records','Used as extortion leverage']},
+    {icon:'💣',title:'Ransomware / Extortion',alt:1,intro:'Encryption & threats arrive last — by then it is late.',list:['Files locked, backups attacked','Public leak threats','Ransom demand']}
+  ])}
+</section>`},
+
+// 6 WHAT WANT — ORBIT (vault)
+{nav:'What Hackers Want',html:`<section class="slide"><div class="idx">05</div>
+  <div class="reveal kicker">Attacker Objectives</div>
+  <h2 class="reveal">What Hackers Want <span class="hl">From Your Business</span></h2>
+  <p class="reveal sub">Not just systems — they want <span class="note">business leverage</span>. Click each target.</p>
+  <div class="reveal">${orbit('<span class="ci">🏦</span><b>Your Business</b><small>the target</small>',[
+    {o:1,icon:'💰',title:'Money',intro:'The fastest path to profit.',list:['Invoice & payment fraud','Ransom payments','Diversion of funds']},
+    {o:1,icon:'📁',title:'Data',intro:'Data is currency on criminal markets.',list:['Customer files & IDs','Financial records','Contracts & trade secrets']},
+    {o:1,icon:'🔑',title:'Access',intro:'Access is reused, sold and escalated.',list:['Email & cloud dashboards','Admin panels','CRM & accounting']},
+    {o:1,icon:'🛑',title:'Disruption',intro:'Downtime creates pressure to pay.',list:['Operational shutdown','Business interruption']},
+    {o:1,icon:'📉',title:'Reputation',intro:'Threatening reputation is leverage.',list:['Customer complaints','Media exposure','Regulator concern']}
+  ],true)}</div>
+</section>`},
+
+// 7 WHY SME — split + convergence mini diagram
+{nav:'Why SMEs Targeted',html:`<section class="slide"><div class="idx">06</div>
+  <div class="reveal kicker">Target Profile</div>
+  <h2 class="reveal">Why SMEs Are <span class="hl">Attractive Targets</span></h2>
+  <div class="two reveal">
+    <div class="diagbox"><svg viewBox="0 0 360 320">
+      <defs><radialGradient id="bg7" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="rgba(247,121,31,.18)"/><stop offset="1" stop-color="transparent"/></radialGradient></defs>
+      <circle cx="180" cy="160" r="150" fill="url(#bg7)"/>
+      ${[[40,60],[320,60],[40,260],[320,260],[180,30],[180,300]].map((p,i)=>`<line x1="${p[0]}" y1="${p[1]}" x2="180" y2="160" stroke="rgba(247,121,31,.4)" stroke-width="1.5" stroke-dasharray="5 6" class="flowline o" vector-effect="non-scaling-stroke"/><text class="blink" x="${p[0]}" y="${p[1]+5}" text-anchor="middle" font-size="20" style="animation-delay:${i*0.25}s">🤖</text>`).join('')}
+      <rect x="140" y="120" width="80" height="80" rx="12" fill="rgba(13,27,58,.95)" stroke="#2aa4f4" stroke-width="2"/>
+      <text x="180" y="168" text-anchor="middle" font-size="30">🏢</text></svg></div>
+    <div><p class="lead">Not because you are famous — because you are <span class="note">easier to compromise</span>.</p>
+    <p class="sub" style="margin:1rem 0 1.2rem">Most attacks are automated. Bots scan the internet continuously and do not need your name first.</p>
+    <ul class="points">
+      <li>Smaller budgets &amp; fewer controls</li><li>Heavy dependency on email, cloud &amp; outsourced IT</li><li>Weak or inconsistent MFA</li><li>Untested backups &amp; no incident response plan</li></ul></div>
+  </div>
+</section>`},
+
+// 8 WHERE ATTACKS — CONVERGENCE MAP
+{nav:'Where Attacks Come From',html:`<section class="slide"><div class="idx">07</div>
+  <div class="reveal kicker">Attack Surface · live map</div>
+  <h2 class="reveal">Where Attacks <span class="hl">Come From</span></h2>
+  ${(function(){const items=[
+    {icon:'🎣',title:'Phishing Emails',intro:'Crafted messages that look legitimate.',list:['Fake invoices & delivery notices','Fake bank updates','Fake CEO instructions']},
+    {icon:'🔑',title:'Weak Credentials',intro:'Passwords are the easiest thing to steal.',list:['Reused & leaked passwords','No MFA','Shared accounts']},
+    {icon:'🌐',title:'Exposed Systems',intro:'Anything exposed gets scanned and probed.',list:['VPN · RDP · APIs','Websites & dashboards','Old, forgotten servers']},
+    {icon:'🧩',title:'Vulnerable Software',intro:'Known flaws are exploited fast.',list:['Unpatched firewalls','Plugins & CMS','Endpoints']},
+    {icon:'🔗',title:'Third-Party Vendors',intro:'Suppliers expand your attack surface.',list:['IT & SaaS providers','Marketing tools','Payment & cloud']},
+    {icon:'⚠️',title:'Insider Error',intro:'Accidents cause real incidents.',list:['Accidental deletion','Wrong file sharing','Careless approvals']}];
+    const n=items.length;const ys=items.map((_,i)=>8+i*(84/(n-1)));
+    const lines=ys.map(y=>`<line x1="14" y1="${y}" x2="88" y2="50" class="flowline o" vector-effect="non-scaling-stroke"/>`).join('');
+    const src=items.map((it,i)=>`<button class="csrc" style="top:${ys[i]}%" data-k="${reg(it)}"><span class="si">${it.icon}</span><h5>${it.title}</h5></button>`).join('');
+    return `<div class="cmap reveal"><svg viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>${src}<div class="ccore"><span class="ci">🏢</span><b>Your SME</b><small>target</small></div></div>`;
+  })()}
+</section>`},
+
+// 9 HUMAN FACTOR — INBOX
+{nav:'The Human Factor',html:`<section class="slide"><div class="idx">08</div>
+  <div class="reveal kicker">The Human Factor</div>
+  <h2 class="reveal">Your People Are the <span class="hl">First Line of Defense</span></h2>
+  <p class="reveal sub">A typical inbox under attack — click any message to see how the scam works.</p>
+  <div class="inbox reveal">
+    <div class="inbox-top">📥 Inbox — Finance Team <span class="badge2">6 threats</span></div>
+    <button class="msg" data-k="${reg({icon:'🏦',title:'Fake Bank-Detail Change',intro:'A "supplier" emails new bank details just before an invoice is due.',list:['Looks like a normal request','Finance updates the record','Next payment goes to the attacker'],ex:'Always verify bank changes by phone using a known number.'})}"><span class="av">🏦</span><span class="mt"><b>Updated bank details for invoice #4471</b><span>accounts@your-supplier-portal.com</span></span><span class="flag">SPOOFED</span><span class="when">09:02</span></button>
+    <button class="msg" data-k="${reg({icon:'⚡',title:'Urgent "CEO" Payment',intro:'A message impersonating the CEO demands a fast, secret transfer.',list:['Urgency discourages checking','Targets junior finance staff'],ex:'Use dual approval for all payments.'})}"><span class="av">⚡</span><span class="mt"><b>Need an urgent transfer — are you at your desk?</b><span>"Amir K." &lt;ceo.office@gmail.com&gt;</span></span><span class="flag">IMPERSONATION</span><span class="when">09:14</span></button>
+    <button class="msg" data-k="${reg({icon:'🔓',title:'Fake Microsoft 365 Login',intro:'A pixel-perfect Microsoft login page steals the password.',list:['Arrives via an email link','Captures username, password & sometimes MFA'],ex:'Check the URL; use phishing-resistant MFA.'})}"><span class="av">🔓</span><span class="mt"><b>Your password expires today — re-verify now</b><span>no-reply@micros0ft-secure.com</span></span><span class="flag">PHISHING</span><span class="when">09:31</span></button>
+    <button class="msg" data-k="${reg({icon:'📦',title:'Fake Courier Link',intro:'A "missed delivery" link leads to malware or a fake form.',list:['Mimics known couriers','Plays on everyday expectation']})}"><span class="av">📦</span><span class="mt"><b>Your parcel could not be delivered — reschedule</b><span>delivery@track-courier-ae.net</span></span><span class="flag">MALWARE</span><span class="when">09:47</span></button>
+    <button class="msg" data-k="${reg({icon:'🔳',title:'Malicious QR Code',intro:'A QR code routes the victim to a malicious site.',list:['Bypasses email link filtering','Common on fake invoices & posters']})}"><span class="av">🔳</span><span class="mt"><b>Scan to view your secure document</b><span>docs@secure-share-qr.com</span></span><span class="flag">QUISHING</span><span class="when">10:05</span></button>
+    <button class="msg" data-k="${reg({icon:'💬',title:'WhatsApp Scam',intro:'Attackers move to chat apps to feel personal and bypass controls.',list:['Impersonates a colleague or boss','Requests gift cards or transfers']})}"><span class="av">💬</span><span class="mt"><b>WhatsApp: "Quick favour — buy gift cards for clients"</b><span>+971 5x xxx xxxx</span></span><span class="flag">SOCIAL ENG.</span><span class="when">10:22</span></button>
+  </div>
+</section>`},
+
+// 10 BEC — RAIL
+{nav:'Business Email Compromise',html:`<section class="slide"><div class="idx">09</div>
+  <div class="reveal kicker">Business Email Compromise · interactive flow</div>
+  <h2 class="reveal">BEC: The <span class="hl">Silent SME Killer</span></h2>
+  <p class="reveal sub" style="max-width:60ch">No malware needed — it looks like normal business communication. Click each step.</p>
+  ${rail([
+    {icon:'📧',title:'Account Compromised',intro:'The attacker quietly gains access to a mailbox.',list:['Via phishing or a stolen password','No alarms raised']},
+    {icon:'👁️',title:'Silent Monitoring',intro:'They read quietly to learn how you do business.',list:['Studies tone & contacts','Waits for a payment cycle']},
+    {icon:'🧾',title:'Find the Invoice',intro:'They spot a pending invoice or payment.',list:['Targets real, in-flight transactions']},
+    {icon:'🏦',title:'Change Bank Details',alt:1,intro:'They send updated bank details that look genuine.',list:['Uses the real email thread','Timing feels natural']},
+    {icon:'💸',title:'Wrong Account Paid',alt:1,intro:'The payment lands with the attacker.',list:['Looks like a routine payment']},
+    {icon:'🚨',title:'Discovered Too Late',alt:1,intro:'The real supplier chases the missing payment.',list:['Funds already moved','Recovery is difficult'],ex:'Controls: MFA on email · external-sender warning · phone verification · dual approval · DMARC/SPF/DKIM · finance training.'}
+  ])}
+</section>`},
+
+// 11 RANSOMWARE — TERMINAL
+{nav:'Ransomware',html:`<section class="slide"><div class="idx">10</div>
+  <div class="reveal kicker">Ransomware Kill Chain · attacker console</div>
+  <h2 class="reveal">Ransomware Is Now <span class="hl">Extortion, Not Just Encryption</span></h2>
+  <div class="terminal reveal">
+    <div class="term-bar"><span class="td r"></span><span class="td y"></span><span class="td g"></span><span class="tt">killchain.sh — root@compromised-host</span></div>
+    <div class="term-body cascade">
+      ${[
+        {icon:'🚪',t:'Initial Access',d:{icon:'🚪',title:'Initial Access',intro:'Entry via phishing, stolen credentials or an exposed system.'}},
+        {icon:'🔑',t:'Credential Theft',d:{icon:'🔑',title:'Credential Theft',intro:'Harvest more logins to expand reach.'}},
+        {icon:'⬆️',t:'Privilege Escalation',d:{icon:'⬆️',title:'Privilege Escalation',intro:'Gain admin rights across the environment.'}},
+        {icon:'🗄️',t:'Backup Discovery',d:{icon:'🗄️',title:'Backup Discovery',intro:'They find and target your backups first.',list:['Deletes or encrypts backups','Removes your safety net'],ex:'Immutable, offline backups defeat this step.'}},
+        {icon:'📤',t:'Data Exfiltration',d:{icon:'📤',title:'Data Exfiltration',intro:'Sensitive data is exfiltrated for leverage.'}},
+        {icon:'🔒',t:'Encryption',d:{icon:'🔒',title:'Encryption',intro:'Files are locked across the business.'}},
+        {icon:'💰',t:'Extortion Demand',d:{icon:'💰',title:'Extortion Demand',intro:'A ransom is demanded to restore access.'}},
+        {icon:'📰',t:'Public Leak Threat',d:{icon:'📰',title:'Public Leak Threat',intro:'They threaten to publish stolen data.',list:['Adds reputational pressure','Doubles the extortion']}}
+      ].map((s,i)=>`<button class="tline" data-k="${reg(s.d)}"><span class="pr">$</span><span class="seq">[${String(i+1).padStart(2,'0')}]</span><span class="cmd">${s.icon} ${s.t}</span><span class="hintx">▸ explain</span></button>`).join('')}
+      <div class="term-cursor">█</div>
+    </div>
+  </div>
+</section>`},
+
+// 12 CRED THEFT — split login→cloud
+{nav:'Credential Theft',html:`<section class="slide"><div class="idx">11</div>
+  <div class="reveal kicker">Credential Theft</div>
+  <h2 class="reveal">Most Attackers <span class="hl">Prefer to Log In</span></h2>
+  <div class="two reveal">
+    <div class="diagbox"><svg viewBox="0 0 360 320">
+      <rect x="40" y="90" width="150" height="140" rx="12" fill="rgba(13,27,58,.9)" stroke="#2aa4f4" stroke-width="2"/>
+      <text x="115" y="120" text-anchor="middle" font-size="13" fill="#93a6c8" font-family="Space Grotesk">Sign in</text>
+      <rect x="62" y="135" width="106" height="20" rx="5" fill="rgba(42,164,244,.12)"/><rect x="62" y="165" width="106" height="20" rx="5" fill="rgba(42,164,244,.12)"/>
+      <rect x="62" y="195" width="106" height="22" rx="6" fill="#f7791f"/><text x="115" y="210" text-anchor="middle" font-size="11" fill="#04060d" font-weight="700" font-family="Space Grotesk">LOGIN</text>
+      <text x="115" y="265" text-anchor="middle" font-size="22">🔑</text>
+      <line x1="190" y1="160" x2="300" y2="90" class="flowline o" vector-effect="non-scaling-stroke" stroke-width="2"/>
+      <line x1="190" y1="160" x2="300" y2="160" class="flowline o" vector-effect="non-scaling-stroke" stroke-width="2"/>
+      <line x1="190" y1="160" x2="300" y2="230" class="flowline o" vector-effect="non-scaling-stroke" stroke-width="2"/>
+      <text x="315" y="96" text-anchor="middle" font-size="26">☁️</text><text x="315" y="166" text-anchor="middle" font-size="26">📧</text><text x="315" y="236" text-anchor="middle" font-size="26">💼</text></svg></div>
+    <div><p class="lead">The easiest attack is not breaking in — it is stealing a valid password.</p>
+    <div class="grid g2" style="margin-top:1.3rem;gap:1rem">
+      ${card({o:1,icon:'🎯',title:'How They Steal It',tag:'Common sources',intro:'Credentials leak from many directions.',list:['Phishing pages','Password reuse & leaked databases','Malware on devices','Shared admin passwords','Compromised personal accounts used for work']})}
+      ${card({icon:'🛡️',title:'The Fix: Identity',tag:'Required controls',intro:'A handful of controls close most of the gap.',list:['MFA everywhere','Password manager','No shared accounts','Dark-web credential monitoring','Conditional access','Admin separation','Immediate offboarding']})}
+    </div></div>
+  </div>
+</section>`},
+
+// 13 EXPOSED — split perimeter
+{nav:'Exposed Systems',html:`<section class="slide"><div class="idx">12</div>
+  <div class="reveal kicker">Exposure &amp; Vulnerabilities</div>
+  <h2 class="reveal">Exposed Systems Are <span class="hl">Open Doors</span></h2>
+  <div class="two reveal">
+    <div class="diagbox"><svg viewBox="0 0 360 320">
+      <rect x="70" y="70" width="220" height="180" rx="16" fill="none" stroke="rgba(42,164,244,.4)" stroke-width="2" stroke-dasharray="8 6"/>
+      <text x="180" y="160" text-anchor="middle" font-size="34">🏢</text><text x="180" y="190" text-anchor="middle" font-size="11" fill="#93a6c8" font-family="Space Grotesk">internal network</text>
+      ${[[70,110,'RDP'],[290,110,'VPN'],[70,210,'API'],[290,210,'WEB'],[180,70,'SRV']].map((p,i)=>`<circle class="blink" cx="${p[0]}" cy="${p[1]}" r="13" fill="rgba(255,80,80,.2)" stroke="#ff5050" stroke-width="2" style="animation-delay:${i*0.3}s"/><text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" font-size="8" fill="#ff8a8a" font-family="Space Grotesk">${p[2]}</text>`).join('')}</svg></div>
+    <div><p class="lead">Attackers scan the internet constantly for exposed, unpatched systems.</p>
+    <div class="grid g2" style="margin-top:1.3rem;gap:1rem">
+      ${card({o:1,icon:'🌐',title:'Common Exposures',tag:'What gets scanned',intro:'Anything reachable from the internet is a target.',list:['RDP & VPN portals','Firewalls & outdated websites','WordPress plugins','Public cloud storage & APIs','Admin panels & test environments','Orphaned servers']})}
+      ${card({icon:'🛠️',title:'The Controls',tag:'How to close them',intro:'Know what you have, then reduce and watch it.',list:['Asset inventory','Vulnerability scanning','Patch management','Penetration testing','Firewall rule review','Remove unused services','Monitor exposed assets']})}
+    </div></div>
+  </div>
+</section>`},
+
+// 14 CLOUD — shared-responsibility TOGGLE
+{nav:'Cloud Security',html:`<section class="slide"><div class="idx">13</div>
+  <div class="reveal kicker">Cloud Security</div>
+  <h2 class="reveal">Cloud Does Not Mean <span class="hl">Automatically Secure</span></h2>
+  <div class="cloudscene reveal">
+    <div class="cloud-head">
+      <div class="cloud-provider"><span>☁️ The provider secures the infrastructure</span>hardware · network · data-centre · hypervisor</div>
+      <button class="cloud-toggle"><span class="knob"></span><b>You secure: <span class="lblR">Risks</span><span class="lblC">Controls</span></b> — tap to flip</button>
+    </div>
+    <div class="cloud-grid">
+      ${[
+        {icon:'🪪',t:'Identity',r:'No MFA · excessive admin',c:'MFA + conditional access',d:{icon:'🪪',title:'Identity & Access',intro:'Who can log in, and with how much power.',list:['Risk: no MFA, too many admins','Control: MFA + conditional access','Control: least-privilege admin roles']}},
+        {icon:'📂',t:'File Sharing',r:'Public / anyone links',c:'Locked sharing policy',d:{icon:'📂',title:'File Sharing',intro:'How data leaves your tenant.',list:['Risk: public or "anyone with the link"','Control: restrict external sharing','Control: expiry & access reviews']}},
+        {icon:'🪣',t:'Storage',r:'Unprotected buckets',c:'Private + encrypted',d:{icon:'🪣',title:'Cloud Storage',intro:'Object storage is a top breach source.',list:['Risk: open / mis-set buckets','Control: private by default + encryption']}},
+        {icon:'📧',t:'Email',r:'Weak anti-phishing',c:'DMARC · SPF · DKIM',d:{icon:'📧',title:'Email Security',intro:'Email is the most-abused cloud service.',list:['Risk: weak filtering & spoofing','Control: DMARC, SPF, DKIM + warnings']}},
+        {icon:'📊',t:'Logging',r:'No logs or alerts',c:'Central logging & alerts',d:{icon:'📊',title:'Logging & Monitoring',intro:'You cannot respond to what you cannot see.',list:['Risk: no audit logs or alerting','Control: central logging + alerts']}},
+        {icon:'🚪',t:'Offboarding',r:'Ex-staff keep access',c:'Instant access removal',d:{icon:'🚪',title:'Offboarding',intro:'Leavers must lose access immediately.',list:['Risk: dormant accounts stay live','Control: automated, immediate removal']}}
+      ].map(x=>`<button class="ctile" data-k="${reg(x.d)}"><span class="ci">${x.icon}</span><h4>${x.t}</h4><span class="state risk">${x.r}</span><span class="state ctl">${x.c}</span></button>`).join('')}
+    </div>
+    <div class="cloud-note">Under the <b>shared-responsibility model</b>, you remain responsible for identity, configuration, data &amp; monitoring.</div>
+  </div>
+</section>`},
+
+// 15 WEB/API — scanned ATTACK SURFACE STACK
+{nav:'Web, App & API',html:`<section class="slide"><div class="idx">14</div>
+  <div class="reveal kicker">Digital Channels · attack-surface scan</div>
+  <h2 class="reveal">Your Digital Channels Are an <span class="hl">Attack Surface</span></h2>
+  <p class="reveal sub">A website, app, API or payment link can be the entry point. Click any layer to scan it.</p>
+  <div class="stackscene reveal"><div class="scanbeam"></div>
+    ${[
+      {icon:'🖥️',t:'Web Frontend',s:'Customer-facing site & portal',rk:'Business-logic abuse',d:{icon:'🖥️',title:'Web Frontend',intro:'The public face — and a tempting target.',list:['Risk: broken authentication','Risk: business-logic abuse','Control: WAPT + WAF + secure dev review']}},
+      {icon:'🔌',t:'APIs',s:'The data pipes behind the app',rk:'Weak / open APIs',d:{icon:'🔌',title:'APIs',intro:'APIs expose your data directly.',list:['Risk: unauthenticated or weak APIs','Risk: data leakage','Control: API penetration testing + rate limits']}},
+      {icon:'🔐',t:'Authentication',s:'Login & session handling',rk:'Credential attacks',d:{icon:'🔐',title:'Authentication',intro:'Where attackers prefer to walk in.',list:['Risk: no MFA, weak sessions','Control: MFA + secure session management']}},
+      {icon:'🧩',t:'Plugins / CMS',s:'WordPress & third-party code',rk:'Vulnerable plugins',d:{icon:'🧩',title:'Plugins & CMS',intro:'Third-party code you did not write.',list:['Risk: outdated, vulnerable plugins','Control: patching + remove unused components']}},
+      {icon:'🗄️',t:'Hosting / Database',s:'Where the data lives',rk:'Data leakage',d:{icon:'🗄️',title:'Hosting & Database',intro:'The crown jewels at the bottom of the stack.',list:['Risk: insecure hosting & exposed DBs','Control: secure hosting + DDoS protection + monitoring']}}
+    ].map(x=>`<button class="alayer" data-k="${reg(x.d)}"><span class="ai">${x.icon}</span><div><h4>${x.t}</h4><p>${x.s}</p></div><span class="rk">⚠ ${x.rk}</span></button>`).join('')}
+  </div>
+</section>`},
+
+// 16 VENDOR — supply-chain WEAKEST LINK
+{nav:'Third-Party Risk',html:`<section class="slide"><div class="idx">15</div>
+  <div class="reveal kicker">Third-Party &amp; Vendor Risk</div>
+  <h2 class="reveal">Your Vendors Can Become Your <span class="hl">Weakest Link</span></h2>
+  <p class="reveal sub">You can outsource the work — not the responsibility. Hover the chain; click any vendor.</p>
+  <div class="chainscene reveal">
+    <div class="chain">
+      ${[
+        {icon:'🏢',t:'Your Business',you:1,d:{icon:'🏢',title:'Your Business',intro:'You carry the impact of every vendor breach.',list:['Regulators & customers hold you responsible','Map who can touch your data']}},
+        {icon:'🔧',t:'IT / MSP',weak:1,d:{icon:'🔧',title:'IT Support / MSP',intro:'Often the most powerful — and riskiest — vendor.',list:['Holds admin access to everything','A breach here is a breach of you'],ex:'Demand MFA, logging & breach-notification terms.'}},
+        {icon:'☁️',t:'Cloud / Hosting',d:{icon:'☁️',title:'Cloud & Hosting',intro:'Your data lives on their platform.',list:['Misconfig or breach exposes your data','Confirm backup & restore capability']}},
+        {icon:'💳',t:'Payments',d:{icon:'💳',title:'Payment Processors',intro:'A direct line to your money.',list:['Fraud & diversion risk','Confirm their security & insurance']}},
+        {icon:'📊',t:'CRM',d:{icon:'📊',title:'CRM Platform',intro:'Holds your customer relationships & data.',list:['Customer PII exposure','Review access & export controls']}},
+        {icon:'📣',t:'Marketing',d:{icon:'📣',title:'Marketing Agency',intro:'Often has access to sites, domains & data.',list:['Website & DNS access','Limit and review permissions']}}
+      ].map((x,i,arr)=>`${i>0?'<div class="cconn"></div>':''}<button class="cnode ${x.you?'you':''} ${x.weak?'weak':''}" data-k="${reg(x.d)}"><span class="cc">${x.icon}</span><h5>${x.t}</h5></button>`).join('')}
+    </div>
+    <div class="chain-q">
+      <span class="reveal" style="color:var(--muted);align-self:center;font-size:.95rem">Ask every vendor:</span>
+      ${[
+        {q:'Do they enforce MFA?',d:{icon:'🔐',title:'Do they enforce MFA?',intro:'Their weak login becomes your breach.',list:['Require MFA on all access to your systems']}},
+        {q:'Who can access your data?',d:{icon:'👥',title:'Who can access your data?',intro:'Know exactly who and what they can touch.',list:['Map vendor accounts & permissions','Least privilege only']}},
+        {q:'If they are breached?',d:{icon:'🚨',title:'What if they are breached?',intro:'Notification speed decides your exposure.',list:['Contractual breach-notification timelines','A response plan that includes vendors']}},
+        {q:'Can they restore your data?',d:{icon:'🔄',title:'Can they restore your data?',intro:'Their recovery capability is your continuity.',list:['Proven backup & restore','Defined RTO / RPO']}},
+        {q:'Cyber insurance?',d:{icon:'📄',title:'Do they have cyber insurance?',intro:'Shared risk if things go wrong.',list:['Confirm coverage & liability terms']}}
+      ].map(x=>`<button class="qchip" data-k="${reg(x.d)}">${x.q}</button>`).join('')}
+    </div>
+  </div>
+</section>`},
+
+// 17 AWARENESS — HUMAN FIREWALL meter
+{nav:'Awareness Training',html:`<section class="slide"><div class="idx">16</div>
+  <div class="reveal kicker">Awareness Training · build the human firewall</div>
+  <h2 class="reveal">Your People Are a <span class="hl">Human Firewall</span></h2>
+  <div class="fwscene meterscene reveal">
+    <div class="fwleft">
+      <div class="fwshield" style="--p:0">
+        <div class="shfill"></div>
+        <svg class="shline" viewBox="0 0 100 112" preserveAspectRatio="none"><polygon points="50,2 98,20 98,67 50,110 2,67 2,20"/></svg>
+        <div class="shtext"><span class="fwemoji">🛡️</span><span class="fwpct">0%</span><small>Firewall strength</small></div>
+      </div>
+      <div class="fwbadge">FULLY TRAINED ✓</div>
+    </div>
+    <div class="fwright">
+      <p class="sub" style="margin:0 0 .8rem">Click each topic to train your team and charge the firewall →</p>
+      <div class="fwtopics">
+        ${[
+          {icon:'🎣',t:'Phishing emails',d:{icon:'🎣',title:'Phishing Emails',intro:'The most common way in.',list:['Spot urgency & lookalike senders','Hover links before clicking','Report, do not delete']}},
+          {icon:'💬',t:'WhatsApp scams',d:{icon:'💬',title:'WhatsApp Scams',intro:'Trust moved to a personal channel.',list:['Verify unusual requests by voice','Beware gift-card & transfer asks']}},
+          {icon:'🧾',t:'Invoice fraud',d:{icon:'🧾',title:'Invoice Fraud',intro:'Fake or altered invoices.',list:['Match to a known PO','Verify any change of amount']}},
+          {icon:'🏦',t:'Bank-detail changes',d:{icon:'🏦',title:'Bank-Detail Changes',intro:'The classic BEC payday.',list:['Always verify by phone, known number','Use dual approval']}},
+          {icon:'🔳',t:'QR phishing',d:{icon:'🔳',title:'QR Phishing (Quishing)',intro:'A QR code hides the destination.',list:['Do not scan unexpected codes','Check the URL after scanning']}},
+          {icon:'🔑',t:'Password security',d:{icon:'🔑',title:'Password Security',intro:'Reuse is the enemy.',list:['Use a password manager','Never reuse work passwords']}},
+          {icon:'⚡',t:'CEO impersonation',d:{icon:'⚡',title:'CEO Impersonation',intro:'Authority + urgency = pressure.',list:['Confirm urgent requests out-of-band','No secret transfers']}},
+          {icon:'🚨',t:'Reporting incidents',d:{icon:'🚨',title:'Reporting Incidents',intro:'Speed limits the damage.',list:['No-blame reporting culture','Know who to tell, fast']}}
+        ].map(x=>`<button class="fwtopic meteritem" data-k="${reg(x.d)}"><span class="tk">✓</span><span class="ti">${x.icon}</span><span>${x.t}</span></button>`).join('')}
+      </div>
+      <div class="fwmeter"><div class="pbar"><span class="meterfill"></span></div><div class="metertext">0 / 8 topics trained</div></div>
+      <p class="fwcadence">Run it for real: <b>monthly</b> micro-training · <b>quarterly</b> phishing simulations · finance &amp; executive sessions · no-blame reporting.</p>
+    </div>
+  </div>
+</section>`},
+
+// 18 BASELINE — ORBIT shield (12)
+{nav:'Minimum Baseline',html:`<section class="slide"><div class="idx">17</div>
+  <div class="reveal kicker">Minimum Security Baseline</div>
+  <h2 class="reveal">Your 12-Control <span class="hl">Defense Ring</span></h2>
+  <p class="reveal sub">Every SME needs these <span class="note">before</span> advanced tools. Click any control.</p>
+  <div class="reveal">${orbit('<span class="ci">🛡️</span><b>Baseline</b><small>12 controls</small>',[
+    {icon:'🔐',title:'MFA',intro:'Multi-factor authentication on email, cloud, finance, CRM, VPN & admin accounts.',list:['Single highest-value control','Blocks most credential attacks']},
+    {icon:'💻',title:'Endpoint',intro:'Modern endpoint protection on all devices.',list:['Detects malware & ransomware behaviour','Laptops, servers & mobiles']},
+    {icon:'📧',title:'Email Security',intro:'Anti-phishing controls on email.',list:['External-sender warnings','DMARC, SPF & DKIM']},
+    {icon:'🩹',title:'Patching',intro:'Monthly patching plus urgent critical patching.',list:['Closes known vulnerabilities fast']},
+    {icon:'🗄️',title:'Backups',intro:'Backups with restore testing, protected from ransomware.'},
+    {icon:'🚪',title:'Access Control',intro:'Least privilege & employee offboarding.',list:['Remove access when people leave','Separate admin accounts']},
+    {icon:'🎓',title:'Awareness',intro:'Practical, scenario-based staff training.'},
+    {icon:'💳',title:'Payment Checks',intro:'Verify payments & bank changes.',list:['Phone verification','Dual approval']},
+    {icon:'🔎',title:'Vuln Testing',intro:'Regular vulnerability assessment.'},
+    {icon:'⚡',title:'Incident Response',intro:'An incident response contact list & plan.'},
+    {icon:'📄',title:'Cyber Insurance',intro:'Reviewed cyber insurance coverage.'},
+    {icon:'🔗',title:'Vendor Risk',intro:'Regular review of vendor risk & access.'}
+  ])}</div>
+</section>`},
+
+// 19 BACKUP/DR — STACK
+{nav:'Backup & DR',html:`<section class="slide"><div class="idx">18</div>
+  <div class="reveal kicker">Backup &amp; Disaster Recovery</div>
+  <h2 class="reveal">Backup Is Not the Same as <span class="hl">Recovery</span></h2>
+  <p class="reveal sub">Many businesses have backups — but cannot recover fast enough. Click each layer.</p>
+  <div class="stack cascade">
+    <button class="slayer" data-k="${reg({icon:'💾',title:'Backup',intro:'A backup is simply a copy of your data.',list:['Necessary but not sufficient','Useless if it cannot be restored quickly'],ex:'Ask: who can delete it, and is it protected from ransomware?'})}"><span class="ln">1</span><span class="si">💾</span><div><h3>Backup</h3><p>A copy of your data.</p></div><span class="arrow">↓</span></button>
+    <button class="slayer o" data-k="${reg({icon:'🔄',title:'Disaster Recovery',intro:'DR is the ability to restore systems and operations.',list:['Defined order of recovery','Known, tested recovery time'],ex:'Ask: when was the last successful restore test?'})}"><span class="ln">2</span><span class="si">🔄</span><div><h3>Disaster Recovery</h3><p>The ability to restore systems &amp; operations.</p></div><span class="arrow">↓</span></button>
+    <button class="slayer" data-k="${reg({icon:'🏢',title:'Business Continuity',intro:'BC keeps the company functioning during disruption.',list:['People, process & comms — not just IT','Plans for working while systems are down']})}"><span class="ln">3</span><span class="si">🏢</span><div><h3>Business Continuity</h3><p>Keeping the company functioning during disruption.</p></div><span class="arrow">✓</span></button>
+  </div>
+</section>`},
+
+// 20 RTO/RPO — GAUGES + table
+{nav:'RTO & RPO',html:`<section class="slide"><div class="idx">19</div>
+  <div class="reveal kicker">Recovery Objectives</div>
+  <h2 class="reveal">RTO and RPO <span class="hl">Made Simple</span></h2>
+  <div class="gauges reveal">
+    <button class="gauge" data-k="${reg({icon:'⏱️',title:'RTO — Recovery Time',intro:'Recovery Time Objective: how quickly must the system be restored?',list:['Drives recovery investment','A business decision, not just IT']})}">
+      <svg viewBox="0 0 120 70"><path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="rgba(42,164,244,.15)" stroke-width="9" stroke-linecap="round"/><path class="arc" d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="#2aa4f4" stroke-width="9" stroke-linecap="round"/></svg>
+      <div class="gt">⏱️ RTO</div><div class="gd">How fast must it be back?</div></button>
+    <button class="gauge o" data-k="${reg({icon:'💾',title:'RPO — Recovery Point',intro:'Recovery Point Objective: how much data can you afford to lose?',list:['Drives backup frequency','Near-zero for payments']})}">
+      <svg viewBox="0 0 120 70"><path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="rgba(247,121,31,.15)" stroke-width="9" stroke-linecap="round"/><path class="arc" d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="#f7791f" stroke-width="9" stroke-linecap="round"/></svg>
+      <div class="gt">💾 RPO</div><div class="gd">How much data can you lose?</div></button>
+  </div>
+  <table class="rto reveal"><thead><tr><th>System</th><th>RTO</th><th>RPO</th></tr></thead><tbody>
+    <tr><td>Payment system</td><td><span class="pill">30 minutes</span></td><td><span class="pill b">Near zero</span></td></tr>
+    <tr><td>Email</td><td><span class="pill">4 hours</span></td><td><span class="pill b">1 hour</span></td></tr>
+    <tr><td>Website</td><td><span class="pill">2 hours</span></td><td><span class="pill b">24 hours</span></td></tr>
+    <tr><td>Archive files</td><td><span class="pill">48 hours</span></td><td><span class="pill b">24 hours</span></td></tr>
+  </tbody></table>
+</section>`},
+
+// 21 IR — CLOCK
+{nav:'Incident Response',html:`<section class="slide"><div class="idx">20</div>
+  <div class="reveal kicker">Incident Response</div>
+  <h2 class="reveal">The First <span class="hl">60 Minutes</span> Matter</h2>
+  <div class="warroom">
+    <div class="reveal"><svg class="svgbox" viewBox="0 0 300 300"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7791f"/><stop offset="1" stop-color="#2aa4f4"/></linearGradient></defs>
+      <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(42,164,244,.13)" stroke-width="11"/>
+      <circle cx="150" cy="150" r="120" fill="none" stroke="url(#cg)" stroke-width="11" stroke-linecap="round" stroke-dasharray="754" stroke-dashoffset="190" transform="rotate(-90 150 150)"/>
+      ${Array.from({length:12}).map((_,i)=>{const a=i*30*Math.PI/180;return `<line x1="${150+Math.sin(a)*100}" y1="${150-Math.cos(a)*100}" x2="${150+Math.sin(a)*112}" y2="${150-Math.cos(a)*112}" stroke="rgba(42,164,244,.4)" stroke-width="2"/>`}).join('')}
+      <text x="150" y="140" fill="#fff" font-size="62" font-weight="700" text-anchor="middle" font-family="Space Grotesk">60</text>
+      <text x="150" y="176" fill="#93a6c8" font-size="15" letter-spacing="3" text-anchor="middle" font-family="Space Grotesk">MINUTES</text>
+      <line x1="150" y1="150" x2="150" y2="68" stroke="#f7791f" stroke-width="3" stroke-linecap="round"/><circle cx="150" cy="150" r="6" fill="#f7791f"/></svg></div>
+    <div class="grid g2" style="margin-top:0">
+      ${card({icon:'🔍',title:'Confirm & Contain',tag:'Steps 1–3',intro:'Establish what is happening and stop the spread.',list:['Confirm the incident','Contain affected systems','Preserve evidence']})}
+      ${card({o:1,icon:'📞',title:'Activate & Notify',tag:'Steps 4–6',intro:'Get the right people engaged immediately.',list:['Activate the IR team','Notify leadership','Contact IT / security provider']})}
+      ${card({o:1,icon:'🛑',title:'Protect the Business',tag:'Steps 7–8',intro:'Limit financial and operational damage.',list:['Stop payments if fraud suspected','Prioritise critical systems']})}
+      ${card({icon:'🗣️',title:'Communicate & Log',tag:'Steps 9–10',intro:'Control the message and record everything.',list:['Prepare customer / vendor comms','Document every decision']})}
+    </div>
+  </div>
+</section>`},
+
+// 22 CEO — cards g3
+{nav:'CEO Questions',html:`<section class="slide"><div class="idx">21</div>
+  <div class="reveal kicker">For the CEO</div>
+  <h2 class="reveal">Questions Every <span class="hl">CEO Should Ask</span></h2>
+  <p class="reveal sub">Click any question to see why it matters →</p>
+  <div class="grid g3 cascade">
+    ${card({icon:'🗂️',title:'Top 10 critical systems?',tag:'Know your crown jewels',intro:'You cannot protect what you have not prioritised.',list:['Defines what recovers first','Focuses budget where it matters']})}
+    ${card({o:1,icon:'👤',title:'Who has admin access?',tag:'Privilege visibility',intro:'Admin accounts are the keys to the kingdom.',list:['Fewer admins = smaller blast radius','Review regularly']})}
+    ${card({icon:'🔐',title:'MFA on critical accounts?',tag:'Identity check',intro:'MFA is the single biggest risk reducer.',list:['Email, finance, cloud, VPN, admin']})}
+    ${card({o:1,icon:'🔄',title:'Last restore test?',tag:'Recovery reality',intro:'Backups only count if they restore.',list:['When, and how long did it take?']})}
+    ${card({icon:'📧',title:'If email is compromised?',tag:'Scenario readiness',intro:'Email is the hub of fraud and access.',list:['Do you have a containment plan?']})}
+    ${card({o:1,icon:'🌐',title:'If the website goes down?',tag:'Continuity',intro:'Customer-facing outages hit revenue & trust.',list:['Who restores it, and how fast?']})}
+    ${card({icon:'🏦',title:'Verify supplier bank changes?',tag:'Fraud control',intro:'The #1 BEC control for finance teams.',list:['Phone verification & dual approval']})}
+    ${card({o:1,icon:'🔗',title:'Which vendors access data?',tag:'Third-party risk',intro:'Their access is your exposure.',list:['Map vendor access & permissions']})}
+    ${card({icon:'⚡',title:'Do we have an IR plan?',tag:'Preparedness',intro:'A plan turns chaos into a checklist.',list:['Who decides, who communicates']})}
+  </div>
+</section>`},
+
+// 23 CTO — PROGRESS CHECKLIST
+{nav:'CTO Checklist',html:`<section class="slide"><div class="idx">22</div>
+  <div class="reveal kicker">For the CTO / IT Leader</div>
+  <h2 class="reveal">Technical Checklist for <span class="hl">CTOs &amp; IT Leaders</span></h2>
+  <div class="pcheckhead reveal"><div class="pbar"><span></span></div><div class="ptext">0 / 12 reviewed</div></div>
+  <div class="checkgrid cascade">
+    ${[['🔐','MFA enforcement report','Proof MFA is enforced across all critical accounts.'],
+       ['👤','Admin account review','List & justify every privileged account.'],
+       ['💻','Endpoint coverage','Confirm endpoint protection on 100% of devices.'],
+       ['🔎','Vulnerability scan','Latest scan results with severity & owners.'],
+       ['🩹','Patch status report','Patch compliance & outstanding critical patches.'],
+       ['🗄️','Backup success report','Evidence backups are completing successfully.'],
+       ['🔄','Restore test evidence','Proof of a recent successful restore.'],
+       ['🧱','Firewall & VPN review','Review of firewall & VPN rules and access.'],
+       ['☁️','Cloud security review','Configuration & identity review of cloud tenants.'],
+       ['📧','Email security config','DMARC / SPF / DKIM & anti-phishing settings.'],
+       ['🛡️','Web / API pen-test','Latest penetration test of web apps & APIs.'],
+       ['📘','IR runbook','A documented, tested incident response runbook.']
+      ].map(c=>`<button class="check" data-k="${reg({icon:c[0],title:c[1],intro:c[2]})}"><span class="ck">✓</span><h4>${c[1]}</h4></button>`).join('')}
+  </div>
+</section>`},
+
+// 24 30-DAY — MILESTONES
+{nav:'30-Day Plan',html:`<section class="slide"><div class="idx">23</div>
+  <div class="reveal kicker">Execution</div>
+  <h2 class="reveal">30-Day Cybersecurity <span class="hl">Action Plan</span></h2>
+  <p class="reveal sub">A focused month. Click each week →</p>
+  <div class="miles reveal"><div class="mline"></div>
+    <button class="mile" data-k="${reg({icon:'🔍',title:'Week 1 · Discover',intro:'Build a clear picture before acting.',list:['Identify critical systems & users','Map vendors & data','Find exposed assets']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 1</div><h3>Discover</h3><p>Identify critical systems, users, vendors, data &amp; exposed assets.</p></div></button>
+    <button class="mile o" data-k="${reg({icon:'🔐',title:'Week 2 · Identity',intro:'Close the most exploited gaps.',list:['Enable MFA','Review admin access','Remove shared passwords','Secure email']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 2</div><h3>Identity</h3><p>Enable MFA, review admin access, remove shared passwords, secure email.</p></div></button>
+    <button class="mile" data-k="${reg({icon:'🛠️',title:'Week 3 · Harden',intro:'Patch and test the obvious weak points.',list:['Patch critical systems','Scan vulnerabilities','Train finance & executives']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 3</div><h3>Harden</h3><p>Patch critical systems, scan vulnerabilities, train finance &amp; executives.</p></div></button>
+    <button class="mile o" data-k="${reg({icon:'🧯',title:'Week 4 · Prepare',intro:'Make sure you can recover and respond.',list:['Test a restore','Create an IR card','Run a tabletop exercise']})}"><span class="mdot"></span><div class="mcard"><div class="wk">WEEK 4</div><h3>Prepare</h3><p>Test restore, create an IR card, run a tabletop exercise.</p></div></button>
+  </div>
+</section>`},
+
+// 25 ROADMAP — LADDER
+{nav:'60–90 Day Roadmap',html:`<section class="slide"><div class="idx">24</div>
+  <div class="reveal kicker">Maturity Roadmap</div>
+  <h2 class="reveal">From Reactive Security to <span class="hl">Managed Resilience</span></h2>
+  <p class="reveal sub">Click each phase of the maturity ladder →</p>
+  <div class="ladder cascade">
+    <button class="rung" data-k="${reg({icon:'🧱',title:'Day 1–30 · Baseline',intro:'Get the fundamentals in place.',list:['MFA, endpoint, email & backup','Access control & awareness','Payment verification process']})}"><div class="rd">DAY 1–30</div><h3>Baseline</h3><p>Core controls implemented.</p></button>
+    <button class="rung" data-k="${reg({icon:'🔎',title:'Day 31–60 · Validation',intro:'Prove the controls work.',list:['Vulnerability & penetration testing','Cloud & supplier review','Remediation tracking']})}"><div class="rd">DAY 31–60</div><h3>Validation</h3><p>Test, review &amp; remediate.</p></button>
+    <button class="rung" data-k="${reg({icon:'🏛️',title:'Day 61–90 · Governance',intro:'Make resilience repeatable & visible.',list:['Dashboards & policy','Quarterly access review','DR runbook & executive reporting']})}"><div class="rd">DAY 61–90</div><h3>Governance</h3><p>Govern &amp; report.</p></button>
+  </div>
+</section>`},
+
+// 26 POLL
+{nav:'Audience Poll',html:`<section class="slide"><div class="idx">25</div>
+  <div class="reveal kicker">Live Audience Poll · click to vote</div>
+  <h2 class="reveal">Audience <span class="hl">Poll</span></h2>
+  <div class="pollwrap reveal">
+    <div><h3>1 · When was your last successful full restore test?</h3>
+      <div class="poll" data-poll="1">${['Within 30 days','Within 6 months','Within 12 months','Never','Not sure'].map(o=>`<div class="opt"><div class="fill"></div><div class="row"><span>${o}</span><span class="pct">0%</span></div></div>`).join('')}</div></div>
+    <div><h3>2 · Which incident would hurt your business most tomorrow?</h3>
+      <div class="poll" data-poll="2">${['Email compromise','Ransomware','Payment fraud','Website outage','Customer data leakage','Supplier outage'].map(o=>`<div class="opt"><div class="fill"></div><div class="row"><span>${o}</span><span class="pct">0%</span></div></div>`).join('')}</div></div>
+  </div>
+</section>`},
+
+// 27 SCENARIO — split
+{nav:'Scenario Exercise',html:`<section class="slide"><div class="idx">26</div>
+  <div class="reveal kicker">Scenario Exercise · 9:00 AM</div>
+  <h2 class="reveal">Scenario: <span class="hl">A Cyber Incident</span></h2>
+  <div class="two reveal">
+    <div class="terminal" style="margin-top:0">
+      <div class="term-bar"><span class="td r"></span><span class="td y"></span><span class="td g"></span><span class="tt">incident — 09:00:00</span></div>
+      <div class="term-body" style="gap:.35rem">
+        <div class="tline"><span class="pr">!</span><span class="cmd" style="color:#ff8a8a">Ransomware detected — files encrypting</span></div>
+        <div class="tline"><span class="pr">!</span><span class="cmd">📧 Email — OFFLINE</span></div>
+        <div class="tline"><span class="pr">!</span><span class="cmd">📇 CRM — OFFLINE</span></div>
+        <div class="tline"><span class="pr">!</span><span class="cmd">💵 Accounting — OFFLINE</span></div>
+        <div class="tline"><span class="pr">!</span><span class="cmd">📞 Customers calling · finance frozen</span></div>
+        <div class="term-cursor">█</div>
+      </div>
+    </div>
+    <div><p class="lead" style="margin-bottom:1rem">Decide as a team — click each:</p>
+    <div class="grid g2" style="margin-top:0;gap:1rem">
+      ${card({o:1,icon:'🚑',title:'Recover first?',tag:'Priority',intro:'You cannot restore everything at once.',list:['Map systems to business impact','Recover revenue-critical first']})}
+      ${card({icon:'👤',title:'Who decides?',tag:'Authority',intro:'Decisions stall without clear ownership.',list:['Named incident commander','Defined escalation path']})}
+      ${card({icon:'🗣️',title:'Who talks to customers?',tag:'Comms',intro:'Mixed messages destroy trust.',list:['Single approved spokesperson','Pre-agreed holding statement']})}
+      ${card({o:1,icon:'💰',title:'Pay or not pay?',tag:'The hard call',intro:'A decision best made before the day arrives.',list:['Legal, insurer & law-enforcement input','Are backups clean & restorable?']})}
+    </div></div>
+  </div>
+</section>`},
+
+// 28 SERVICES — ORBIT around logo
+{nav:'How ITSEC Helps',html:`<section class="slide"><div class="idx">27</div>
+  <div class="reveal kicker">Our Services</div>
+  <h2 class="reveal">How ITSEC Helps You Build <span class="hl">Cyber Resilience</span></h2>
+  <p class="reveal sub">Five service areas around your business. Click to explore each.</p>
+  <div class="reveal">${orbit('<img src="asset/ITSEC%20Icon.png" alt="ITSEC">',[
+    {icon:'🔍',title:'Assessment',intro:'A baseline review across your environment.',list:['Identity, email & endpoint','Cloud, network & backups','Incident response readiness']},
+    {icon:'🎓',title:'Awareness',intro:'Practical training for every audience.',list:['Staff, executives & finance','IT teams','Scenario-based & ongoing']},
+    {icon:'🛡️',title:'VAPT / WAPT',intro:'Hands-on security testing.',list:['Infrastructure & web','Mobile & API','Cloud security testing']},
+    {icon:'🔄',title:'DR Advisory',intro:'Make recovery real and measurable.',list:['RTO/RPO mapping','Backup review & restore testing','DR runbooks']},
+    {icon:'⚡',title:'IR Readiness',intro:'Prepare to respond under pressure.',list:['IR plans & tabletop exercises','Escalation design','Executive support']}
+  ])}</div>
+</section>`},
+
+// 29 FINAL — PILLARS
+{nav:'Final Message',html:`<section class="slide"><div class="idx">28</div>
+  <div class="reveal kicker">Closing</div>
+  <h2 class="reveal">Cybersecurity Is a <span class="hl">Business Discipline</span></h2>
+  <p class="reveal sub">Not bought with tools — built through leadership &amp; discipline. Click each pillar.</p>
+  <div class="pillars cascade">
+    <button class="pillar" data-k="${reg({icon:'🗂️',title:'Know your assets',intro:'You can only protect what you can see.',list:['Maintain an asset inventory','Prioritise the critical few']})}"><span class="pi">🗂️</span><h4>Know your assets</h4></button>
+    <button class="pillar o" data-k="${reg({icon:'🔐',title:'Protect identities',intro:'MFA and least privilege everywhere.',list:['MFA on every critical account','Separate admin accounts']})}"><span class="pi">🔐</span><h4>Protect identities</h4></button>
+    <button class="pillar" data-k="${reg({icon:'🎓',title:'Train people',intro:'Your people are the first line of defence.',list:['Practical, ongoing training','No-blame reporting']})}"><span class="pi">🎓</span><h4>Train people</h4></button>
+    <button class="pillar o" data-k="${reg({icon:'🧩',title:'Patch exposed systems',intro:'Close known doors before attackers walk through.',list:['Patch on a cadence','Remove what you do not need']})}"><span class="pi">🧩</span><h4>Patch systems</h4></button>
+    <button class="pillar" data-k="${reg({icon:'🔄',title:'Test recovery',intro:'A backup only counts if it restores.',list:['Restore-test regularly','Know your RTO & RPO']})}"><span class="pi">🔄</span><h4>Test recovery</h4></button>
+    <button class="pillar o" data-k="${reg({icon:'⚡',title:'Prepare response',intro:'Decide who acts before the incident hits.',list:['Written IR plan','Run tabletop exercises']})}"><span class="pi">⚡</span><h4>Prepare response</h4></button>
+  </div>
+</section>`},
+
+// 30 QA
+{nav:'Q&A',html:`<section class="slide cover">${HEROMARK}
+  <div class="reveal kicker">Thank You</div>
+  <h1 class="reveal">Questions &amp;<br><span class="hl">Discussion</span></h1>
+  <p class="reveal sub">Thank you for your time and attention.</p>
+  <div class="reveal footerline"><span class="who">Amir A. Kolahzadeh</span><span class="dot-sep"></span><span>Founder &amp; CEO, ITSEC</span></div>
+</section>`}
+];
+
+/* ---- RAIL builder (defined after use is fine: hoisted) ---- */
+function railNode(i,c){const up=i%2===0;return `<button class="rail-node ${up?'up':'down'} ${c.alt?'alt':''}" data-k="${reg(c)}"><div class="rail-card"><span class="rc-ic">${c.icon}</span><h4>${c.title}</h4><span class="tap">▸ explain</span></div><div class="rail-dot">${i+1}</div></button>`}
+function rail(steps,dark){return `<div class="rail ${dark?'dark':''}" data-anim="rail"><div class="rail-track"></div><div class="rail-pulse"></div><div class="rail-items">${steps.map((s,i)=>railNode(i,s)).join('')}</div></div>`}
+
+/* ===== rail CSS injected (kept here to keep markup tidy) ===== */
+const railCSS=document.createElement('style');railCSS.textContent=`
+.rail{position:relative;width:100%;margin-top:3rem;z-index:2}
+.rail-track{position:absolute;left:0;right:0;top:50%;height:3px;transform:translateY(-50%);background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.rail-track::after{content:"";position:absolute;inset:0;width:0;border-radius:3px;background:linear-gradient(90deg,var(--royal),var(--sky),var(--orange));transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+.rail.play .rail-track::after{width:100%}
+.rail-pulse{position:absolute;top:50%;left:0;width:16px;height:16px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 0 22px 6px var(--sky);opacity:0;z-index:4}
+.rail.play .rail-pulse{animation:travel 1.5s cubic-bezier(.4,0,.2,1) forwards}@keyframes travel{0%{left:0;opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+.rail-items{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;min-height:44vh}
+.rail-node{position:relative;display:grid;grid-template-rows:1fr 56px 1fr;align-items:center;justify-items:center;background:none;border:0;cursor:pointer;font-family:inherit;color:#fff;padding:0 .35rem;opacity:0}
+.rail.play .rail-node{animation:pop .5s cubic-bezier(.2,.8,.2,1) forwards}
+.rail.play .rail-node:nth-child(1){animation-delay:.25s}.rail.play .rail-node:nth-child(2){animation-delay:.4s}.rail.play .rail-node:nth-child(3){animation-delay:.55s}.rail.play .rail-node:nth-child(4){animation-delay:.7s}
+.rail.play .rail-node:nth-child(5){animation-delay:.85s}.rail.play .rail-node:nth-child(6){animation-delay:1s}.rail.play .rail-node:nth-child(7){animation-delay:1.15s}.rail.play .rail-node:nth-child(8){animation-delay:1.3s}
+.rail-dot{grid-row:2;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:1.05rem;color:#04060d;background:linear-gradient(135deg,var(--sky),var(--royal));border:4px solid var(--bg);z-index:3;box-shadow:0 0 0 5px rgba(42,164,244,.14);transition:transform .25s}
+.rail-node.alt .rail-dot{background:linear-gradient(135deg,var(--orange),var(--ember));box-shadow:0 0 0 5px rgba(247,121,31,.16)}
+.rail-node:hover .rail-dot{transform:scale(1.16)}
+.rail-card{position:relative;width:100%;border-radius:14px;padding:1rem .95rem;text-align:left;background:linear-gradient(165deg,rgba(14,26,52,.85),rgba(8,16,34,.6));border:1px solid var(--pb);transition:transform .25s,border-color .25s,box-shadow .25s}
+.rail-node:hover .rail-card{transform:translateY(-4px);border-color:var(--sky);box-shadow:var(--glow)}.rail-node.alt:hover .rail-card{border-color:var(--orange);box-shadow:var(--glowO)}
+.rail-node.up .rail-card{grid-row:1;align-self:end;margin-bottom:14px}.rail-node.down .rail-card{grid-row:3;align-self:start;margin-top:14px}
+.rail-card::after{content:"";position:absolute;left:50%;width:2px;height:14px;background:var(--pb);transform:translateX(-50%)}
+.rail-node.up .rail-card::after{bottom:-14px}.rail-node.down .rail-card::after{top:-14px}
+.rail-card .rc-ic{font-size:1.4rem;display:block;margin-bottom:.35rem}.rail-card h4{font-size:clamp(.9rem,1.05vw,1.1rem);font-weight:600;line-height:1.12}
+.rail-card .tap{margin-top:.45rem;font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--sky)}.rail-node.alt .rail-card .tap{color:var(--orange2)}
+.rail.dark .rail-track::after{background:linear-gradient(90deg,var(--royal),var(--ember),#ff3b3b)}.rail.dark .rail-pulse{box-shadow:0 0 22px 6px var(--ember)}
+@media(max-width:900px){.rail-items{grid-auto-flow:row}.rail-node{grid-template-rows:none}}
+`;document.head.appendChild(railCSS);
+
+/* ===== scene CSS for slides 14–17 ===== */
+const sceneCSS=document.createElement('style');sceneCSS.textContent=`
+/* 14 CLOUD toggle */
+.cloudscene{margin-top:1.4rem;width:100%;max-width:1060px}
+.cloud-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.cloud-provider{display:flex;flex-direction:column;gap:.15rem;padding:.85rem 1.3rem;border:1px solid rgba(39,201,63,.3);border-radius:14px;background:rgba(39,201,63,.08);color:#9be8ab;font-size:.95rem}
+.cloud-provider span:first-child{font-weight:600;color:#fff;font-size:1.05rem}
+.cloud-toggle{display:inline-flex;align-items:center;gap:.75rem;cursor:pointer;border:1px solid var(--pb);background:rgba(12,22,44,.7);color:#fff;font-family:inherit;font-size:1rem;font-weight:600;padding:.6rem 1rem;border-radius:999px;transition:.2s}
+.cloud-toggle:hover{border-color:var(--sky);box-shadow:var(--glow)}
+.cloud-toggle .knob{width:48px;height:25px;border-radius:999px;background:rgba(255,80,80,.3);position:relative;transition:.3s;border:1px solid rgba(255,255,255,.15);flex:0 0 auto}
+.cloud-toggle .knob::after{content:"";position:absolute;top:1px;left:1px;width:21px;height:21px;border-radius:50%;background:#ff7a7a;transition:.3s}
+.cloudscene.secure .cloud-toggle .knob{background:rgba(39,201,63,.35)}.cloudscene.secure .cloud-toggle .knob::after{left:24px;background:#3fe06a}
+.cloud-toggle .lblC{display:none;color:#7be29a}.cloud-toggle .lblR{color:#ff9a9a}.cloudscene.secure .cloud-toggle .lblR{display:none}.cloudscene.secure .cloud-toggle .lblC{display:inline}
+.cloud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ctile{position:relative;text-align:left;cursor:pointer;font-family:inherit;color:#fff;border-radius:16px;padding:1.2rem 1.3rem;border:1px solid rgba(255,80,80,.34);background:linear-gradient(165deg,rgba(40,14,14,.65),rgba(16,8,8,.4));transition:transform .25s,border-color .35s,background .35s}
+.ctile:hover{transform:translateY(-6px)}
+.cloudscene.secure .ctile{border-color:rgba(39,201,63,.36);background:linear-gradient(165deg,rgba(12,34,18,.6),rgba(8,18,12,.4));animation:tileflip .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes tileflip{0%{transform:rotateX(55deg);opacity:.35}100%{transform:none;opacity:1}}
+.ctile .ci{font-size:1.5rem}.ctile h4{font-size:1.12rem;font-weight:600;margin:.4rem 0 .55rem}
+.ctile .state{font-size:1rem;line-height:1.35;display:none;align-items:center;gap:.5rem;font-weight:500}
+.ctile .state.risk{display:flex;color:#ff9a9a}.cloudscene.secure .ctile .state.risk{display:none}.cloudscene.secure .ctile .state.ctl{display:flex;color:#9be8ab}
+.ctile .state.risk::before{content:"✕";font-weight:800}.ctile .state.ctl::before{content:"✓";font-weight:800}
+.cloud-note{margin-top:1.1rem;color:var(--muted);font-size:1.05rem}.cloud-note b{color:var(--orange2)}
+/* 15 WEB stack */
+.stackscene{position:relative;margin-top:1.5rem;width:100%;max-width:780px;display:grid;gap:.85rem;padding-left:1.4rem;overflow:hidden;border-radius:16px}
+.stackscene::before{content:"";position:absolute;left:.1rem;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--royal),var(--sky),var(--orange));border-radius:3px}
+.scanbeam{position:absolute;left:-1.4rem;right:0;height:64px;border-radius:14px;background:linear-gradient(180deg,transparent,rgba(42,164,244,.14),transparent);pointer-events:none;animation:scanstack 3.4s ease-in-out infinite;z-index:0}
+@keyframes scanstack{0%,100%{top:-10px}50%{top:calc(100% - 54px)}}
+.alayer{position:relative;z-index:1;display:flex;align-items:center;gap:1.1rem;padding:1.05rem 1.3rem;border-radius:14px;cursor:pointer;color:#fff;font-family:inherit;text-align:left;border:1px solid var(--pb);background:linear-gradient(100deg,rgba(14,26,52,.82),rgba(8,16,34,.5));transition:.25s}
+.alayer::before{content:"";position:absolute;left:-1.4rem;top:50%;transform:translateY(-50%);width:1rem;height:2px;background:var(--sky)}
+.alayer:hover{transform:translateX(10px);border-color:var(--sky);box-shadow:var(--glow)}
+.alayer .ai{font-size:1.6rem;width:50px;height:50px;display:grid;place-items:center;border-radius:12px;background:rgba(42,164,244,.1);border:1px solid var(--pb);flex:0 0 auto}
+.alayer h4{font-size:1.18rem;font-weight:600}.alayer p{color:var(--muted);font-size:.96rem}
+.alayer .rk{margin-left:auto;font-size:.82rem;color:var(--orange2);border:1px solid rgba(247,121,31,.3);background:rgba(247,121,31,.1);padding:.32rem .75rem;border-radius:999px;white-space:nowrap}
+/* 16 CHAIN */
+.chainscene{margin-top:2.2rem;width:100%}
+.chain{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.2rem}
+.cnode{position:relative;display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;background:none;border:0;font-family:inherit;color:#fff;padding:.3rem .2rem}
+.cnode .cc{width:clamp(64px,7vw,86px);aspect-ratio:1;border-radius:20px;display:grid;place-items:center;font-size:1.8rem;border:1px solid var(--pb);background:linear-gradient(165deg,rgba(14,26,52,.92),rgba(8,16,34,.7));transition:.25s}
+.cnode.you .cc{border-color:var(--sky);box-shadow:var(--glow)}
+.cnode h5{font-size:.88rem;font-weight:600;max-width:11ch;text-align:center;line-height:1.1}
+.cnode:hover .cc{transform:translateY(-7px);border-color:var(--orange);box-shadow:var(--glowO)}
+.cnode:hover h5{color:var(--orange2)}
+.cconn{width:clamp(26px,4vw,58px);height:4px;border-radius:3px;background:linear-gradient(90deg,var(--royal),var(--sky));position:relative;overflow:hidden;flex:0 0 auto}
+.cconn::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 5px,rgba(255,255,255,.55) 5px,rgba(255,255,255,.55) 9px);animation:cflow 1s linear infinite}
+@keyframes cflow{to{transform:translateX(14px)}}
+.cnode.weak .cc{border-color:#ff5050;box-shadow:0 0 0 0 rgba(255,80,80,.5);animation:weakpulse 1.7s ease-in-out infinite}
+@keyframes weakpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,80,80,.5)}50%{box-shadow:0 0 0 13px rgba(255,80,80,0)}}
+.cnode.weak::after{content:"⚠ weakest link";position:absolute;top:-1.5rem;left:50%;transform:translateX(-50%);font-size:.72rem;color:#ff8a8a;white-space:nowrap;font-weight:700;letter-spacing:.03em}
+.chain-q{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;align-items:center;margin-top:2.6rem}
+.qchip{padding:.6rem 1.1rem;border-radius:999px;border:1px solid rgba(247,121,31,.3);background:rgba(247,121,31,.08);color:var(--orange2);font-family:inherit;font-size:.98rem;font-weight:500;cursor:pointer;transition:.2s}
+.qchip:hover{transform:translateY(-4px);box-shadow:var(--glowO);border-color:var(--orange);color:#fff}
+/* 17 FIREWALL */
+.fwscene{margin-top:1.2rem;width:100%;display:grid;grid-template-columns:.8fr 1.2fr;gap:2.6rem;align-items:center}
+.fwleft{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.fwshield{position:relative;width:100%;max-width:240px;aspect-ratio:1/1.12;display:grid;place-items:center;clip-path:polygon(50% 0,100% 18%,100% 60%,50% 100%,0 60%,0 18%);background:rgba(12,22,44,.5)}
+.shfill{position:absolute;left:0;right:0;bottom:0;height:calc(var(--p,0)*100%);background:linear-gradient(180deg,rgba(42,164,244,.75),rgba(13,95,181,.9));transition:height .55s cubic-bezier(.2,.8,.2,1)}
+.shline{position:absolute;inset:0;width:100%;height:100%}.shline polygon{fill:none;stroke:rgba(42,164,244,.55);stroke-width:2.5;transition:stroke .4s}
+.fwscene.full .shline polygon{stroke:#3fe06a}
+.shtext{position:relative;z-index:2;text-align:center;display:grid;gap:.1rem}
+.fwemoji{font-size:2.3rem}.fwpct{font-size:2rem;font-weight:700}.shtext small{color:#cdd9ee;letter-spacing:.12em;text-transform:uppercase;font-size:.66rem}
+.fwbadge{opacity:0;transform:scale(.8);transition:.4s;padding:.5rem 1.1rem;border-radius:999px;background:rgba(63,224,106,.15);border:1px solid rgba(63,224,106,.4);color:#7ff0a0;font-weight:700;letter-spacing:.06em;font-size:.85rem}
+.fwscene.full .fwbadge{opacity:1;transform:none}
+.fwright .fwtopics{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fwtopic{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-radius:12px;cursor:pointer;color:#fff;font-family:inherit;text-align:left;border:1px solid var(--pb);background:linear-gradient(165deg,rgba(14,26,52,.7),rgba(8,16,34,.4));transition:.2s;font-size:1.02rem}
+.fwtopic:hover{border-color:var(--sky);transform:translateY(-3px)}.fwtopic.done{border-color:#3fe06a;background:linear-gradient(165deg,rgba(12,34,18,.6),rgba(8,18,12,.4))}
+.fwtopic .tk{width:22px;height:22px;border-radius:6px;border:2px solid var(--muted);display:grid;place-items:center;color:transparent;font-size:.78rem;flex:0 0 auto;transition:.2s}
+.fwtopic.done .tk{background:linear-gradient(135deg,#3fe06a,#1f9c4a);border-color:transparent;color:#04060d}
+.fwtopic .ti{font-size:1.15rem}
+.fwmeter{display:flex;align-items:center;gap:1rem;margin-top:1.1rem}
+.fwmeter .pbar{flex:1;height:10px;border-radius:999px;background:rgba(42,164,244,.12);overflow:hidden;border:1px solid var(--pb)}
+.fwmeter .pbar span{display:block;height:100%;width:0;background:var(--grad);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.metertext{color:var(--sky);font-weight:600;font-variant-numeric:tabular-nums;min-width:13ch;text-align:right}
+.fwcadence{margin-top:1rem;color:var(--muted);font-size:1rem;line-height:1.45}.fwcadence b{color:var(--orange2)}
+@media(max-width:1000px){.fwscene{grid-template-columns:1fr;gap:1.4rem}.fwleft{flex-direction:row;justify-content:center}.fwshield{max-width:160px}}
+@media(max-width:900px){.cloud-grid{grid-template-columns:1fr 1fr}.fwright .fwtopics{grid-template-columns:1fr}}
+`;document.head.appendChild(sceneCSS);
+
+/* ===== render + nav ===== */
+const stage=document.getElementById('stage'),dotsEl=document.getElementById('dots'),ovgrid=document.getElementById('ovgrid');
+stage.innerHTML=slides.map(s=>s.html).join('');
+const slideEls=[...document.querySelectorAll('.slide')];let idx=0;
+document.getElementById('total').textContent=String(slides.length).padStart(2,'0');
+slides.forEach((s,i)=>{const d=document.createElement('button');d.title=(i+1)+'. '+s.nav;d.onclick=()=>go(i);dotsEl.appendChild(d);
+  const o=document.createElement('button');o.innerHTML=`<span class="qn">${String(i+1).padStart(2,'0')}</span>${s.nav}`;o.onclick=()=>{go(i);overview.classList.remove('show')};ovgrid.appendChild(o);});
+const dotBtns=[...dotsEl.children];
+function animateSlide(el){
+  el.querySelectorAll('[data-count]').forEach(n=>{const target=+n.dataset.count,suf=n.dataset.suffix||'';let t0=null;
+    requestAnimationFrame(function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1400,1),e=1-Math.pow(1-p,3);n.textContent=Math.floor(e*target).toLocaleString()+suf;if(p<1)requestAnimationFrame(step)})});
+  el.querySelectorAll('[data-anim="rail"]').forEach(r=>{r.classList.remove('play');void r.offsetWidth;r.classList.add('play')});
+}
+function go(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===idx)return;
+  const cur=slideEls[idx];cur.classList.add('leaving');cur.classList.remove('active');setTimeout(()=>cur.classList.remove('leaving'),560);
+  idx=n;const s=slideEls[idx];s.classList.add('active');update();animateSlide(s);}
+function update(){dotBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));document.getElementById('cur').textContent=String(idx+1).padStart(2,'0');
+  document.getElementById('prog').style.width=(idx/(slides.length-1)*100)+'%';document.getElementById('navTitle').textContent=slides[idx].nav;dotBtns[idx].scrollIntoView({block:'nearest'});}
+function next(){go(idx+1)}function prev(){go(idx-1)}
+slideEls[0].classList.add('active');update();animateSlide(slideEls[0]);
+document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+
+/* ===== modal ===== */
+const modal=document.getElementById('modal'),mbody=document.getElementById('mbody'),mpanel=modal.querySelector('.m-panel');
+function openModal(d,orange){mpanel.classList.toggle('o',!!orange);
+  mbody.innerHTML=`<div class="m-head"><span class="m-ic">${d.icon||'🔹'}</span><h2>${d.title||''}</h2></div>
+    ${d.intro?`<p class="m-intro">${d.intro}</p>`:''}
+    ${d.list&&d.list.length?`<div class="m-sec"><h4>Key points</h4><ul class="m-list">${d.list.map(li=>`<li>${li}</li>`).join('')}</ul></div>`:''}
+    ${d.ex?`<div class="m-ex"><b>In practice</b>${d.ex}</div>`:''}`;
+  modal.classList.add('show');}
+function closeModal(){modal.classList.remove('show')}
+modal.querySelector('.m-close').onclick=closeModal;modal.querySelector('.m-back').onclick=closeModal;
+/* cloud risks⇄controls toggle (no modal) */
+stage.addEventListener('click',e=>{const tg=e.target.closest('.cloud-toggle');if(tg){tg.closest('.cloudscene').classList.toggle('secure')}});
+stage.addEventListener('click',e=>{const t=e.target.closest('[data-k]');if(!t)return;const d=DETAILS[t.getAttribute('data-k')];if(!d)return;
+  const orange=t.classList.contains('o')||t.classList.contains('alt')||t.classList.contains('danger');
+  /* CTO checklist progress */
+  const chk=t.closest('.check');if(chk&&!chk.classList.contains('done')){chk.classList.add('done');
+    const grid=chk.closest('.checkgrid'),total=grid.querySelectorAll('.check').length,done=grid.querySelectorAll('.check.done').length;
+    const head=grid.previousElementSibling;head.querySelector('.pbar span').style.width=(done/total*100)+'%';head.querySelector('.ptext').textContent=done+' / '+total+' reviewed';}
+  /* generic meter (human firewall) */
+  const mi=t.closest('.meteritem');if(mi&&!mi.classList.contains('done')){mi.classList.add('done');
+    const sc=mi.closest('.meterscene'),all=sc.querySelectorAll('.meteritem').length,done=sc.querySelectorAll('.meteritem.done').length,pct=Math.round(done/all*100);
+    sc.style.setProperty('--p',done/all);const f=sc.querySelector('.meterfill');if(f)f.style.width=pct+'%';
+    const p=sc.querySelector('.fwpct');if(p)p.textContent=pct+'%';const tt=sc.querySelector('.metertext');if(tt)tt.textContent=done+' / '+all+' topics trained';
+    sc.classList.toggle('full',done===all);}
+  openModal(d,orange);});
+/* card glow + tilt */
+stage.addEventListener('mousemove',e=>{const c=e.target.closest('.fcard');if(!c)return;const r=c.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;
+  c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');c.style.transform=`translateY(-7px) perspective(800px) rotateX(${((y/r.height)-.5)*-5}deg) rotateY(${((x/r.width)-.5)*5}deg)`;});
+stage.addEventListener('mouseout',e=>{const c=e.target.closest('.fcard');if(c)c.style.transform='';});
+
+/* ===== keys / swipe / wheel ===== */
+const overview=document.getElementById('overview');
+window.addEventListener('keydown',e=>{if(modal.classList.contains('show')&&e.key==='Escape'){closeModal();return}
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next()}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+  else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(slides.length-1)}else if(e.key.toLowerCase()==='o'){overview.classList.toggle('show')}
+  else if(e.key==='Escape'){overview.classList.remove('show')}else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}});
+let tx=0;stage.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+stage.addEventListener('touchend',e=>{if(modal.classList.contains('show'))return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60){dx<0?next():prev()}});
+let wlock=false;stage.addEventListener('wheel',e=>{if(modal.classList.contains('show'))return;if(wlock)return;if(Math.abs(e.deltaY)<24&&Math.abs(e.deltaX)<24)return;wlock=true;(e.deltaY>0||e.deltaX>0)?next():prev();setTimeout(()=>wlock=false,700)},{passive:true});
+
+/* ===== poll ===== */
+document.querySelectorAll('.poll').forEach(poll=>{const opts=[...poll.querySelectorAll('.opt')];
+  opts.forEach(opt=>opt.addEventListener('click',()=>{const sel=opts.indexOf(opt);const base=opts.map((_,i)=>8+(Math.sin((i+1)*9.7)+1)*9);base[sel]+=42;const sum=base.reduce((a,b)=>a+b,0);
+    opts.forEach((o,i)=>{const pct=Math.round(base[i]/sum*100);o.querySelector('.fill').style.width=pct+'%';o.querySelector('.pct').textContent=pct+'%'})}));});
+
+/* ===== node network bg ===== */
+(function(){const c=document.getElementById('net'),x=c.getContext('2d');let w,h,nodes;
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;init()}
+  function init(){const count=Math.min(80,Math.floor(w*h/26000));nodes=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.6+.5,o:Math.random()}))}
+  function loop(){x.clearRect(0,0,w,h);for(let i=0;i<nodes.length;i++){const n=nodes[i];n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;
+    for(let j=i+1;j<nodes.length;j++){const m=nodes[j],dx=n.x-m.x,dy=n.y-m.y,d=dx*dx+dy*dy;if(d<20000){const a=(1-d/20000)*.3;x.strokeStyle='rgba(42,164,244,'+a+')';x.lineWidth=.6;x.beginPath();x.moveTo(n.x,n.y);x.lineTo(m.x,m.y);x.stroke()}}}
+    for(const n of nodes){x.beginPath();x.arc(n.x,n.y,n.r,0,7);x.fillStyle=n.o>.86?'rgba(247,121,31,.75)':'rgba(42,164,244,.6)';x.fill()}requestAnimationFrame(loop)}
+  addEventListener('resize',size);size();loop();})();
+</script>
+</body>
+</html>
