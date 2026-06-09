@@ -322,7 +322,7 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .duopanel li::before{content:"▸";position:absolute;left:0;color:var(--sky)}.duopanel.danger li::before{content:"✕";color:#ff5050}.duopanel.safe li::before{content:"✓";color:#27c93f}
 
 /* chrome */
-.brand{position:fixed;top:24px;left:38px;z-index:30}.brand img{height:34px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.brand{position:fixed;top:24px;left:7vw;z-index:30;cursor:pointer;background:none;border:0;padding:0;transition:transform .25s,filter .25s}.brand:hover{transform:translateY(-1px)}.brand img{height:34px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}.brand:hover img{filter:drop-shadow(0 2px 12px rgba(42,164,244,.6))}
 .burger{position:fixed;top:22px;right:38px;z-index:70;width:48px;height:48px;border-radius:13px;border:1px solid var(--pb);background:rgba(12,22,44,.6);cursor:pointer;backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;transition:.2s}
 .burger:hover{border-color:var(--sky);box-shadow:var(--glow);background:rgba(42,164,244,.12)}
 .burger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--sky);transition:.25s}
@@ -452,7 +452,7 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 </head>
 <body>
 <div id="bg"></div><canvas id="net"></canvas><div id="grid"></div><div id="vignette"></div><div class="scan"></div>
-<div class="brand"><img src="asset/ITSEC%20Horizontal%20White.png" alt="ITSEC"></div>
+<button class="brand" id="brandHome" aria-label="Back to cover" title="Back to cover"><img src="asset/ITSEC%20Horizontal%20White.png" alt="ITSEC"></button>
 <button class="burger" id="burger" aria-label="Slide menu" title="Slide menu (O)"><span></span><span></span><span></span></button>
 <div id="prog"></div><div id="stage"></div>
 <div class="dots" id="dots"></div>
@@ -1212,6 +1212,7 @@ function update(){dotBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));docum
 function next(){go(idx+1)}function prev(){go(idx-1)}
 slideEls[0].classList.add('active');update();animateSlide(slideEls[0]);
 document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+document.getElementById('brandHome').onclick=()=>go(0);
 
 /* ===== cybersecurity connected-node network (cover + end slide) ===== */
 (function(){
