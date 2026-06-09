@@ -117,10 +117,9 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .partners{margin-top:1.9rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;z-index:2}
 .partners .plabel{color:var(--muted);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
 .plogos{display:flex;align-items:center;gap:.9rem}
-.pchip{background:#fff;border-radius:12px;padding:.55rem .95rem;display:inline-flex;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:.25s}
+.pchip{background:#fff;border-radius:12px;padding:7px;display:inline-flex;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:.25s}
 .pchip:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(42,164,244,.4)}
-.pchip img{height:36px;width:auto;display:block}
-.pchip img.dc-chamber{height:64px}
+.pchip img{height:64px;width:auto;display:block}
 .footerline{margin-top:2.3rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;color:var(--muted);font-size:1.12rem;z-index:2}
 .footerline .who{color:#fff;font-weight:600}.dot-sep{width:7px;height:7px;border-radius:50%;background:var(--orange)}
 .cta{margin-top:2.2rem;display:inline-flex;align-items:center;gap:.7rem;cursor:pointer;padding:1rem 1.9rem;border-radius:999px;font-size:1.1rem;font-weight:600;color:#04060d;font-family:inherit;background:var(--grad);border:0;box-shadow:var(--glow);transition:.25s;z-index:2}
@@ -463,7 +462,7 @@ function reg(d){const k='k'+(_k++);DETAILS[k]=d;return k}
 function card(c){return `<button class="fcard ${c.o?'o':''}" data-k="${reg(c)}"><span class="ic">${c.icon}</span><h3>${c.title}</h3><p>${c.tag||''}</p><span class="explore">Explore <i>→</i></span></button>`}
 const HEROMARK='<img class="hero-mark" src="asset/ITSEC%20Icon.png" alt="">';
 const CYBERNET='<canvas class="cybernet" aria-hidden="true"></canvas>';
-const PARTNERLOGOS='<span class="pchip"><img src="asset/ded-det.png" alt="Dubai Economy and Tourism"></span><span class="pchip"><img class="dc-chamber" src="asset/DC CHAMBER OF COMMERCE.png" alt="DC Chamber of Commerce"></span>';
+const PARTNERLOGOS='<span class="pchip"><img src="asset/ded-det.png" alt="Dubai Economy and Tourism"></span><span class="pchip"><img src="asset/DC CHAMBER OF COMMERCE.png" alt="DC Chamber of Commerce"></span>';
 
 /* ---- ORBIT scene ---- */
 function orbit(coreHTML,items,o){
