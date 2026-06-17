@@ -457,7 +457,7 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 <div id="prog"></div><div id="stage"></div>
 <div class="dots" id="dots"></div>
 <div class="nav"><button id="prev">‹</button><div class="title" id="navTitle"></div><button id="next">›</button></div>
-<div class="counter"><b id="cur">01</b> / <span id="total">30</span></div>
+<div class="counter"><b id="cur">01</b> / <span id="total">27</span></div>
 <div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen</div>
 <div id="overview"><h3>SLIDE OVERVIEW — CLICK TO JUMP</h3><div class="ovgrid" id="ovgrid"></div></div>
 <div id="modal"><div class="m-back"></div><div class="m-panel"><div class="m-glowbar"></div><button class="m-close">✕</button><div id="mbody"></div></div></div>
@@ -493,19 +493,20 @@ const slides=[
 </section>`},
 
 // 2 WHY NOW — ops dashboard
-{nav:'Why Resilience Now',html:`<section class="slide"><div class="idx">02</div>
+{nav:'Why Resilience Now',html:`<!-- SPEAKER NOTE (cloud/SaaS compliance): For ordinary private SMEs, the practical priority is to understand cloud/SaaS dependency and recovery options. For companies serving Dubai Government, semi-government, or critical entities, cloud location, CSP compliance, and data residency may become procurement or regulatory requirements. --><!-- SPEAKER NOTE (service examples): Use the member/service examples as illustrations of digital services that may be affected when cloud, SaaS, CRM, payment, or service platforms go down. Do not claim these are confirmed Dubai Chambers systems unless provided officially. --><section class="slide"><div class="idx">02</div>
   <div class="reveal kicker">Why This Session Matters Now</div>
   <h2 class="reveal">Resilience Is Now a <span class="hl">Business Survival Requirement</span></h2>
   <p class="reveal sub" style="max-width:66ch">When core systems fail, the business does not just lose technology — it loses <span class="note">operational capability</span>. Click any system to see the impact.</p>
   <div class="opsboard reveal">
     <button class="otile" data-k="${reg({icon:'📧',title:'Email — Offline',intro:'Email is the backbone of approvals, sales and operations.',list:['Approvals and quotes stall','Customer & supplier comms stop','Often the first system attackers control']})}"><span class="oi">📧</span><span class="om"><b>Email</b><span>Communication &amp; approvals</span></span><span class="st down"><i></i>DOWN</span></button>
-    <button class="otile" data-k="${reg({icon:'📇',title:'CRM — Offline',intro:'The CRM holds your customers, pipeline and service history.',list:['Sales and service grind to a halt','No visibility of customer commitments','Revenue stops moving']})}"><span class="oi">📇</span><span class="om"><b>CRM</b><span>Customers &amp; sales</span></span><span class="st down"><i></i>DOWN</span></button>
+    <button class="otile" data-k="${reg({icon:'📇',title:'CRM / Member Records — Offline',intro:'Holds member, customer and service records — e.g. member services, certificate issuance, business group services.',list:['Member &amp; customer service grinds to a halt','No visibility of member commitments &amp; service requests','Revenue and service delivery stall'],ex:'Examples only — illustrative of services that may be affected; not a confirmed system inventory.'})}"><span class="oi">📇</span><span class="om"><b>CRM / Member Records</b><span>Members &amp; service data</span></span><span class="st down"><i></i>DOWN</span></button>
     <button class="otile" data-k="${reg({icon:'☁️',title:'Cloud / SaaS — Offline',intro:'Most business systems now live on cloud and SaaS platforms.',list:['A region or provider outage stops many systems at once','You depend on infrastructure you do not control']})}"><span class="oi">☁️</span><span class="om"><b>Cloud / SaaS</b><span>Where systems live</span></span><span class="st down"><i></i>DOWN</span></button>
     <button class="otile" data-k="${reg({icon:'💵',title:'Finance / ERP — Degraded',intro:'Invoicing, payroll and payments depend on finance systems.',list:['Cash flow and payroll at risk','Fraud risk rises during disruption']})}"><span class="oi">💵</span><span class="om"><b>Finance / ERP</b><span>Invoicing &amp; payroll</span></span><span class="st warn"><i></i>AT RISK</span></button>
-    <button class="otile" data-k="${reg({icon:'🌐',title:'Website / Portal — Degraded',intro:'Your public face and customer self-service.',list:['Lead generation and trust impacted','Customers assume the worst']})}"><span class="oi">🌐</span><span class="om"><b>Website / Portal</b><span>Customer self-service</span></span><span class="st warn"><i></i>AT RISK</span></button>
-    <button class="otile" data-k="${reg({icon:'🗂️',title:'Customer Data — At Risk',intro:'Records, contracts and personal data carry trust and legal weight.',list:['Loss or exposure damages reputation','Regulatory and contractual exposure'],ex:'Backup alone does not answer how fast you recover or how much you can lose.'})}"><span class="oi">🗂️</span><span class="om"><b>Customer Data</b><span>Records &amp; trust</span></span><span class="st warn"><i></i>AT RISK</span></button>
+    <button class="otile" data-k="${reg({icon:'🌐',title:'Member Services Portal — Degraded',intro:'Public face and member self-service — e.g. certificate issuance, event registration, member communication, payments.',list:['Member self-service &amp; event registration disrupted','Trust and public confidence impacted'],ex:'Examples only — illustrative of services that may be affected; not a confirmed system inventory.'})}"><span class="oi">🌐</span><span class="om"><b>Member Services Portal</b><span>Self-service &amp; certificates</span></span><span class="st warn"><i></i>AT RISK</span></button>
+    <button class="otile" data-k="${reg({icon:'🗂️',title:'Member &amp; Customer Data — At Risk',intro:'Member records, payment/transaction records and contracts carry trust and legal weight.',list:['Loss or exposure damages reputation','Regulatory and contractual exposure'],ex:'Backup alone does not answer how fast you recover or how much you can lose.'})}"><span class="oi">🗂️</span><span class="om"><b>Member &amp; Customer Data</b><span>Records &amp; trust</span></span><span class="st warn"><i></i>AT RISK</span></button>
   </div>
   <div class="opsnote reveal">Ransomware, cloud disruption, human error and supplier failure can all stop operations. <b>Backup alone is not enough</b> — leadership must define acceptable downtime and acceptable data loss.</div>
+  <div class="callout reveal" style="border-left-color:var(--sky);max-width:none"><b style="color:var(--sky)">Conditional compliance note</b>For government, semi-government, Critical Non-Government entities and service providers working with them, cloud hosting, SaaS dependency, backup and DR design should <em>also</em> be assessed against DESC CSP requirements and UAE data residency obligations where applicable.</div>
 </section>`},
 
 // 3 CASE STUDY — regional cloud disruption
@@ -571,7 +572,7 @@ const slides=[
 </section>`},
 
 // 6 DATA CLASSIFICATION — pyramid
-{nav:'Data Classification',html:`<section class="slide"><div class="idx">06</div>
+{nav:'Data Classification',html:`<!-- SPEAKER NOTE (data classification): This is not only a compliance point. Even for private SMEs, data classification is the foundation of practical DR. You cannot define RTO/RPO if you do not know which data matters most. --><section class="slide"><div class="idx">06</div>
   <div class="reveal kicker">Classification Comes First</div>
   <h2 class="reveal">Not All Data Has the Same <span class="hl">Recovery Priority</span></h2>
   <p class="reveal sub">Before RTO and RPO, classify your data — or you will overspend on the trivial and underprotect the critical. Click each tier.</p>
@@ -582,10 +583,33 @@ const slides=[
     <button class="ptier" data-k="${reg({icon:'⚪',title:'Archived / Historical',intro:'Low immediate operational impact.',list:['Old records, inactive client files, legacy documents','Recovery: longer window acceptable']})}"><b>Archived / Historical</b><span>Legacy &amp; inactive records</span></button>
   </div>
   <button class="preg reveal" data-k="${reg({icon:'⚖️',title:'Regulated / Sensitive Data',intro:'Cuts across every tier — and adds legal weight.',list:['KYC data, financial records, contracts, personal data','Must consider privacy, retention & access control','Recovery decisions are also compliance decisions']})}"><span class="pi">⚖️</span><span><b>Regulated / Sensitive data</b> — KYC, financials, contracts, personal data — cuts across all tiers: privacy, retention &amp; access control apply.</span></button>
+  <div class="callout reveal classfirst" style="border-left-color:var(--sky);max-width:none"><b style="color:var(--sky)">Dubai Data Classification Comes Before Recovery Planning</b>Before defining RTO and RPO, classify data by sensitivity, ownership, location, service dependency, legal obligation and recovery priority. For Dubai Government and in-scope entities, classification and protection should align with ISR / Dubai Data requirements where applicable.</div>
+  <table class="rto reveal classlens"><thead><tr><th>Classification lens</th><th>Question</th></tr></thead><tbody>
+    <tr><td>Sensitivity</td><td>Is the data public, internal, confidential, sensitive, regulated, or critical?</td></tr>
+    <tr><td>Location</td><td>Where is it stored, processed, backed up, or replicated?</td></tr>
+    <tr><td>Service dependency</td><td>Which customer, member, public, or internal service depends on it?</td></tr>
+    <tr><td>Recovery priority</td><td>How fast must it be restored?</td></tr>
+    <tr><td>Access control</td><td>Who can access, export, delete, or restore it?</td></tr>
+  </tbody></table>
 </section>`},
 
-// 7 RTO/RPO TIMELINE
-{nav:'RTO & RPO',html:`<section class="slide"><div class="idx">07</div>
+// 7 WHEN DESC / ISR / CSP BECOMES RELEVANT (conditional compliance layer)
+{nav:'When DESC / ISR / CSP Applies',html:`<!-- SPEAKER NOTE (purpose): For a normal private SME, DESC is not the starting point — business resilience is. But if the company wants to sell to government, semi-government, or critical sectors, resilience also becomes part of compliance and procurement readiness. --><!-- SPEAKER POSITIONING (Amir): "For most SMEs, the immediate priority is not regulatory complexity. It is knowing your data, defining recovery priorities, securing backups, and proving you can restore operations. But if your business serves government, semi-government, or critical entities, then resilience also becomes part of procurement readiness and regulatory alignment." --><section class="slide"><div class="idx">07</div>
+  <div class="reveal kicker">Conditional Compliance Layer</div>
+  <h2 class="reveal">When DESC / ISR / CSP Requirements <span class="hl">Become Relevant</span></h2>
+  <p class="reveal sub" style="max-width:84ch">Not every SME is directly subject to DESC requirements. They may become relevant when a private company operates in — or supplies services into — Dubai's government, semi-government or critical digital ecosystem.</p>
+  <table class="rto reveal desctable"><thead><tr><th>Business type</th><th>Practical SME requirement</th><th>DESC / government-aligned requirement</th></tr></thead><tbody>
+    <tr><td>Normal private SME</td><td>Backup, DR, RTO/RPO, ransomware recovery, business continuity</td><td><span class="pill b">DESC may not directly apply unless otherwise regulated or classified</span></td></tr>
+    <tr><td>SME handling sensitive customer data</td><td>Strong data protection, access control, backup security, incident response</td><td><span class="pill">Use DESC-style controls as benchmark; confirm legal obligations</span></td></tr>
+    <tr><td>SME selling technology to government</td><td>Secure architecture, UAE data location, DR evidence, incident response</td><td><span class="pill">ISR / DESC may become part of procurement or contract</span></td></tr>
+    <tr><td>Cloud / infrastructure provider</td><td>Secure hosting, DR, SLA, data protection</td><td><span class="pill">DESC CSP certification may be required where applicable</span></td></tr>
+    <tr><td>SOC / MSSP provider</td><td>Monitoring, incident response, ISO 27001, ISO 22301</td><td><span class="pill">DESC SOC / Cyber Force / CSP may apply if serving gov, semi-gov or CII</span></td></tr>
+    <tr><td>AI / SaaS provider</td><td>Secure development, data handling, logging, monitoring, recovery</td><td><span class="pill">DESC AI Security Policy / data residency / ISR may apply when serving gov, semi-gov or CII</span></td></tr>
+  </tbody></table>
+</section>`},
+
+// 8 RTO/RPO TIMELINE
+{nav:'RTO & RPO',html:`<section class="slide"><div class="idx">08</div>
   <div class="reveal kicker">Recovery Objectives</div>
   <h2 class="reveal">RTO and RPO Are <span class="hl">Business Decisions</span></h2>
   <div class="two reveal">
@@ -614,9 +638,9 @@ const slides=[
 </section>`},
 
 // 8 BUSINESS IMPACT MATRIX
-{nav:'Business Impact Matrix',html:`<section class="slide"><div class="idx">08</div>
+{nav:'Business & Service Impact',html:`<!-- SPEAKER NOTE (business & service impact): RTO/RPO must reflect both business impact and service impact. For SMEs, service impact means customer experience, revenue continuity, contractual delivery, reputation, and operational trust. --><section class="slide"><div class="idx">09</div>
   <div class="reveal kicker">Impact-Based Recovery</div>
-  <h2 class="reveal">RTO/RPO Must Be Based on <span class="hl">Business Impact</span></h2>
+  <h2 class="reveal">RTO / RPO Must Be Based on <span class="hl">Business and Service Impact</span></h2>
   <p class="reveal sub">Treat every system equally and DR becomes expensive and ineffective. Prioritise.</p>
   <table class="rto reveal"><thead><tr><th>System</th><th>Business impact</th><th>Suggested RTO</th><th>Suggested RPO</th></tr></thead><tbody>
     <tr><td>Payment / transaction</td><td>Revenue stops immediately</td><td><span class="pill">15–30 min</span></td><td><span class="pill b">Near zero</span></td></tr>
@@ -626,10 +650,11 @@ const slides=[
     <tr><td>Website</td><td>Trust &amp; lead-gen impact</td><td><span class="pill">2–6 hours</span></td><td><span class="pill b">24 hours</span></td></tr>
     <tr><td>Archive data</td><td>Low immediate impact</td><td><span class="pill">24–72 hours</span></td><td><span class="pill b">24 hours</span></td></tr>
   </tbody></table>
+  <div class="callout reveal" style="border-left-color:var(--sky);max-width:none"><b style="color:var(--sky)">Service impact, not only financial</b>For Dubai Chambers and service-oriented organizations, impact is not only financial — a disruption may affect member services, certificate issuance, stakeholder communication, event registration, payment processing, service delivery and public trust.</div>
 </section>`},
 
 // 9 RESILIENCE STACK — 9 layers
-{nav:'Resilience Stack',html:`<section class="slide"><div class="idx">09</div>
+{nav:'Resilience Stack',html:`<section class="slide"><div class="idx">10</div>
   <div class="reveal kicker">The Business Resilience Stack</div>
   <h2 class="reveal">Resilience Is Built in <span class="hl">Layers</span></h2>
   <p class="reveal sub">Most SMEs start at backup and stop. Maturity means climbing the full stack. Click any layer.</p>
@@ -648,7 +673,7 @@ const slides=[
 </section>`},
 
 // 10 BACKUP MODELS — 6 cards
-{nav:'Backup Models',html:`<section class="slide"><div class="idx">10</div>
+{nav:'Backup Models',html:`<section class="slide"><div class="idx">11</div>
   <div class="reveal kicker">Backup Models</div>
   <h2 class="reveal">Not All Backups <span class="hl">Protect Equally</span></h2>
   <p class="reveal sub">The right question is not "do we have backups?" — it is "can we restore clean, usable data in time?" Click each model.</p>
@@ -663,7 +688,7 @@ const slides=[
 </section>`},
 
 // 11 STANDBY & FAILOVER — spectrum
-{nav:'Standby & Failover',html:`<section class="slide"><div class="idx">11</div>
+{nav:'Standby & Failover',html:`<section class="slide"><div class="idx">12</div>
   <div class="reveal kicker">Levels of Readiness</div>
   <h2 class="reveal">Standby and Failover Are <span class="hl">Different Levels of Readiness</span></h2>
   <div class="specbar reveal"><span>◂ lower cost · slower recovery</span><span class="sb-r">higher cost · faster recovery ▸</span></div>
@@ -677,7 +702,7 @@ const slides=[
 </section>`},
 
 // 12 WHY FAILOVER FAILS
-{nav:'Why Failover Fails',html:`<section class="slide"><div class="idx">12</div>
+{nav:'Why Failover Fails',html:`<section class="slide"><div class="idx">13</div>
   <div class="reveal kicker">The Failover Trap</div>
   <h2 class="reveal">Failover Often Fails Because It Was <span class="hl">Never Tested</span></h2>
   <div class="two reveal">
@@ -701,10 +726,10 @@ const slides=[
   </div>
 </section>`},
 
-// 13 OFFSHORE MIRRORING
-{nav:'Offshore Mirroring',html:`<section class="slide"><div class="idx">13</div>
-  <div class="reveal kicker">Offshore Mirroring</div>
-  <h2 class="reveal">Offshore Mirroring Must Be <span class="hl">Governed</span></h2>
+// 13 DATA REPLICATION, MIRRORING & RESIDENCY
+{nav:'Replication & Residency',html:`<!-- SPEAKER NOTE (replication & residency): Do not say offshore mirroring is always acceptable. Do not say it is always prohibited for every private company. Say it depends on the data, client, contract, sector, and whether the organization is in scope of UAE / DESC / government requirements. --><section class="slide"><div class="idx">14</div>
+  <div class="reveal kicker">Replication, Mirroring &amp; Residency</div>
+  <h2 class="reveal">Data Replication, Mirroring &amp; <span class="hl">Residency</span> Considerations</h2>
   <div class="two reveal">
     <div class="diagbox"><svg viewBox="0 0 380 300">
       <rect x="22" y="100" width="130" height="100" rx="14" fill="rgba(13,27,58,.92)" stroke="#2aa4f4" stroke-width="2"/>
@@ -716,19 +741,20 @@ const slides=[
       <line x1="190" y1="40" x2="190" y2="250" stroke="rgba(247,121,31,.3)" stroke-width="1.5" stroke-dasharray="4 5"/>
       <text x="190" y="34" text-anchor="middle" fill="#ff9d6b" font-size="9" font-family="Space Grotesk">jurisdiction boundary</text>
     </svg></div>
-    <div><p class="lead">It improves resilience — but it is a <span class="note">governance decision</span>, not just a technical one.</p>
+    <div><p class="lead">Replication and mirroring improve resilience — but data location is a <span class="note">governance decision</span>, not just a technical one.</p>
     <ul class="points">
-      <li>Where is the data physically stored?</li>
-      <li>Is it encrypted before transfer — and who controls the keys?</li>
-      <li>Does the client contract allow cross-border storage?</li>
-      <li>Is personal, regulated or sensitive data involved?</li>
-      <li>Can it be accessed during a regional outage — and is failback to the UAE tested?</li>
-    </ul></div>
+      <li><b>For private SMEs:</b> base replication on business needs, customer contracts, privacy obligations, encryption, restore speed &amp; risk appetite</li>
+      <li><b>For government, semi-government, Critical Non-Government entities &amp; providers serving them:</b> UAE data residency &amp; DESC-aligned requirements may restrict storing, backing up or using classified/sensitive data outside the UAE</li>
+      <li>Where is the data physically stored, and who controls the encryption keys?</li>
+      <li>Does the client contract allow cross-border storage — and is failback to the UAE tested?</li>
+    </ul>
+    <div class="callout"><b>Key message</b>Mirroring is a resilience tool, but data location must be governed.</div>
+    </div>
   </div>
 </section>`},
 
 // 14 MULTI-CLOUD FAILOVER
-{nav:'Multi-Cloud Failover',html:`<section class="slide"><div class="idx">14</div>
+{nav:'Multi-Cloud Failover',html:`<!-- SPEAKER NOTE (cloud compliance): DESC's SOC Security Policy states that cloud-based managed SOCs require adherence to DESC CSP Security Policy certification, and third-party cloud infrastructure must also be certified according to DESC CSP Security Policy where applicable. ISR V3 references include legal/geographical UAE boundaries, incident reporting, and separate DR site requirements. --><section class="slide"><div class="idx">15</div>
   <div class="reveal kicker">Multi-Cloud Continuity</div>
   <h2 class="reveal">Multi-Cloud Is Not Resilience <span class="hl">Unless It Is Tested</span></h2>
   <div class="two reveal">
@@ -746,12 +772,13 @@ const slides=[
       ${[['DNS failover','Traffic must reroute automatically.'],['Identity continuity','Logins must work on the secondary cloud.'],['Data replication','Data must already be synchronised.'],['App dependency mapping','Every dependency must exist on both sides.'],['Network routing','Routes & firewall rules must be mirrored.'],['Security controls','Same protections on both clouds.'],['Monitoring','You must see the failure to act.'],['Runbooks','A documented, rehearsed procedure.'],['Failback plan','A way to return to primary.']].map(q=>`<button class="qchip" data-k="${reg({icon:'🔗',title:q[0],intro:q[1]})}">${q[0]}</button>`).join('')}
     </div>
     <p class="opsnote" style="margin-top:1rem">Multi-cloud without testing is only <b>architecture on paper</b>.</p>
+    <div class="callout" style="border-left-color:var(--sky);margin-top:.8rem"><b style="color:var(--sky)">Cloud Compliance Layer — where applicable</b>SMEs: know where workloads, backups, identity, DNS &amp; SaaS data are hosted and how they restore. For government, semi-government, Critical Non-Government entities &amp; vendors serving them, also confirm: workload · backup · DR location · identity dependency · DNS failover · <b>CSP certification</b> · <b>data residency</b> · restore &amp; failback testing.</div>
     </div>
   </div>
 </section>`},
 
 // 15 RANSOMWARE AS DR EVENT — rail
-{nav:'Ransomware = DR Event',html:`<section class="slide"><div class="idx">15</div>
+{nav:'Ransomware = DR Event',html:`<section class="slide"><div class="idx">16</div>
   <div class="reveal kicker">Ransomware Recovery · interactive chain</div>
   <h2 class="reveal">Ransomware Is a <span class="hl">Disaster Recovery Event</span></h2>
   <p class="reveal sub" style="max-width:62ch">Modern ransomware is not only a security incident — it is a continuity and recovery crisis. Click any stage.</p>
@@ -767,7 +794,7 @@ const slides=[
 </section>`},
 
 // 16 ANATOMY (supporting) — terminal
-{nav:'Anatomy of an Attack',html:`<section class="slide"><div class="idx">16</div>
+{nav:'Anatomy of an Attack',html:`<section class="slide"><div class="idx">17</div>
   <div class="reveal kicker">Supporting Context · attacker console</div>
   <h2 class="reveal">How an Attack Becomes a <span class="hl">Recovery Crisis</span></h2>
   <p class="reveal sub" style="max-width:64ch">Attacks become DR events only after moving through stages. Understanding them helps design backup, isolation, segmentation &amp; recovery. Click any step.</p>
@@ -790,7 +817,7 @@ const slides=[
 </section>`},
 
 // 17 THREAT ACTORS (supporting) — hex
-{nav:'Threat Actors',html:`<section class="slide"><div class="idx">17</div>
+{nav:'Threat Actors',html:`<!-- SPEAKER NOTE (threat actors target DATA): Attackers do not only target systems. They target data confidentiality, data integrity, and data availability. A DR plan must protect production data and backup data. --><section class="slide"><div class="idx">18</div>
   <div class="reveal kicker">Supporting Context</div>
   <h2 class="reveal">Threat Actors Behind <span class="hl">Business Disruption</span></h2>
   <p class="reveal sub">Different motives — but the business impact is the same: data loss, disruption, extortion. Click each.</p>
@@ -808,10 +835,11 @@ const slides=[
       <button class="hex" data-k="${reg({icon:'🎭',title:'Opportunists',intro:'Exploiting whatever is easy and exposed.',list:['Off-the-shelf tools','Hit whoever is unprotected']})}"><div class="face"><span class="ic">🎭</span><h4>Opportunists</h4><small>Easy targets</small></div></button>
     </div>
   </div>
+  <div class="callout reveal" style="max-width:none"><b>They don't only target systems — they target DATA</b>Customer records · member data · payment records · identity records · contracts · operational records · backup data · service data. A DR plan must protect both production data <em>and</em> backup data.</div>
 </section>`},
 
 // 18 FIRST 60 MINUTES — clock
-{nav:'First 60 Minutes',html:`<section class="slide"><div class="idx">18</div>
+{nav:'First 60 Minutes',html:`<section class="slide"><div class="idx">19</div>
   <div class="reveal kicker">Crisis Response</div>
   <h2 class="reveal">The First <span class="hl">60 Minutes</span> Decide the Outcome</h2>
   <div class="warroom">
@@ -833,7 +861,7 @@ const slides=[
 </section>`},
 
 // 19 RESTORE PRIORITY MATRIX
-{nav:'Restore Priority',html:`<section class="slide"><div class="idx">19</div>
+{nav:'Restore Priority',html:`<section class="slide"><div class="idx">20</div>
   <div class="reveal kicker">Recover in the Right Order</div>
   <h2 class="reveal">What Do You <span class="hl">Recover First?</span></h2>
   <p class="reveal sub">You cannot restore everything at once. Agree the order <span class="note">before</span> the incident. Click any layer.</p>
@@ -843,7 +871,7 @@ const slides=[
 </section>`},
 
 // 20 DR TESTING
-{nav:'DR Testing',html:`<section class="slide"><div class="idx">20</div>
+{nav:'DR Testing',html:`<section class="slide"><div class="idx">21</div>
   <div class="reveal kicker">Proof, Not Policy</div>
   <h2 class="reveal">A DR Plan That Is Not Tested Is <span class="hl">Only a Document</span></h2>
   <p class="reveal sub">The first test should never be during the real crisis. Click any test type.</p>
@@ -866,7 +894,7 @@ const slides=[
 </section>`},
 
 // 21 EXECUTIVE DECISION MODEL
-{nav:'Executive Decisions',html:`<section class="slide"><div class="idx">21</div>
+{nav:'Executive Decisions',html:`<!-- SPEAKER NOTE (incident response): For SMEs, the practical message remains: detect, contain, restore, communicate, document, and improve. For in-scope entities and vendors serving them, DESC reporting and classification obligations may apply. --><section class="slide"><div class="idx">22</div>
   <div class="reveal kicker">Decide With a Framework</div>
   <h2 class="reveal">Executive Decisions During <span class="hl">Critical Incidents</span></h2>
   <div class="two reveal">
@@ -882,10 +910,11 @@ const slides=[
       ${[['Is customer data affected?'],['Is revenue impacted?'],['Regulated records involved?'],['Can we operate manually?'],['What is restored first?'],['Who talks to customers?'],['Who contacts suppliers?'],['Notify legal / insurer / regulator?'],['Is the backup clean?'],['Is failover safer than restore?']].map(q=>`<button class="qchip" data-k="${reg({icon:'❓',title:q[0],intro:'A decision leadership must be ready to make fast — using a framework agreed before the incident.'})}">${q[0]}</button>`).join('')}
     </div></div>
   </div>
+  <div class="callout reveal" style="border-left-color:var(--sky);max-width:none"><b style="color:var(--sky)">DESC alignment note — where applicable</b>Dubai Government entities, Critical Non-Government entities and service providers supporting them should align incident classification, escalation and reporting with the DESC Incident Management Framework — including incidents that affect, or may affect, the confidentiality, integrity, availability or continuity of government or critical services.</div>
 </section>`},
 
 // 22 CEO QUESTIONS
-{nav:'CEO Questions',html:`<section class="slide"><div class="idx">22</div>
+{nav:'CEO Questions',html:`<section class="slide"><div class="idx">23</div>
   <div class="reveal kicker">For the CEO</div>
   <h2 class="reveal">Questions Every <span class="hl">CEO Should Ask</span></h2>
   <p class="reveal sub">Resilience becomes real when leaders ask for evidence, not assumptions. Click any question.</p>
@@ -903,7 +932,7 @@ const slides=[
 </section>`},
 
 // 23 CTO CHECKLIST — progress
-{nav:'CTO Checklist',html:`<section class="slide"><div class="idx">23</div>
+{nav:'CTO Checklist',html:`<section class="slide"><div class="idx">24</div>
   <div class="reveal kicker">For the CTO / IT Leader</div>
   <h2 class="reveal">Technical Readiness Checklist for <span class="hl">CTOs &amp; IT Leaders</span></h2>
   <div class="pcheckhead reveal"><div class="pbar"><span></span></div><div class="ptext">0 / 12 reviewed</div></div>
@@ -925,7 +954,7 @@ const slides=[
 </section>`},
 
 // 24 30-DAY PLAN — journey
-{nav:'30-Day Plan',html:`<section class="slide"><div class="idx">24</div>
+{nav:'30-Day Plan',html:`<section class="slide"><div class="idx">25</div>
   <div class="reveal kicker">Execution · First 30 Days</div>
   <h2 class="reveal">Your 30-Day Data Resilience <span class="hl">Action Plan</span></h2>
   <p class="reveal sub">DR does not start with a massive project — it starts with visibility, classification, priorities &amp; testing. Tap any week.</p>
@@ -942,7 +971,7 @@ const slides=[
 </section>`},
 
 // 25 HOW ITSEC HELPS
-{nav:'How ITSEC Helps',html:`<section class="slide"><div class="idx">25</div>
+{nav:'How ITSEC Helps',html:`<section class="slide"><div class="idx">26</div>
   <div class="reveal kicker">Our Support</div>
   <h2 class="reveal">How ITSEC Supports <span class="hl">Data Resilience &amp; DR</span></h2>
   <p class="reveal sub">We help businesses move from assumptions to evidence. Click each area.</p>
@@ -1161,6 +1190,15 @@ const drCSS=document.createElement('style');drCSS.textContent=`/* ============ D
 .tkitem{position:relative;padding:.55rem 1rem .55rem 2.3rem;background:rgba(42,164,244,.05);border:1px solid var(--line);border-radius:11px;font-size:1.02rem;color:var(--text);line-height:1.3}
 .tkitem::before{content:"✓";position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:#04060d;font-weight:800;font-size:.7rem;width:17px;height:17px;border-radius:5px;display:grid;place-items:center;background:var(--grad)}
 @media(max-width:900px){.takeaways{grid-template-columns:1fr}}
+/* compact tables for classification-lens (S6) and DESC scope (S7) */
+.callout.classfirst{margin-top:.7rem}
+.classlens{margin-top:.5rem;font-size:.95rem}
+.classlens th,.classlens td{padding:.42rem .9rem}
+.desctable{margin-top:.9rem;font-size:.98rem}
+.desctable th,.desctable td{padding:.55rem .9rem;vertical-align:top}
+.desctable td:first-child{white-space:nowrap}
+.desctable .pill{white-space:normal;line-height:1.3}
+@media(max-width:900px){.classlens,.desctable{font-size:.86rem}}
 `;document.head.appendChild(drCSS);
 
 /* ===== render + nav ===== */
