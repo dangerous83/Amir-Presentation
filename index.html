@@ -357,6 +357,15 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .pt-dot.amber{background:#ffc14d;box-shadow:0 0 10px #ffc14d}
 .pt-dot.red{background:#ff6b5e;box-shadow:0 0 10px #ff6b5e}
 @media(max-width:760px){.ptimer{min-width:0;padding:7px 11px}.pt-time{font-size:1.2rem}.pt-sub{font-size:.66rem}}
+/* ===== per-slide countdown (bottom-center) ===== */
+.stimer{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--pb);border-radius:999px;padding:6px 16px;backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,.4);font-variant-numeric:tabular-nums}
+.stimer .sl-dot{width:8px;height:8px;border-radius:50%;background:#3ad17a;box-shadow:0 0 8px #3ad17a;flex:none;transition:.3s}
+.stimer .sl-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stimer .sl-time{font-family:var(--mono);font-size:1.05rem;font-weight:600;color:#fff;letter-spacing:.02em;min-width:3.4ch;text-align:right}
+.stimer.warn{border-color:#ffc14d}.stimer.warn .sl-time{color:#ffc14d}.stimer.warn .sl-dot{background:#ffc14d;box-shadow:0 0 8px #ffc14d}
+.stimer.over{border-color:#ff6b5e;animation:slpulse 1.1s ease-in-out infinite}.stimer.over .sl-time{color:#ff6b5e}.stimer.over .sl-dot{background:#ff6b5e;box-shadow:0 0 8px #ff6b5e}
+@keyframes slpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,94,.55)}50%{box-shadow:0 0 0 9px rgba(255,107,94,0)}}
+.stimer.hide{opacity:0;pointer-events:none}
 #overview{position:fixed;inset:0;z-index:60;background:rgba(3,5,12,.94);backdrop-filter:blur(10px);display:none;padding:7vh 6vw;overflow:auto}#overview.show{display:block}
 #overview h3{font-size:1.4rem;margin-bottom:1.5rem;color:var(--sky);letter-spacing:.1em;font-weight:600}
 .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1rem}
@@ -488,6 +497,7 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
     <span class="pt-slide" id="ptSlide">1:40 / slide</span>
   </div>
 </div>
+<div class="stimer" id="stimer"><span class="sl-dot"></span><span class="sl-label">This slide</span><span class="sl-time" id="slTime">1:40</span></div>
 <div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen · <kbd>P</kbd> timer · <kbd>T</kbd> hide</div>
 <div id="overview"><h3>SLIDE OVERVIEW — CLICK TO JUMP</h3><div class="ovgrid" id="ovgrid"></div></div>
 <div id="modal"><div class="m-back"></div><div class="m-panel"><div class="m-glowbar"></div><button class="m-close">✕</button><div id="mbody"></div></div></div>
@@ -1270,7 +1280,7 @@ function runClock(el){const svg=el.querySelector('.clock60');if(!svg)return;
 }
 function go(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===idx)return;
   const cur=slideEls[idx];cur.classList.add('leaving');cur.classList.remove('active');setTimeout(()=>cur.classList.remove('leaving'),560);
-  idx=n;const s=slideEls[idx];s.classList.add('active');if(idx>0&&window.ptAutoStart)window.ptAutoStart();update();animateSlide(s);}
+  idx=n;const s=slideEls[idx];s.classList.add('active');if(idx>0&&window.ptAutoStart)window.ptAutoStart();if(window.ptSlideReset)window.ptSlideReset();update();animateSlide(s);}
 function update(){dotBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));document.getElementById('cur').textContent=String(idx+1).padStart(2,'0');
   document.getElementById('prog').style.width=(idx/(slides.length-1)*100)+'%';document.getElementById('navTitle').textContent=slides[idx].nav;dotBtns[idx].scrollIntoView({block:'nearest'});if(window.ptRender)window.ptRender();}
 function next(){go(idx+1)}function prev(){go(idx-1)}
@@ -1283,11 +1293,12 @@ document.getElementById('brandHome').onclick=()=>go(0);
   const TALK_MIN=45;
   const total=TALK_MIN*60;
   const perSlide=total/slides.length;            // ≈100s (1:40) per slide across 27 slides
-  let elapsed=0,running=false,started=false,last=0,raf=0;
+  let elapsed=0,slideElapsed=0,running=false,started=false,last=0,raf=0;
   const el=document.getElementById('ptimer'),tEl=document.getElementById('ptTime'),
         dotEl=document.getElementById('ptDot'),paceEl=document.getElementById('ptPace'),
         slideEl=document.getElementById('ptSlide'),playBtn=document.getElementById('ptPlay'),
-        resetBtn=document.getElementById('ptReset');
+        resetBtn=document.getElementById('ptReset'),
+        sEl=document.getElementById('stimer'),slTimeEl=document.getElementById('slTime');
   function fmt(s){const neg=s<0;s=Math.abs(Math.round(s));return (neg?'-':'')+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
   function render(){
     const left=total-elapsed;
@@ -1304,17 +1315,23 @@ document.getElementById('brandHome').onclick=()=>go(0);
     dotEl.className='pt-dot'+(cls?' '+cls:'');
     paceEl.textContent=txt;
     slideEl.textContent=started?fmt(slideLeft)+' · slide '+(idx+1):fmt(perSlide)+' / slide';
+    // independent per-slide countdown (resets on every slide)
+    const sLeft=perSlide-slideElapsed;
+    slTimeEl.textContent=fmt(sLeft);
+    sEl.classList.toggle('warn',sLeft<=15&&sLeft>0);
+    sEl.classList.toggle('over',sLeft<=0);
   }
-  function tick(ts){if(!running)return;if(!last)last=ts;elapsed+=(ts-last)/1000;last=ts;render();raf=requestAnimationFrame(tick);}
+  function tick(ts){if(!running)return;if(!last)last=ts;const dt=(ts-last)/1000;elapsed+=dt;slideElapsed+=dt;last=ts;render();raf=requestAnimationFrame(tick);}
   function start(){if(running)return;running=true;started=true;last=0;playBtn.textContent='⏸';raf=requestAnimationFrame(tick);}
   function pause(){running=false;cancelAnimationFrame(raf);playBtn.textContent='▶';}
-  function reset(){pause();elapsed=0;started=false;el.classList.remove('warn','crit');render();}
+  function reset(){pause();elapsed=0;slideElapsed=0;started=false;el.classList.remove('warn','crit');render();}
   playBtn.onclick=()=>running?pause():start();
   resetBtn.onclick=reset;
   window.ptAutoStart=()=>{if(!started&&!running)start();};
   window.ptRender=render;
+  window.ptSlideReset=()=>{slideElapsed=0;render();};
   window.ptToggle=()=>running?pause():start();
-  window.ptHide=()=>el.classList.toggle('hide');
+  window.ptHide=()=>{el.classList.toggle('hide');sEl.classList.toggle('hide');};
   render();
 })();
 
