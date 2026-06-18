@@ -340,25 +340,8 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .dots button.on{background:var(--orange);border-color:var(--orange);box-shadow:0 0 10px var(--orange);height:24px;border-radius:6px}
 .hint{position:fixed;bottom:28px;left:38px;z-index:30;font-size:.8rem;color:var(--muted);letter-spacing:.04em}
 .hint kbd{background:rgba(42,164,244,.1);border:1px solid var(--pb);border-radius:6px;padding:1px 8px;color:var(--sky);font-family:inherit}
-/* ===== speaker presentation timer ===== */
-.ptimer{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:65;background:var(--panel);border:1px solid var(--pb);border-radius:14px;backdrop-filter:blur(8px);padding:9px 14px;display:flex;flex-direction:column;gap:5px;min-width:236px;box-shadow:0 6px 26px rgba(0,0,0,.45);font-variant-numeric:tabular-nums;transition:opacity .25s,transform .25s}
-.ptimer.hide{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-16px)}
-.pt-main{display:flex;align-items:center;gap:9px}
-.pt-dot{width:10px;height:10px;border-radius:50%;background:#3ad17a;box-shadow:0 0 10px #3ad17a;flex:none;transition:.3s}
-.pt-time{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:#fff;line-height:1;letter-spacing:.02em}
-.pt-unit{font-size:.66rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-right:auto}
-.pt-btn{width:30px;height:30px;border-radius:9px;border:1px solid var(--pb);background:rgba(42,164,244,.08);color:var(--sky);font-size:.9rem;cursor:pointer;display:grid;place-items:center;transition:.18s;flex:none}
-.pt-btn:hover{border-color:var(--sky);color:#fff;background:rgba(42,164,244,.18)}
-.pt-sub{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.74rem;letter-spacing:.03em}
-.pt-pace{color:var(--muted);font-weight:600}
-.pt-slide{font-family:var(--mono);color:var(--muted)}
-.ptimer.warn .pt-time{color:#ffc14d}
-.ptimer.crit .pt-time{color:#ff6b5e}
-.pt-dot.amber{background:#ffc14d;box-shadow:0 0 10px #ffc14d}
-.pt-dot.red{background:#ff6b5e;box-shadow:0 0 10px #ff6b5e}
-@media(max-width:760px){.ptimer{min-width:0;padding:7px 11px}.pt-time{font-size:1.2rem}.pt-sub{font-size:.66rem}}
-/* ===== per-slide countdown (bottom-center) ===== */
-.stimer{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--pb);border-radius:999px;padding:6px 16px;backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,.4);font-variant-numeric:tabular-nums}
+/* ===== per-slide countdown (bottom-left corner) ===== */
+.stimer{position:fixed;left:38px;bottom:62px;z-index:30;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--pb);border-radius:999px;padding:6px 16px;backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,.4);font-variant-numeric:tabular-nums;transition:opacity .25s}
 .stimer .sl-dot{width:8px;height:8px;border-radius:50%;background:#3ad17a;box-shadow:0 0 8px #3ad17a;flex:none;transition:.3s}
 .stimer .sl-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .stimer .sl-time{font-family:var(--mono);font-size:1.05rem;font-weight:600;color:#fff;letter-spacing:.02em;min-width:3.4ch;text-align:right}
@@ -484,19 +467,6 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 <div class="dots" id="dots"></div>
 <div class="nav"><button id="prev">‹</button><div class="title" id="navTitle"></div><button id="next">›</button></div>
 <div class="counter"><b id="cur">01</b> / <span id="total">27</span></div>
-<div class="ptimer" id="ptimer">
-  <div class="pt-main">
-    <span class="pt-dot" id="ptDot"></span>
-    <span class="pt-time" id="ptTime">45:00</span>
-    <span class="pt-unit">left</span>
-    <button class="pt-btn" id="ptPlay" title="Start / pause (P)">▶</button>
-    <button class="pt-btn" id="ptReset" title="Reset timer">↺</button>
-  </div>
-  <div class="pt-sub">
-    <span class="pt-pace" id="ptPace">Ready · 45 min talk</span>
-    <span class="pt-slide" id="ptSlide">1:40 / slide</span>
-  </div>
-</div>
 <div class="stimer" id="stimer"><span class="sl-dot"></span><span class="sl-label">This slide</span><span class="sl-time" id="slTime">1:40</span></div>
 <div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen · <kbd>P</kbd> timer · <kbd>T</kbd> hide</div>
 <div id="overview"><h3>SLIDE OVERVIEW — CLICK TO JUMP</h3><div class="ovgrid" id="ovgrid"></div></div>
@@ -1293,45 +1263,23 @@ document.getElementById('brandHome').onclick=()=>go(0);
   const TALK_MIN=45;
   const total=TALK_MIN*60;
   const perSlide=total/slides.length;            // ≈100s (1:40) per slide across 27 slides
-  let elapsed=0,slideElapsed=0,running=false,started=false,last=0,raf=0;
-  const el=document.getElementById('ptimer'),tEl=document.getElementById('ptTime'),
-        dotEl=document.getElementById('ptDot'),paceEl=document.getElementById('ptPace'),
-        slideEl=document.getElementById('ptSlide'),playBtn=document.getElementById('ptPlay'),
-        resetBtn=document.getElementById('ptReset'),
-        sEl=document.getElementById('stimer'),slTimeEl=document.getElementById('slTime');
+  let slideElapsed=0,running=false,started=false,last=0,raf=0;
+  const sEl=document.getElementById('stimer'),slTimeEl=document.getElementById('slTime');
   function fmt(s){const neg=s<0;s=Math.abs(Math.round(s));return (neg?'-':'')+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
   function render(){
-    const left=total-elapsed;
-    tEl.textContent=fmt(Math.max(left,-3599));
-    el.classList.toggle('warn',left<=300&&left>60);
-    el.classList.toggle('crit',left<=60);
-    const sched=(idx+1)*perSlide,diff=elapsed-sched,slideLeft=sched-elapsed;  // should finish current slide by `sched`
-    let cls='',txt='';
-    if(!started){txt='Ready · '+TALK_MIN+' min talk';}
-    else if(diff<=-perSlide){txt='Ahead '+fmt(-diff);}
-    else if(diff<=5){txt='On pace';}
-    else if(diff<=perSlide*0.6){cls='amber';txt='Slightly behind '+fmt(diff);}
-    else{cls='red';txt='Behind '+fmt(diff)+' · speed up';}
-    dotEl.className='pt-dot'+(cls?' '+cls:'');
-    paceEl.textContent=txt;
-    slideEl.textContent=started?fmt(slideLeft)+' · slide '+(idx+1):fmt(perSlide)+' / slide';
-    // independent per-slide countdown (resets on every slide)
-    const sLeft=perSlide-slideElapsed;
+    const sLeft=perSlide-slideElapsed;           // per-slide countdown, resets on every slide
     slTimeEl.textContent=fmt(sLeft);
     sEl.classList.toggle('warn',sLeft<=15&&sLeft>0);
     sEl.classList.toggle('over',sLeft<=0);
   }
-  function tick(ts){if(!running)return;if(!last)last=ts;const dt=(ts-last)/1000;elapsed+=dt;slideElapsed+=dt;last=ts;render();raf=requestAnimationFrame(tick);}
-  function start(){if(running)return;running=true;started=true;last=0;playBtn.textContent='⏸';raf=requestAnimationFrame(tick);}
-  function pause(){running=false;cancelAnimationFrame(raf);playBtn.textContent='▶';}
-  function reset(){pause();elapsed=0;slideElapsed=0;started=false;el.classList.remove('warn','crit');render();}
-  playBtn.onclick=()=>running?pause():start();
-  resetBtn.onclick=reset;
+  function tick(ts){if(!running)return;if(!last)last=ts;slideElapsed+=(ts-last)/1000;last=ts;render();raf=requestAnimationFrame(tick);}
+  function start(){if(running)return;running=true;started=true;last=0;raf=requestAnimationFrame(tick);}
+  function pause(){running=false;cancelAnimationFrame(raf);}
   window.ptAutoStart=()=>{if(!started&&!running)start();};
   window.ptRender=render;
   window.ptSlideReset=()=>{slideElapsed=0;render();};
   window.ptToggle=()=>running?pause():start();
-  window.ptHide=()=>{el.classList.toggle('hide');sEl.classList.toggle('hide');};
+  window.ptHide=()=>sEl.classList.toggle('hide');
   render();
 })();
 
