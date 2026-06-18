@@ -340,6 +340,23 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 .dots button.on{background:var(--orange);border-color:var(--orange);box-shadow:0 0 10px var(--orange);height:24px;border-radius:6px}
 .hint{position:fixed;bottom:28px;left:38px;z-index:30;font-size:.8rem;color:var(--muted);letter-spacing:.04em}
 .hint kbd{background:rgba(42,164,244,.1);border:1px solid var(--pb);border-radius:6px;padding:1px 8px;color:var(--sky);font-family:inherit}
+/* ===== speaker presentation timer ===== */
+.ptimer{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:65;background:var(--panel);border:1px solid var(--pb);border-radius:14px;backdrop-filter:blur(8px);padding:9px 14px;display:flex;flex-direction:column;gap:5px;min-width:236px;box-shadow:0 6px 26px rgba(0,0,0,.45);font-variant-numeric:tabular-nums;transition:opacity .25s,transform .25s}
+.ptimer.hide{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-16px)}
+.pt-main{display:flex;align-items:center;gap:9px}
+.pt-dot{width:10px;height:10px;border-radius:50%;background:#3ad17a;box-shadow:0 0 10px #3ad17a;flex:none;transition:.3s}
+.pt-time{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:#fff;line-height:1;letter-spacing:.02em}
+.pt-unit{font-size:.66rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-right:auto}
+.pt-btn{width:30px;height:30px;border-radius:9px;border:1px solid var(--pb);background:rgba(42,164,244,.08);color:var(--sky);font-size:.9rem;cursor:pointer;display:grid;place-items:center;transition:.18s;flex:none}
+.pt-btn:hover{border-color:var(--sky);color:#fff;background:rgba(42,164,244,.18)}
+.pt-sub{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.74rem;letter-spacing:.03em}
+.pt-pace{color:var(--muted);font-weight:600}
+.pt-slide{font-family:var(--mono);color:var(--muted)}
+.ptimer.warn .pt-time{color:#ffc14d}
+.ptimer.crit .pt-time{color:#ff6b5e}
+.pt-dot.amber{background:#ffc14d;box-shadow:0 0 10px #ffc14d}
+.pt-dot.red{background:#ff6b5e;box-shadow:0 0 10px #ff6b5e}
+@media(max-width:760px){.ptimer{min-width:0;padding:7px 11px}.pt-time{font-size:1.2rem}.pt-sub{font-size:.66rem}}
 #overview{position:fixed;inset:0;z-index:60;background:rgba(3,5,12,.94);backdrop-filter:blur(10px);display:none;padding:7vh 6vw;overflow:auto}#overview.show{display:block}
 #overview h3{font-size:1.4rem;margin-bottom:1.5rem;color:var(--sky);letter-spacing:.1em;font-weight:600}
 .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1rem}
@@ -458,7 +475,20 @@ h2{font-size:clamp(2.1rem,4.5vw,3.9rem);line-height:1.02;font-weight:700;letter-
 <div class="dots" id="dots"></div>
 <div class="nav"><button id="prev">‹</button><div class="title" id="navTitle"></div><button id="next">›</button></div>
 <div class="counter"><b id="cur">01</b> / <span id="total">27</span></div>
-<div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen</div>
+<div class="ptimer" id="ptimer">
+  <div class="pt-main">
+    <span class="pt-dot" id="ptDot"></span>
+    <span class="pt-time" id="ptTime">45:00</span>
+    <span class="pt-unit">left</span>
+    <button class="pt-btn" id="ptPlay" title="Start / pause (P)">▶</button>
+    <button class="pt-btn" id="ptReset" title="Reset timer">↺</button>
+  </div>
+  <div class="pt-sub">
+    <span class="pt-pace" id="ptPace">Ready · 45 min talk</span>
+    <span class="pt-slide" id="ptSlide">1:40 / slide</span>
+  </div>
+</div>
+<div class="hint">Click anything to explore · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>O</kbd> overview · <kbd>F</kbd> fullscreen · <kbd>P</kbd> timer · <kbd>T</kbd> hide</div>
 <div id="overview"><h3>SLIDE OVERVIEW — CLICK TO JUMP</h3><div class="ovgrid" id="ovgrid"></div></div>
 <div id="modal"><div class="m-back"></div><div class="m-panel"><div class="m-glowbar"></div><button class="m-close">✕</button><div id="mbody"></div></div></div>
 
@@ -1240,13 +1270,53 @@ function runClock(el){const svg=el.querySelector('.clock60');if(!svg)return;
 }
 function go(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===idx)return;
   const cur=slideEls[idx];cur.classList.add('leaving');cur.classList.remove('active');setTimeout(()=>cur.classList.remove('leaving'),560);
-  idx=n;const s=slideEls[idx];s.classList.add('active');update();animateSlide(s);}
+  idx=n;const s=slideEls[idx];s.classList.add('active');if(idx>0&&window.ptAutoStart)window.ptAutoStart();update();animateSlide(s);}
 function update(){dotBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));document.getElementById('cur').textContent=String(idx+1).padStart(2,'0');
-  document.getElementById('prog').style.width=(idx/(slides.length-1)*100)+'%';document.getElementById('navTitle').textContent=slides[idx].nav;dotBtns[idx].scrollIntoView({block:'nearest'});}
+  document.getElementById('prog').style.width=(idx/(slides.length-1)*100)+'%';document.getElementById('navTitle').textContent=slides[idx].nav;dotBtns[idx].scrollIntoView({block:'nearest'});if(window.ptRender)window.ptRender();}
 function next(){go(idx+1)}function prev(){go(idx-1)}
 slideEls[0].classList.add('active');update();animateSlide(slideEls[0]);
 document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
 document.getElementById('brandHome').onclick=()=>go(0);
+
+/* ===== speaker presentation timer (45 min budget across the deck) ===== */
+(function(){
+  const TALK_MIN=45;
+  const total=TALK_MIN*60;
+  const perSlide=total/slides.length;            // ≈100s (1:40) per slide across 27 slides
+  let elapsed=0,running=false,started=false,last=0,raf=0;
+  const el=document.getElementById('ptimer'),tEl=document.getElementById('ptTime'),
+        dotEl=document.getElementById('ptDot'),paceEl=document.getElementById('ptPace'),
+        slideEl=document.getElementById('ptSlide'),playBtn=document.getElementById('ptPlay'),
+        resetBtn=document.getElementById('ptReset');
+  function fmt(s){const neg=s<0;s=Math.abs(Math.round(s));return (neg?'-':'')+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+  function render(){
+    const left=total-elapsed;
+    tEl.textContent=fmt(Math.max(left,-3599));
+    el.classList.toggle('warn',left<=300&&left>60);
+    el.classList.toggle('crit',left<=60);
+    const sched=(idx+1)*perSlide,diff=elapsed-sched,slideLeft=sched-elapsed;  // should finish current slide by `sched`
+    let cls='',txt='';
+    if(!started){txt='Ready · '+TALK_MIN+' min talk';}
+    else if(diff<=-perSlide){txt='Ahead '+fmt(-diff);}
+    else if(diff<=5){txt='On pace';}
+    else if(diff<=perSlide*0.6){cls='amber';txt='Slightly behind '+fmt(diff);}
+    else{cls='red';txt='Behind '+fmt(diff)+' · speed up';}
+    dotEl.className='pt-dot'+(cls?' '+cls:'');
+    paceEl.textContent=txt;
+    slideEl.textContent=started?fmt(slideLeft)+' · slide '+(idx+1):fmt(perSlide)+' / slide';
+  }
+  function tick(ts){if(!running)return;if(!last)last=ts;elapsed+=(ts-last)/1000;last=ts;render();raf=requestAnimationFrame(tick);}
+  function start(){if(running)return;running=true;started=true;last=0;playBtn.textContent='⏸';raf=requestAnimationFrame(tick);}
+  function pause(){running=false;cancelAnimationFrame(raf);playBtn.textContent='▶';}
+  function reset(){pause();elapsed=0;started=false;el.classList.remove('warn','crit');render();}
+  playBtn.onclick=()=>running?pause():start();
+  resetBtn.onclick=reset;
+  window.ptAutoStart=()=>{if(!started&&!running)start();};
+  window.ptRender=render;
+  window.ptToggle=()=>running?pause():start();
+  window.ptHide=()=>el.classList.toggle('hide');
+  render();
+})();
 
 /* ===== cybersecurity connected-node network (cover + end slide) ===== */
 (function(){
@@ -1331,7 +1401,8 @@ burger.addEventListener('click',()=>{overview.classList.toggle('show');syncBurge
 window.addEventListener('keydown',e=>{if(modal.classList.contains('show')&&e.key==='Escape'){closeModal();return}
   if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next()}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
   else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(slides.length-1)}else if(e.key.toLowerCase()==='o'){overview.classList.toggle('show');syncBurger()}
-  else if(e.key==='Escape'){overview.classList.remove('show');syncBurger()}else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}});
+  else if(e.key==='Escape'){overview.classList.remove('show');syncBurger()}else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+  else if(e.key.toLowerCase()==='p'){e.preventDefault();window.ptToggle&&window.ptToggle()}else if(e.key.toLowerCase()==='t'){window.ptHide&&window.ptHide()}});
 let tx=0;stage.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
 stage.addEventListener('touchend',e=>{if(modal.classList.contains('show'))return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60){dx<0?next():prev()}});
 let wlock=false;stage.addEventListener('wheel',e=>{if(modal.classList.contains('show'))return;if(wlock)return;if(Math.abs(e.deltaY)<24&&Math.abs(e.deltaX)<24)return;wlock=true;(e.deltaY>0||e.deltaX>0)?next():prev();setTimeout(()=>wlock=false,700)},{passive:true});
